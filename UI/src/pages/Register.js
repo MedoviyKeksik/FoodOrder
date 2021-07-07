@@ -1,5 +1,7 @@
+import RegisterForm from "../containers/registerForm/RegisterForm"
+
 function Register() {
-    return (<h1>Register</h1>);
+    return (<RegisterForm />);
 }
 
 export default Register;
