@@ -1,5 +1,7 @@
+import FoodForm from "../containers/foodForm/FoodForm"
+
 function Admin() {
-    return (<h1>Admin</h1>);
+    return (<FoodForm />);
 }
 
 export default Admin;
