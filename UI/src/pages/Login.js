@@ -1,5 +1,7 @@
+import LoginForm from '../containers/loginForm/LoginForm'
+
 function Login() {
-    return (<h1>Login</h1>);
+    return (<LoginForm />);
 }
 
 export default Login;
