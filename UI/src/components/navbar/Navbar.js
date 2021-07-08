@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-function Navbar() {
+function Navbar(props) {
     return (
         <ul>
             <li><Link to="/">Home</Link></li>
