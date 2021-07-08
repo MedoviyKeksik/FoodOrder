@@ -1,6 +1,6 @@
 import React from "react";
 
-function FoodCart(props) {
+function FoodCard(props) {
     return (
         <div>
             <h3>{props.title}</h3>
@@ -8,8 +8,9 @@ function FoodCart(props) {
             <img src={props.imageSource} />
             <span>{props.cookingTime}</span>
             <span>{props.cost}</span>
+            <button>Add</button>
         </div>
     );
 }
 
-export default FoodCart;
+export default FoodCard;
