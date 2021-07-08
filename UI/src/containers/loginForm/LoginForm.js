@@ -1,4 +1,5 @@
 import React from "react"
+import InputField from "../../components/inputField/InputField";
 
 class LoginForm extends React.Component {
     constructor(props) {
@@ -9,17 +10,15 @@ class LoginForm extends React.Component {
             password: ''
         }
 
-        this.handleLoginChange = this.handleLoginChange.bind(this);
-        this.handlePasswordChange = this.handlePasswordChange.bind(this);
+        this.handleLoginChange = this.handleChange.bind(this, 'login');
+        this.handlePasswordChange = this.handleChange.bind(this, 'password');
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-
-    handleLoginChange(event) {
-        this.setState({login: event.target.value});
-    }
-
-    handlePasswordChange(event) {
-        this.setState({password: event.target.value});
+    
+    handleChange(field, event) {
+        const tmp = {};
+        tmp[field] = event.target.value;
+        this.setState(tmp);
     }
 
     handleSubmit(event) {
@@ -30,14 +29,8 @@ class LoginForm extends React.Component {
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-                <label>
-                    Phone/Email:
-                    <input onChange={this.handleLoginChange} type="phone" name="phone" />
-                </label>
-                <label>
-                    Password:
-                    <input onChange={this.handlePasswordChange} type="password" name="password" />
-                </label>
+                <InputField title="Phone/Email:" type="text" name="login" isRequired={true} onChange={this.handleLoginChange} />
+                <InputField title="Password:" type="password" name="password" isRequired={true} onChange={this.handlePasswordChange} />
                 <input type="submit" />
             </form>
         )
