@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import './App.css';
 import { Switch, Route } from 'react-router-dom';
 import Localizer from './features/localizer/Localizer';
@@ -13,14 +12,11 @@ import Register from './pages/register/Register';
 import Account from './pages/account/Account';
 import Cart from './pages/cart/Cart';
 import Admin from './pages/admin/Admin';
+import { useSelector } from 'react-redux';
 
 
 function App() {
-  var [locale, setLocale] = useState(store.getState().localizer.locale);
-  const handleLocaleChange = () => {
-    setLocale(store.getState().localizer.locale);
-  }
-  const subscribe = store.subscribe(handleLocaleChange);
+  const locale = useSelector(state => state.localizer.locale);
 
   return (
     <>
