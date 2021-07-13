@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import localizerReducer from '../features/localizer/localizerSlice'
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
-  },
+    localizer: localizerReducer
+  }
 });
