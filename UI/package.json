@@ -12,7 +12,9 @@
     "react-js-pagination": "^3.0.3",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.3"
+    "react-saga": "^0.3.1",
+    "react-scripts": "4.0.3",
+    "reactjs-popup": "^2.0.5"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -37,6 +39,7 @@
   },
   "devDependencies": {
     "react-intl": "^5.20.4",
+    "redux-saga": "^1.1.3",
     "tslib": "^2.3.0"
   }
 }
