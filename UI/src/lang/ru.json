@@ -1,0 +1,8 @@
+{
+    "app.navbar.home": "Главая",
+    "app.navbar.account": "Личный кабинет",
+    "app.navbar.login": "Вход",
+    "app.navbar.register": "Регистрация",
+    "app.navbar.cart": "Корзина",
+    "app.navbar.admin": "Администрирование"
+}
