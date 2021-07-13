@@ -5,7 +5,7 @@ function FoodCard(props) {
         <div>
             <h3>{props.title}</h3>
             <p>{props.description}</p>
-            <img src={props.imageSource} />
+            <img alt="Food" src={props.imageSource} />
             <span>{props.cookingTime}</span>
             <span>{props.cost}</span>
             <button>Add</button>

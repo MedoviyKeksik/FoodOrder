@@ -33,5 +33,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "react-intl": "^5.20.4",
+    "tslib": "^2.3.0"
   }
 }
