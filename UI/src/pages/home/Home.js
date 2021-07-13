@@ -1,4 +1,4 @@
-import FoodCard from "../components/foodCard/FoodCard";
+import FoodCard from "../../components/foodCard/FoodCard";
 
 function Home() {
     return (

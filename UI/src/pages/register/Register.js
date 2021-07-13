@@ -1,4 +1,4 @@
-import RegisterForm from "../containers/registerForm/RegisterForm"
+import RegisterForm from "../../containers/registerForm/RegisterForm"
 
 function Register() {
     return (<RegisterForm />);

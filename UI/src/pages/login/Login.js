@@ -1,4 +1,4 @@
-import LoginForm from '../containers/loginForm/LoginForm'
+import LoginForm from '../../containers/loginForm/LoginForm'
 
 function Login() {
     return (<LoginForm />);
