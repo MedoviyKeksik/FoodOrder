@@ -1,5 +1,5 @@
 import React from 'react';
-import { store } from '../../app/store';
+import { store } from '../../store';
 
 function LocalizationButton(props) {
     return (

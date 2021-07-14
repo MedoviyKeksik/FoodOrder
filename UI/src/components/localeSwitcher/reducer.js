@@ -24,8 +24,8 @@ export default localizerSlice.reducer;
 
 function getLanguage(locale) {
     switch (locale) {
-        case 'ru':
-            return Russian;
+        // case 'ru':
+            // return Russian;
         default:
             return English;
     }

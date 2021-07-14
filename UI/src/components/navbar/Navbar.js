@@ -8,9 +8,6 @@ function Navbar(props) {
             <li className="navbar__item"><Link to="/admin">
                 <FormattedMessage defaultMessage="Admin" id="app.navbar.admin" />
             </Link></li>
-            <li className="navbar__item"><Link to="/cart"> 
-                <FormattedMessage defaultMessage="Cart" id="app.navbar.cart" />
-            </Link></li>
         </ul>
     );
 }

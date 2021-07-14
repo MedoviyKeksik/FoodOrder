@@ -1,9 +1,11 @@
 import FoodCard from "../../components/foodCard/FoodCard";
 import Pagination from "react-js-pagination";
 import { Component } from "react";
-import { store } from '../../app/store';
+import { store } from '../../store';
 import { all } from "redux-saga/effects";
 import { FormattedMessage } from "react-intl";
+import FoodContainer from "../../containers/foodContainer/FoodContainer";
+
 
 const itemsPerPage = [
     {
@@ -39,12 +41,6 @@ class Home extends Component {
         this.options = itemsPerPage.map((data) => <option value={data.value}>{data.title}</option>)
         this.handleCardsChange = this.handleCardsChange.bind(this);
         store.subscribe(this.handleCardsChange);
-
-        
-    }
-
-    componentDidMount() {
-        store.dispatch({type: 'FOOD_CARDS_REQUESTED'});
     }
 
     handleCardsChange() {
@@ -70,7 +66,6 @@ class Home extends Component {
     }
 
     render() {
-        var cards = this.state.foodCards.map((data => <FoodCard title={data.title} description={data.description} />));
         return (
             <>
                 <h1>Home</h1>
@@ -78,7 +73,7 @@ class Home extends Component {
                     {this.options}
                 </select>
                 <Pagination activePage={this.state.activePage} itemsCountPerPage={this.state.itemsCountPerPage} totalItemsCount={this.state.totalItemsCount} onChange={this.handlePageChange.bind(this)} pageRangeDisplayed={5} />
-                {cards}               
+                <FoodContainer />
             </>
         );
     };
