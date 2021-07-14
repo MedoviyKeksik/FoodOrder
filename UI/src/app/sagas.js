@@ -7,6 +7,10 @@ function* fetchFood(action) {
                 {
                     title: "Pizza #1",
                     description: "So tasty pizza!"
+                },
+                {
+                    title: "Pizza #2",
+                    description: "Another pizza!"
                 }
             ]
         }
