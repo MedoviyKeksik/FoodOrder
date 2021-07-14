@@ -2,8 +2,27 @@ import FoodCard from "../../components/foodCard/FoodCard";
 import Pagination from "react-js-pagination";
 import { Component } from "react";
 import { store } from '../../app/store';
+import { all } from "redux-saga/effects";
+import { FormattedMessage } from "react-intl";
 
-const itemsPerPage = [10, 20, 50];
+const itemsPerPage = [
+    {
+        value: 20,
+        title: 20
+    },
+    {
+        value: 50,
+        title: 50
+    },
+    {
+        value: 100,
+        title: 100
+    },
+    {
+        value: 100000000, // This value will be updated later
+        title: 'all'
+    }
+]
 
 class Home extends Component {
     constructor(props) {
@@ -17,9 +36,11 @@ class Home extends Component {
 
         this.getGlobalId = this.getGlobalId.bind(this);
         
-        this.options = itemsPerPage.map((number) => <option val={number}>{number}</option>)
+        this.options = itemsPerPage.map((data) => <option value={data.value}>{data.title}</option>)
         this.handleCardsChange = this.handleCardsChange.bind(this);
         store.subscribe(this.handleCardsChange);
+
+        
     }
 
     componentDidMount() {
