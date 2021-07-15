@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { store } from '../../store';
-import LocaleSwitcher from '../localeSwitcher/LocaleSwitcher';
+import LocaleSwitcher from '../../containers/localeSwitcher/LocaleSwitcher';
 import Navbar from '../navbar/Navbar';
 import './Header.scss';
 import { FormattedMessage } from 'react-intl';

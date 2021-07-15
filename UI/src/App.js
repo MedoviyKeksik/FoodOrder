@@ -11,14 +11,16 @@ import Cart from './pages/cart/Cart';
 import Admin from './pages/admin/Admin';
 import { useSelector } from 'react-redux';
 import Header from './components/header/Header';
+import { loadLocale } from './containers/localeSwitcher/localStorage';
 
 function App() {
-  const locale = useSelector(state => state.localizer.locale);
+  store.dispatch({type: 'localizer/changeLocale', payload: loadLocale() || 'en'});
+  const locale = useSelector((state) => state.localizer);
 
   return (
     <>
       <div className="App">
-        <IntlProvider locale={locale} messages={store.getState().localizer.language}>
+        <IntlProvider locale={locale.locale} messages={locale.messages}>
           <Header />
           <Switch>
             <Route exact path="/" component={Home}/>

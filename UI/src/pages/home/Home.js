@@ -39,15 +39,7 @@ class Home extends Component {
         this.getGlobalId = this.getGlobalId.bind(this);
         
         this.options = itemsPerPage.map((data) => <option value={data.value}>{data.title}</option>)
-        this.handleCardsChange = this.handleCardsChange.bind(this);
-        store.subscribe(this.handleCardsChange);
-    }
-
-    handleCardsChange() {
-        this.setState({
-            foodCards: store.getState().food.items,
-            totalItemsCount: store.getState().food.totalCount
-        });
+        
     }
 
     handlePageChange(pageNumber) {
