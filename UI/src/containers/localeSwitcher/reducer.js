@@ -1,31 +1,42 @@
-import { createSlice } from "@reduxjs/toolkit";
-
-import Russian from '../../lang/ru.json';
-import English from '../../lang/en.json';
+import { LOCALE_CHANGED, LOCALIZATION_LOADED } from "./constants";
+import { loadLocale } from "./localStorage";
 
 const initialState = {
-    locale: navigator.language,
-    language: getLanguage(navigator.language)
+    locale: loadLocale() || 'en',
+    messages: {
+        [loadLocale() || 'en']: {}
+    }
 }
 
-export const localizerSlice = createSlice({
-    name: "localizer",
-    initialState,
-    reducers: {
-        changeLocale: (state, action) => {
-            state.locale = action.payload;
-            state.messages = getLanguage(action.payload);
+export const reducer = (state = initialState, action) => {
+    switch (action.type) {
+        case LOCALE_CHANGED: {
+            if (state.messages[action.locale] == 'undefined') 
+                return { 
+                    locale: action.payload,
+                    messages: {
+                        ...state.messages,
+                        [action.locale]: {}
+                    }
+                };
+            return { 
+                ...state,
+                locale: action.locale
+            };
         }
-    }
-});
-
-export default localizerSlice.reducer;
-
-function getLanguage(locale) {
-    switch (locale) {
-        case 'ru':
-            return Russian;
+        case LOCALIZATION_LOADED: {
+            let newMessages = {...state.messages};
+            for (let locale in action.payload) {
+                newMessages[locale] = {...state.messages[locale], ...action.payload[locale]};
+            }
+            return {
+                ...state,
+                messages: newMessages
+            }
+        }
         default:
-            return English;
+            return state;
     }
 }
+
+export default reducer;

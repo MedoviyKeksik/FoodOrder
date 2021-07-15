@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useStore } from 'react-redux';
 import { store } from '../../store';
+import { changeLocale } from './actions';
 import { loadLocale, saveLocale } from './localStorage';
 
 class LocalizationButton extends React.Component {
@@ -15,7 +16,7 @@ class LocalizationButton extends React.Component {
     }
 
     handleLocaleChange(e) {
-        store.dispatch({type: 'localizer/changeLocale', payload: e.target.value});
+        store.dispatch(changeLocale(e.target.value));
         saveLocale(e.target.value);
         this.setState({locale: e.target.value});
     }
