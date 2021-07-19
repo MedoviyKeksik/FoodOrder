@@ -11,9 +11,13 @@ store.dispatch(loadLoclization(localization));
 function Navbar(props) {    
     return (
         <ul className="navbar">
-            <li className="navbar__item"><Link to="/admin">
-                <FormattedMessage defaultMessage="Admin" id={FOODORDER_NAVBAR_ADMIN_LOCALIZATION} />
-            </Link></li>
+            { props.isAdmin && 
+                <li className="navbar__item">
+                    <Link to="/admin">
+                        <FormattedMessage defaultMessage="Admin" id={FOODORDER_NAVBAR_ADMIN_LOCALIZATION} />
+                    </Link>
+                </li>
+            }
         </ul>
     );
 }

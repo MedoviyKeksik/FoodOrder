@@ -2,6 +2,7 @@ import React from "react"
 import InputField from "../../components/inputField/InputField";
 import { store } from "../../store";
 import { loadLoclization } from "../localeSwitcher/actions";
+import { userLogin } from "./actions";
 import { FOODORDER_LOGINFORM_LOGIN, FOODORDER_LOGINFORM_PASSWORRD } from "./constants";
 import localization from './messages'
 
@@ -28,7 +29,10 @@ class LoginForm extends React.Component {
     }
 
     handleSubmit(event) {
-        // TODO: Login submit
+        store.dispatch(userLogin({
+            login: this.state.login,
+            password: this.state.password
+        }));
         event.preventDefault();
     }
 

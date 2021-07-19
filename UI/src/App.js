@@ -1,6 +1,5 @@
 import './App.scss';
 import { Switch, Route } from 'react-router-dom';
-import { store } from './store';
 import { IntlProvider } from 'react-intl';
 
 import Home from './pages/home/Home';
@@ -14,13 +13,13 @@ import Header from './components/header/Header';
 
 function App() {
   const locale = useSelector((state) => state.localizer);
-  console.log(store.getState());
+  const user = useSelector((state) => state.root.user);
 
   return (
     <>
       <div className="App">
         <IntlProvider locale={locale.locale} messages={locale.messages[locale.locale]}>
-          <Header />
+          <Header user={user} />
           <Switch>
             <Route exact path="/" component={Home}/>
             <Route path="/login" component={Login}/>  
