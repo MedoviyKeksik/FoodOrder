@@ -14,7 +14,7 @@ function Header(props) {
                 <h1>Pizza</h1>
             </Link>
             <Navbar isAdmin={props.user && props.user.isAdmin} />
-            <span className="navbar__item"><Link to="/cart"> 
+                <CartManager className="header__cart" count={props.count || 0} />
                 <FormattedMessage defaultMessage="Cart" id="app.navbar.cart" />
             </Link></span>
             <LocaleSwitcher className="header__localeSwitcher" locale={store.getState().localizer.locale} />

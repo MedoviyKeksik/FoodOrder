@@ -1,0 +1,17 @@
+@import '../../constants.scss';
+
+$font-size: 25px;
+
+.cart {
+    text-decoration: none;
+
+    &__count {
+        color: $second-color;
+        font-size: $font-size;
+    }
+
+    &__cart {
+        color: $second-color;
+        font-size: $font-size;
+    }
+}
