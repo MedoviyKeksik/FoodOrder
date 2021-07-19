@@ -19,7 +19,7 @@ function App() {
     <>
       <div className="App">
         <IntlProvider locale={locale.locale} messages={locale.messages[locale.locale]}>
-          <Header user={user} />
+          <Header user={user} locale={locale.locale} />
           <Switch>
             <Route exact path="/" component={Home}/>
             <Route path="/login" component={Login}/>  

@@ -5,6 +5,7 @@ import { store } from '../../store';
 import { all } from "redux-saga/effects";
 import { FormattedMessage } from "react-intl";
 import FoodContainer from "../../containers/foodContainer/FoodContainer";
+import './Home.scss';
 
 
 const itemsPerPage = [
@@ -59,14 +60,16 @@ class Home extends Component {
 
     render() {
         return (
-            <>
+            <div className="home">
                 <h1>Home</h1>
-                <select value={this.state.itemsCountPerPage} onChange={this.handleItemsPerPage.bind(this)}>
-                    {this.options}
-                </select>
-                <Pagination activePage={this.state.activePage} itemsCountPerPage={this.state.itemsCountPerPage} totalItemsCount={this.state.totalItemsCount} onChange={this.handlePageChange.bind(this)} pageRangeDisplayed={5} />
+                <div className="home__pagination-row">
+                    <select value={this.state.itemsCountPerPage} onChange={this.handleItemsPerPage.bind(this)}>
+                        {this.options}
+                    </select>
+                    <Pagination className="classNamepagination" itemClass="home__pagination-item" activePage={this.state.activePage} itemsCountPerPage={this.state.itemsCountPerPage} totalItemsCount={this.state.totalItemsCount} onChange={this.handlePageChange.bind(this)} pageRangeDisplayed={5} />
+                </div>
                 <FoodContainer />
-            </>
+            </div>
         );
     };
 }

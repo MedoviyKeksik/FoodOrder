@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { useSelector, useStore } from 'react-redux';
+import React from 'react';
 import { store } from '../../store';
 import { changeLocale } from './actions';
-import { loadLocale, saveLocale } from './localStorage';
+import { saveLocale } from './localStorage';
+import './LocaleSwitcher.scss';
 
 class LocalizationButton extends React.Component {
     constructor(props) {
@@ -23,9 +23,9 @@ class LocalizationButton extends React.Component {
 
     render() {
         return (
-            <select value={this.state.locale} onChange={this.handleLocaleChange}>
-                <option value='en'>English</option>
-                <option value='ru'>Русский</option>
+            <select className='locale-switcher' value={this.state.locale} onChange={this.handleLocaleChange}>
+                <option value='en'>Eng</option>
+                <option value='ru'>Рус</option>
             </select>
         );
     }

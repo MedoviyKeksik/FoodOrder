@@ -1,0 +1,23 @@
+@import '../../constants.scss';
+
+.home {
+    width: $page-width;
+    margin: 0 auto;
+
+    &__pagination-row {
+        display: flex;
+    }
+
+    &__pagination {
+        display: flex;
+    }
+
+    &__pagination-item {
+        display: block;
+        list-style: none;
+    }
+}
+
+.pagination {
+    display: flex;
+}
