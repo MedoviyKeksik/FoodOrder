@@ -15,6 +15,7 @@ function LoginManager(props) {
         content = (
             <>
                 <Link to="/login"><FormattedMessage defaultMessage="Login" id={FOODORDER_LOGINMANAGER_LOGIN} /></Link>
+                <span> </span>
                 <Link to="/register"><FormattedMessage defaultMessage="Register" id={FOODORDER_LOGINMANAGER_REGISTER} /></Link>
             </>
         );
