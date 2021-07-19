@@ -5,6 +5,7 @@ import LocaleSwitcher from '../../containers/localeSwitcher/LocaleSwitcher';
 import Navbar from '../navbar/Navbar';
 import './Header.scss';
 import { FormattedMessage } from 'react-intl';
+import LoginManager from '../../containers/loginManager/LoginManager';
 
 function Header(props) {
     return (
@@ -17,9 +18,10 @@ function Header(props) {
                 <FormattedMessage defaultMessage="Cart" id="app.navbar.cart" />
             </Link></span>
             <LocaleSwitcher className="header__localeSwitcher" locale={store.getState().localizer.locale} />
-            {/* <LoginManager /> */}
+            <LoginManager />
         </header>
     );
 }
 
 export default Header;
+
