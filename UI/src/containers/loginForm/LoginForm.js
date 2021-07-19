@@ -1,5 +1,11 @@
 import React from "react"
 import InputField from "../../components/inputField/InputField";
+import { store } from "../../store";
+import { loadLoclization } from "../localeSwitcher/actions";
+import { FOODORDER_LOGINFORM_LOGIN, FOODORDER_LOGINFORM_PASSWORRD } from "./constants";
+import localization from './messages'
+
+store.dispatch(loadLoclization(localization));
 
 class LoginForm extends React.Component {
     constructor(props) {
@@ -29,8 +35,8 @@ class LoginForm extends React.Component {
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-                <InputField title="Phone/Email:" type="text" name="login" isRequired={true} onChange={this.handleLoginChange} />
-                <InputField title="Password:" type="password" name="password" isRequired={true} onChange={this.handlePasswordChange} />
+                <InputField titleDefault="Phone/Email:" titleId={FOODORDER_LOGINFORM_LOGIN} type="text" name="login" isRequired={true} onChange={this.handleLoginChange} />
+                <InputField titleDefault="Password:" titleId={FOODORDER_LOGINFORM_PASSWORRD} type="password" name="password" isRequired={true} onChange={this.handlePasswordChange} />
                 <input type="submit" />
             </form>
         )

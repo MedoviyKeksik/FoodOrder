@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { store } from '../../store';
 import { loadLoclization } from '../../containers/localeSwitcher/actions';
 import { FOODORDER_NAVBAR_ADMIN_LOCALIZATION } from './constants';
-import './Navbar.scss'
+import './Navbar.scss';
 import localization from './messages';
 
 store.dispatch(loadLoclization(localization));
