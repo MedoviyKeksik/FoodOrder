@@ -14,12 +14,13 @@ import Header from './components/header/Header';
 function App() {
   const locale = useSelector((state) => state.localizer);
   const user = useSelector((state) => state.root.user);
+  const cart = useSelector((state) => state.root.cart);
 
   return (
     <>
       <div className="App">
         <IntlProvider locale={locale.locale} messages={locale.messages[locale.locale]}>
-          <Header user={user} locale={locale.locale} />
+          <Header user={user} locale={locale.locale} cartCount={cart.length} />
           <Switch>
             <Route exact path="/" component={Home}/>
             <Route path="/login" component={Login}/>  

@@ -14,7 +14,7 @@ function FoodContainer(props) {
         return (<h2><FormattedMessage defaultMessage="No Foood!" id={FOODORDER_FOODCONTAINER_NOFOOD} /></h2>);
 
     let cards = props.food.map((food) => 
-        <FoodCard key={food.id} title={food.title} description={food.description} />
+        <FoodCard key={food.id} title={food.title} description={food.description} isAuthorized={props.isAuthorized}/>
     );
     return (
         <div className="food-container">

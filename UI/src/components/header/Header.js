@@ -14,7 +14,7 @@ function Header(props) {
                     <h1>Pizza</h1>
                 </Link>
                 <Navbar isAdmin={props.user && props.user.isAdmin} />
-                <CartManager className="header__cart" count={props.count || 0} />
+                <CartManager className="header__cart" count={props.cartCount || 0} />
                 <LocaleSwitcher className="header__locale-switcher" locale={props.locale} />
                 <LoginManager user={props.user} />
             </header>

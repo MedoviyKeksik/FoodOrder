@@ -34,28 +34,30 @@ class Home extends Component {
             totalItemsCount: 0,
             activePage: 1,
             itemsCountPerPage: itemsPerPage[0].value,
-            foodCards: []
+            foodCards: [],
+            isAuthorized: false
         }
 
         this.getGlobalId = this.getGlobalId.bind(this);
         
         this.options = itemsPerPage.map((data) => <option value={data.value}>{data.title}</option>);   
-        this.handleFoodChange = this.handleFoodChange.bind(this);
+        this.handleStoreChange = this.handleStoreChange.bind(this);
     }
 
     componentDidMount() {
-        store.subscribe(this.handleFoodChange);
+        store.subscribe(this.handleStoreChange);
         store.dispatch(requestFood({
             count: this.state.itemsCountPerPage, 
             offset: (this.state.activePage - 1) * this.state.itemsCountPerPage
         }));
     }
 
-    handleFoodChange() {
+    handleStoreChange() {
         console.log(store.getState().food);
         this.setState({
             foodCards: store.getState().food.items, 
-            totalItemsCount: store.getState().food.totalCount
+            totalItemsCount: store.getState().food.totalCount,
+            isAuthorized: store.getState().root.user
         });
     }
 
@@ -92,7 +94,7 @@ class Home extends Component {
                     </select>
                     <Pagination className="classNamepagination" itemClass="home__pagination-item" activePage={this.state.activePage} itemsCountPerPage={this.state.itemsCountPerPage} totalItemsCount={this.state.totalItemsCount} onChange={this.handlePageChange.bind(this)} pageRangeDisplayed={5} />
                 </div>
-                <FoodContainer food={this.state.foodCards} />
+                <FoodContainer food={this.state.foodCards} isAuthorized={this.state.isAuthorized} />
             </div>
         );
     };
