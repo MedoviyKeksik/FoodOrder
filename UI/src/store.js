@@ -1,7 +1,7 @@
 import { applyMiddleware, combineReducers, createStore } from '@reduxjs/toolkit';
 import localizerReducer from './containers/localeSwitcher/reducer';
 import createSagaMiddleware from 'redux-saga'
-import  foodReducer from './containers/foodContainer/reducer';
+import  foodReducer from './pages/home/reducer';
 import { reducer } from './reducer';
 import saga from './saga';
 
