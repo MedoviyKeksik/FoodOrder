@@ -17,7 +17,9 @@ function FoodAddModal(props) {
 
     function handleConfirmation() {
         store.dispatch(addFoodToCart({
-            title: props.title
+            title: props.title,
+            count: count,
+            cost: props.cost
         }));
     }
 
@@ -27,7 +29,7 @@ function FoodAddModal(props) {
 
     if (props.isAuthorized) {
         return (
-            <Modal buttonTitle={props.buttonTitle}>
+            <Modal trigger={props.trigger}>
                 <img alt="Food" src={props.imageSource} />
                 <h3 className="food-card__title">{props.title}</h3>
                 <p className="food-card__description">{props.description}</p>
@@ -38,7 +40,7 @@ function FoodAddModal(props) {
             </Modal>
         );
     } else {
-        return (<NeedAuthModal buttonTitle={props.buttonTitle} />);
+        return (<NeedAuthModal trigger={props.trigger} />);
     }
 }
 

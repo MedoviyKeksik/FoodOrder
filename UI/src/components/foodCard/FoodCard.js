@@ -13,7 +13,6 @@ function FoodCard(props) {
             <p className="food-card__description">{props.description}</p>
             <span className="food-card__cookingTime">{props.cookingTime}</span>
             <span className="food-card__cost">{props.cost}</span>
-            {/* <button className="food-card__btn">Choose</button> */}
             <FoodAddModal 
                 trigger={<button><FormattedMessage defaultMessage="Add to cart" id={FOODORDER_FOODCARD_ADDBUTTON} /></button>}
                 imageSource={props.imageSource} 
