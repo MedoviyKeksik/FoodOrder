@@ -1,19 +1,24 @@
 import { useState } from "react";
 import { store } from "../../store";
-import { removeCartItem } from "./actions";
+import { removeCartItem, updateCartItem } from "./actions";
 
 
 function CartRow(props) {
     const [count, setCount] = useState(props.count);
 
     function handleCountChange(e) {
-        if (e.target.value > 0)
-            setCount(e.target.value);
+        if (e.target.value > 0) {
+            setCount(e.target.value);        
+            store.dispatch(updateCartItem({
+                id: props.id,
+                count: e.target.value
+            }));
+        }
     }
 
     function handleRemove() {
         store.dispatch(removeCartItem({
-            Id: props.FoodId
+            id: props.id
         }));
     }
 
