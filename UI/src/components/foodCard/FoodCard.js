@@ -1,6 +1,8 @@
 import React from "react";
+import { FormattedMessage } from "react-intl";
 import FoodAddModal from "../foodAddModal/FoodAddModal";
-import Modal from "../Modal/Modal";
+import Modal from "../modal/Modal";
+import { FOODORDER_FOODCARD_ADDBUTTON } from "./constants";
 import './FoodCard.scss';
 
 function FoodCard(props) {
@@ -13,6 +15,7 @@ function FoodCard(props) {
             <span className="food-card__cost">{props.cost}</span>
             {/* <button className="food-card__btn">Choose</button> */}
             <FoodAddModal 
+                buttonTitle={<FormattedMessage defaultMessage="Add to cart" id={FOODORDER_FOODCARD_ADDBUTTON} />}
                 imageSource={props.imageSource} 
                 title={props.title}
                 description={props.description}

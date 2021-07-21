@@ -1,0 +1,1 @@
+export const FOODORDER_FOODCARD_ADDBUTTON = 'FoodOrder.FoodAddModal.AddButton';
