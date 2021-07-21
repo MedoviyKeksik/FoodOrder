@@ -1,5 +1,5 @@
 import { ADD_FOOD_TO_CART } from "./components/foodAddModal/constants";
-import { REMOVE_CART_ITEM } from "./containers/cartRow/constatnts";
+import { REMOVE_CART_ITEM, UPDATE_CART_ITEM } from "./containers/cartRow/constatnts";
 import { USER_LOGIN_SUCCEED } from "./containers/loginForm/constants";
 
 const initialState = {
@@ -23,9 +23,20 @@ export const reducer = (state = initialState, action) => {
                 cart
             };
         }
+        case UPDATE_CART_ITEM: {
+            let cart = [...state.cart];
+            let ind = cart.findIndex((element, index, arr) => element.id = action.payload.id);
+            for (let key in action.payload) {
+                cart[ind][key] = action.payload[key];
+            }
+            return {
+                ...state,
+                cart
+            }
+        }
         case REMOVE_CART_ITEM: {
             let cart = [...state.cart];
-            let ind = cart.find((element, index, arr) => element.id = action.payload.id);
+            let ind = cart.findIndex((element, index, arr) => element.id = action.payload.id);
             if (ind != 'undefined') {
                 cart.splice(ind, 1);
             }

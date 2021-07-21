@@ -1,0 +1,19 @@
+import { FOODORDER_FOODFORM_COOKINGTIME, FOODORDER_FOODFORM_COST, FOODORDER_FOODFORM_DESCRIPTION, FOODORDER_FOODFORM_PICTURE, FOODORDER_FOODFORM_TITLE } from "./constants";
+
+export const en = {
+    [FOODORDER_FOODFORM_TITLE]: 'Title: ',
+    [FOODORDER_FOODFORM_DESCRIPTION]: 'Description: ',
+    [FOODORDER_FOODFORM_PICTURE]: 'Picture: ',
+    [FOODORDER_FOODFORM_COST]: 'Cost: ',
+    [FOODORDER_FOODFORM_COOKINGTIME]: 'Cooking time: '
+}
+
+export const ru = {
+    [FOODORDER_FOODFORM_TITLE]: 'Название: ',
+    [FOODORDER_FOODFORM_DESCRIPTION]: 'Описание: ',
+    [FOODORDER_FOODFORM_PICTURE]: 'Картинка: ',
+    [FOODORDER_FOODFORM_COST]: 'Стоимость: ',
+    [FOODORDER_FOODFORM_COOKINGTIME]: 'Время приготовления: '
+}
+
+export default {en, ru};
