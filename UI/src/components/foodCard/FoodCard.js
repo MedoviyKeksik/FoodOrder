@@ -15,7 +15,7 @@ function FoodCard(props) {
             <span className="food-card__cost">{props.cost}</span>
             {/* <button className="food-card__btn">Choose</button> */}
             <FoodAddModal 
-                buttonTitle={<FormattedMessage defaultMessage="Add to cart" id={FOODORDER_FOODCARD_ADDBUTTON} />}
+                trigger={<button><FormattedMessage defaultMessage="Add to cart" id={FOODORDER_FOODCARD_ADDBUTTON} /></button>}
                 imageSource={props.imageSource} 
                 title={props.title}
                 description={props.description}

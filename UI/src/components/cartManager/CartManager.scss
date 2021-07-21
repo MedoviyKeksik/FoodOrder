@@ -3,6 +3,8 @@
 $font-size: 25px;
 
 .cart {
+    border: none;
+    background-color: inherit;
     text-decoration: none;
 
     &__count {
