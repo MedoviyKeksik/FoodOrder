@@ -7,6 +7,7 @@ function* fetchLogin(action) {
         yield put({
             type: USER_LOGIN_SUCCEED, 
             user: {
+                id: 1,
                 name: 'Klim',
                 surname: 'Severin',
                 isAdmin: false

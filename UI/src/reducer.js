@@ -1,6 +1,7 @@
 import { ADD_FOOD_TO_CART } from "./components/foodAddModal/constants";
 import { REMOVE_CART_ITEM, UPDATE_CART_ITEM } from "./containers/cartRow/constatnts";
 import { USER_LOGIN_SUCCEED } from "./containers/loginForm/constants";
+import { HISTORY_SUCCEED } from "./pages/account/constants";
 
 const initialState = {
     user: null,
@@ -43,6 +44,16 @@ export const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 cart
+            }
+        }
+        case HISTORY_SUCCEED: {
+            console.log('STATE CHANGED', action.payload);
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    history: action.payload
+                }
             }
         }
         default: 

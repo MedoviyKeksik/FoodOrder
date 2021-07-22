@@ -12,27 +12,29 @@ import { useSelector } from 'react-redux';
 import Header from './components/header/Header';
 
 function App() {
-  const locale = useSelector((state) => state.localizer);
-  const user = useSelector((state) => state.root.user);
-  const cart = useSelector((state) => state.root.cart);
+    const locale = useSelector((state) => state.localizer);
+    const user = useSelector((state) => state.root.user);
+    const cart = useSelector((state) => state.root.cart);
 
-  return (
-    <>
-      <div className="App">
-        <IntlProvider locale={locale.locale} messages={locale.messages[locale.locale]}>
-          <Header user={user} locale={locale.locale} cartCount={cart.length} />
-          <Switch>
-            <Route exact path="/" component={Home}/>
-            <Route path="/login" component={Login}/>  
-            <Route path="/register" component={Register}/>
-            <Route path="/account" component={Account}/>
-            <Route path="/cart" component={Cart}/>
-            <Route path="/admin" component={Admin}/>
-          </Switch>
-        </IntlProvider>
-      </div>
-    </>
-  );
+    return (
+        <>
+        <div className="App">
+            <IntlProvider locale={locale.locale} messages={locale.messages[locale.locale]}>
+            <Header user={user} locale={locale.locale} cartCount={cart.length} />
+            <Switch>
+                <Route exact path="/" component={Home}/>
+                <Route path="/login" component={Login}/>  
+                <Route path="/register" component={Register}/>
+                <Route path="/account">
+                    <Account user={user} />
+                </Route>
+                <Route path="/cart" component={Cart}/>
+                <Route path="/admin" component={Admin}/>
+            </Switch>
+            </IntlProvider>
+        </div>
+        </>
+    );
 }
 
 

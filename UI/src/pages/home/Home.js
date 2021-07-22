@@ -69,6 +69,7 @@ class Home extends Component {
         }));
     }
 
+    
     handleItemsPerPage(e) {
         this.setState({
             activePage: 1,
@@ -92,7 +93,7 @@ class Home extends Component {
                     <select value={this.state.itemsCountPerPage} onChange={this.handleItemsPerPage.bind(this)}>
                         {this.options}
                     </select>
-                    <Pagination className="classNamepagination" itemClass="home__pagination-item" activePage={this.state.activePage} itemsCountPerPage={this.state.itemsCountPerPage} totalItemsCount={this.state.totalItemsCount} onChange={this.handlePageChange.bind(this)} pageRangeDisplayed={5} />
+                    <Pagination itemClass="home__pagination-item" activePage={this.state.activePage} itemsCountPerPage={this.state.itemsCountPerPage} totalItemsCount={this.state.totalItemsCount} onChange={this.handlePageChange.bind(this)} pageRangeDisplayed={5} />
                 </div>
                 <FoodContainer food={this.state.foodCards} isAuthorized={this.state.isAuthorized} />
             </div>
