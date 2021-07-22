@@ -23,7 +23,7 @@ class LocalizationButton extends React.Component {
 
     render() {
         return (
-            <select className='locale-switcher' value={this.state.locale} onChange={this.handleLocaleChange}>
+            <select className={'locale-switcher ' + this.props.className} value={this.state.locale} onChange={this.handleLocaleChange}>
                 <option value='en'>Eng</option>
                 <option value='ru'>Рус</option>
             </select>

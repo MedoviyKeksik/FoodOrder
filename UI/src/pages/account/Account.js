@@ -24,19 +24,24 @@ class Account extends React.Component {
         this.renderInfo = this.renderInfo.bind(this);
         this.renderEdit = this.renderEdit.bind(this);
         this.renderHistory = this.renderHistory.bind(this);
+        this.handleHistoryClick = this.handleHistoryClick.bind(this);
     }
 
-    componentDidMount() {
-        store.dispatch(getHistory({
-            userId: this.state.user.id,
-            count: this.state.countPerPage,
-            offset: (this.state.activePage -  1) * this.state.countPerPage
-        }));
+    componentDidUpdate() {
+        console.log("ACCOUNT COMPONENT UPDATED");
+    }
 
+    handleHistoryClick() {
+        if (this.state.user != null) {
+            store.dispatch(getHistory({
+                userId: this.state.user.id,
+                count: this.state.countPerPage,
+                offset: (this.state.activePage -  1) * this.state.countPerPage
+            }));
+        }
     }
 
     handlePageChange(page) {
-        this.setState({activePage: page});
         store.dispatch(getHistory({
             userId: this.state.user.id,
             count: this.state.countPerPage,
@@ -45,17 +50,14 @@ class Account extends React.Component {
     }    
 
     renderInfo() {
-        if (this.state.user != null)
-            return (
-                <AccountInfo 
-                    name={this.state.user.name} 
-                    surname={this.state.user.surname}  
-                    email={this.state.user.email}
-                    phone={this.state.user.phone}
-                />
-            );
-        else
-            return (<>NO DATA</>);
+        return (
+            <AccountInfo 
+                name={this.state.user.name} 
+                surname={this.state.user.surname}  
+                email={this.state.user.email}
+                phone={this.state.user.phone}
+            />
+        );
     }
 
     renderEdit() {
@@ -64,30 +66,37 @@ class Account extends React.Component {
 
     renderHistory() {
         console.log("RENDER HISTORY", this.state);
-        return (
-            <>
-                <Pagination 
-                    itemClass="account__history-item"
-                    activePage={this.state.activePage} 
-                    totalItemsCount={(this.state.user.history != null && this.state.user.history.totalCount) || 0} 
-                    onChange={this.handlePageChange} 
-                    itemsCountPerPage={this.state.countPerPage}
-                />
-                <AccountHistory 
-                    items={(this.state.user.history != null && this.state.user.history.items) || []}
-                />
-            </>
-        );
+        if (this.state.user.history == null) {
+            return (<>No data</>);
+        } else {
+            return (
+                <>
+                    <Pagination 
+                        itemClass="account__history-item"
+                        activePage={this.state.activePage} 
+                        totalItemsCount={this.state.user.history.totalCount} 
+                        onChange={this.handlePageChange} 
+                        itemsCountPerPage={this.state.countPerPage}
+                    />
+                    <AccountHistory 
+                        items={this.state.user.history.items}
+                    />
+                </>
+            );
+        }
     }
 
     render() {
-        return (
+        if (this.state.user == null) {
+            return (<h2>Please login first</h2>);
+        } else {
+            return (
             <>
                 <h1>Account</h1>
                 <ul>
                     <li><Link to="/account">Info</Link></li>
                     <li><Link to="/account/edit">Edit</Link></li>
-                    <li><Link to="/account/history">History</Link></li>
+                    <li><Link to="/account/history" onClick={this.handleHistoryClick}>History</Link></li>
                 </ul>
                 <Switch>
                     <Route exact path='/account' render={this.renderInfo} />
@@ -95,15 +104,9 @@ class Account extends React.Component {
                     <Route path='/account/history' render={this.renderHistory} />
                 </Switch>
             </>
-        );
+            );
+        }
     }
 }
-
-// function Account() {
-//     const user = useSelector((state) => state.root.user);
-//     const [activePage, setActivePage] = useState(1); 
-//     const [countPerPage, setCountPerPage] = useState(20);
-
-// }   
 
 export default Account;

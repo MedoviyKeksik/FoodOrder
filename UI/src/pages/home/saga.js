@@ -6,7 +6,8 @@ const Food = {
     items: [
         {
             title: "Pizza #1",
-            description: "So tasty pizza!"
+            description: "So tasty pizza!",
+            imageSource: "/pizza1.jpeg"
         },
         {
             title: "Pizza #2",
@@ -457,8 +458,6 @@ function getSuffix(array, offset, count) {
 }
 
 function* fetchFood(action) {
-    console.log('FOOD IS FETCHED');
-    console.log(action.payload);
     yield put({type: FOOD_FETCH_SUCCEED, info: {
         totalCount: Food.totalCount,
         items: getSuffix(Food.items, action.payload.offset, action.payload.count)

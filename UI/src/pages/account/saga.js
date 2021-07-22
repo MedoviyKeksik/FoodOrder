@@ -6,11 +6,14 @@ function* fetchHistory(action) {
     yield put({
         type: HISTORY_SUCCEED,
         payload: {
-            totalCount: 2,
-            items: [
-                { title: 'Item1' },
-                { title: 'Item2' }
-            ]
+            orderId: 1,
+            food: {    
+                totalCount: 2,
+                items: [
+                    { title: 'Item1', count: 5, cost: 10 },
+                    { title: 'Item2' }
+                ]
+            }
         }
     });
     

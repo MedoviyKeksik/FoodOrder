@@ -10,8 +10,8 @@ function Header(props) {
     return (
         <div className="wrapper wrapper_header">
             <header className="header">
-                <Link className="header__title" to="/">
-                    <h1>Pizza</h1>
+                <Link className="header__title-link" to="/">
+                    <h1 className="header__title">Pizza</h1>
                 </Link>
                 <Navbar isAdmin={props.user && props.user.isAdmin} />
                 <CartManager isAuthorized={props.user != null} className="header__cart" count={props.cartCount || 0} />

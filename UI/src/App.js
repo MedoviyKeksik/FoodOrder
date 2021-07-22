@@ -1,5 +1,5 @@
 import './App.scss';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
 
 import Home from './pages/home/Home';
@@ -23,8 +23,20 @@ function App() {
             <Header user={user} locale={locale.locale} cartCount={cart.length} />
             <Switch>
                 <Route exact path="/" component={Home}/>
-                <Route path="/login" component={Login}/>  
-                <Route path="/register" component={Register}/>
+                <Route path="/login">
+                    {
+                        user != null ? 
+                            <Redirect to="/" /> :        
+                            <Login />
+                    }
+                </Route>
+                <Route path="/register">
+                    {
+                        user != null ?
+                            <Redirect to="/" /> :
+                            <Register />
+                    }
+                </Route>
                 <Route path="/account">
                     <Account user={user} />
                 </Route>

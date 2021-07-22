@@ -1,7 +1,11 @@
 @import '../../constants.scss';
 
 .locale-switcher {
-    font-size: 12px;
-    height: 30px;
     display: block;
+    font-size: 1em;
+    height: 30px;
+    color: $text-color;
+    background-color: $second-color;
+    border-radius: 5px;
+    border: 1px solid $shadow-color;
 }

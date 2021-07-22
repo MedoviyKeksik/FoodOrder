@@ -6,6 +6,7 @@ import { FOODORDER_FOODCARD_ADDBUTTON } from "./constants";
 import './FoodCard.scss';
 
 function FoodCard(props) {
+    console.log(props.imageSource);
     return (
         <div className="food-card">
             <img alt="Food" src={props.imageSource} />

@@ -1,0 +1,15 @@
+@import '../../constants.scss';
+
+.login-manager {
+    color: $second-color;
+    font-size: 1em;
+
+    &__link {
+        color: $second-color;
+        text-decoration: none;
+
+        &:hover {
+            color: $text-color;
+        }
+    }
+}

@@ -53,7 +53,6 @@ class Home extends Component {
     }
 
     handleStoreChange() {
-        console.log(store.getState().food);
         this.setState({
             foodCards: store.getState().food.items, 
             totalItemsCount: store.getState().food.totalCount,
@@ -69,7 +68,7 @@ class Home extends Component {
         }));
     }
 
-    
+
     handleItemsPerPage(e) {
         this.setState({
             activePage: 1,
@@ -88,7 +87,6 @@ class Home extends Component {
     render() {
         return (
             <div className="home">
-                <h1>Home</h1>
                 <div className="home__pagination-row">
                     <select value={this.state.itemsCountPerPage} onChange={this.handleItemsPerPage.bind(this)}>
                         {this.options}

@@ -11,7 +11,7 @@ const initialState = {
 export const reducer = (state = initialState, action) => {
     switch (action.type) {
         case LOCALE_CHANGED: {
-            if (state.messages[action.locale] == 'undefined') 
+            if (state.messages[action.locale] === undefined) 
                 return { 
                     locale: action.payload,
                     messages: {

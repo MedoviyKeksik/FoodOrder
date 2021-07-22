@@ -9,26 +9,34 @@
 .header {
     width: $page-width;
     margin: 0 auto;
-    height: 70px;
+    height: 55px;
     display: flex;
     flex-direction: row;
-    margin: 0 auto;
+    align-items: center;
+
+    &__title-link {
+        text-decoration: none;
+    }
 
     &__title {
+        font-family: 'Uchen', serif;
         margin: 0;
         color: $second-color;
         text-decoration: none;
-        outline: none;
     }
 
     &__cart {
         margin-left: auto;
+        margin-right: 15px;
         color: $second-color;
-        font-size: 35px;
+        font-size: 1.5em;
+    
+        &:hover {
+            color: $text-color;
+        }
     }
 
     &__locale-switcher {
-        width: 30px;
-        height: 15px;
+        margin-right: 15px;
     }
 }

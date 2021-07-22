@@ -14,9 +14,9 @@ function LoginManager(props) {
     if (props.user == null) {
         content = (
             <>
-                <Link to="/login"><FormattedMessage defaultMessage="Login" id={FOODORDER_LOGINMANAGER_LOGIN} /></Link>
-                <span> </span>
-                <Link to="/register"><FormattedMessage defaultMessage="Register" id={FOODORDER_LOGINMANAGER_REGISTER} /></Link>
+                <Link className="login-manager__link" to="/login"><FormattedMessage defaultMessage="Login" id={FOODORDER_LOGINMANAGER_LOGIN} /></Link>
+                <span>&nbsp;/&nbsp;</span>
+                <Link className="login-manager__link" to="/register"><FormattedMessage defaultMessage="Register" id={FOODORDER_LOGINMANAGER_REGISTER} /></Link>
             </>
         );
     } else {
@@ -24,7 +24,7 @@ function LoginManager(props) {
             <>
                 <span>
                     <FormattedMessage defaultMessage="Hi, " id={FOODORDER_LOGINMANAGER_HI} />
-                    <Link to="/account">{props.user.name}</Link>                    
+                    <Link className="login-manager__link" to="/account">{props.user.name}</Link>                    
                 </span>
             </>
         );

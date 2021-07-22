@@ -9,7 +9,7 @@ function CartManager(props) {
         return (
             <Link className={props.className + " cart"} to="/cart">
                 <span className="cart__count">{props.count}</span>
-                <span> </span>
+                <span>&nbsp;</span>
                 <FontAwesomeIcon className="cart__cart" icon={faShoppingCart} />
             </Link>
         );
@@ -19,7 +19,7 @@ function CartManager(props) {
                 trigger={
                 <a className={props.className + " cart"}>
                     <span className="cart__count">{props.count}</span>
-                    <span> </span>    
+                    <span className="cart__separator">&nbsp;</span>    
                     <FontAwesomeIcon className="cart__cart" icon={faShoppingCart} />
                 </a>}     
             />
