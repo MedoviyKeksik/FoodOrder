@@ -6,7 +6,7 @@ function Admin() {
         <>
             <ul>
                 <li><Link to="/admin/add">Add</Link></li>
-                <li><Link to="/admin/edit">Edit</Link></li>
+                {/* <li><Link to="/admin/edit">Edit</Link></li> */}
             </ul>
             <Switch>
                 <Route path="/admin/add" component={FoodForm}/>

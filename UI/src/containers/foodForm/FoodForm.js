@@ -2,8 +2,11 @@ import React from "react";
 import InputField from "../../components/inputField/InputField";
 import { store } from "../../store";
 import { loadLoclization } from "../localeSwitcher/actions";
-import { FOODORDER_FOODFORM_COOKINGTIME, FOODORDER_FOODFORM_COST, FOODORDER_FOODFORM_DESCRIPTION, FOODORDER_FOODFORM_PICTURE, FOODORDER_FOODFORM_TITLE } from "./constants";
+import { addFoodToCatalog } from "./actions";
+import { FOODORDER_FOODFORM_ADDBUTTON, FOODORDER_FOODFORM_COOKINGTIME, FOODORDER_FOODFORM_COST, FOODORDER_FOODFORM_DESCRIPTION, FOODORDER_FOODFORM_PICTURE, FOODORDER_FOODFORM_TITLE } from "./constants";
 import localization from './messages';
+import './FoodForm.scss';
+import { FormattedMessage } from "react-intl";
 
 class FoodForm extends React.Component {
     constructor(props) {
@@ -38,18 +41,53 @@ class FoodForm extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        // TODO: Submit food form
+        store.dispatch(addFoodToCatalog({
+            title: this.state.title,
+            description: this.state.description,
+            cost: this.state.cookingTime,
+            cookingTime: this.state.cookingTime
+        }));
     }
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <InputField titleDefault="Title: " titleId={FOODORDER_FOODFORM_TITLE} inputType="text" name="title" isRequired={true} onChange={this.handleTitleChange} />
-                <InputField titleDefault="Description:" titleId={FOODORDER_FOODFORM_DESCRIPTION} inputType="textarea" name="description" onChange={this.handleDescriptionChange} />
-                <InputField titleDefault="Picture:" titleId={FOODORDER_FOODFORM_PICTURE} inputType="file" name="picture" onChange={this.handlePictureChange} />
-                <InputField titleDefault="Cost:" titleId={FOODORDER_FOODFORM_COST} inputType="number" name="cost" isRequired={true} onChange={this.handleCostChange} />
-                <InputField titleDefault="Cooking time:" titleId={FOODORDER_FOODFORM_COOKINGTIME} inputType="number" name="cookingTime" isRequired={true} onChange={this.handleCookingTimeChange} />
-                <input type="submit" value="Add" />
+            <form className="food-form" onSubmit={this.handleSubmit}>
+                <InputField 
+                    label={<FormattedMessage defaultMessage="Title: " id={FOODORDER_FOODFORM_TITLE} />} 
+                    inputType="text" 
+                    name="title" 
+                    isRequired={true} 
+                    onChange={this.handleTitleChange} 
+                />
+                <InputField 
+                    label={<FormattedMessage defaultMessage="Description:" id={FOODORDER_FOODFORM_DESCRIPTION} />} 
+                    inputType="textarea" 
+                    name="description" 
+                    onChange={this.handleDescriptionChange} 
+                />
+                <InputField 
+                    label={<FormattedMessage defaultMessage="Picture:" id={FOODORDER_FOODFORM_PICTURE} />} 
+                    inputType="file" 
+                    name="picture" 
+                    onChange={this.handlePictureChange} 
+                />
+                <InputField 
+                    label={<FormattedMessage defaultMessage="Cost:" id={FOODORDER_FOODFORM_COST} />} 
+                    inputType="number" 
+                    name="cost" 
+                    isRequired={true} 
+                    onChange={this.handleCostChange} 
+                />
+                <InputField 
+                    label={<FormattedMessage defaultMessage="Cooking time:" id={FOODORDER_FOODFORM_COOKINGTIME} />} 
+                    inputType="number" 
+                    name="cookingTime" 
+                    isRequired={true} 
+                    onChange={this.handleCookingTimeChange} 
+                />
+                <button type="submit">
+                    <FormattedMessage defaultMessage="Add" id={FOODORDER_FOODFORM_ADDBUTTON} />
+                </button>
             </form>
         );
     }
