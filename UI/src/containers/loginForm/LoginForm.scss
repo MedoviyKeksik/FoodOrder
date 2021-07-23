@@ -1,0 +1,23 @@
+@import '../../constants.scss';
+
+.login-form {
+    width: 300px;
+    margin: 0 auto;
+    border: 1px solid $shadow-color;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px $shadow-color;
+    padding: 20px;
+
+    &__title {
+        margin-top: 0;
+        text-align: center;
+    }
+    
+    &__button {
+        display: block;
+        margin-left: auto;
+        margin-top: 20px;
+        font-size: 1em;
+
+    }
+}

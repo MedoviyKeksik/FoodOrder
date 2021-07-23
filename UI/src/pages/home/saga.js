@@ -5,8 +5,8 @@ const Food = {
     totalCount: 110,
     items: [
         {
-            title: "Pizza #1",
-            description: "So tasty pizza!",
+            title: "4 сезона",
+            description: "Бекон, цыпленок, ветчина, сыр блю чиз, сыры чеддер и пармезан, соус песто, кубики брынзы, томаты, красный лук, моцарелла, соус альфредо, чеснок, итальянские травы.",
             imageSource: "/pizza1.jpeg"
         },
         {

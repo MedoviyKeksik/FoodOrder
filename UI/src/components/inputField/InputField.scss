@@ -1,0 +1,16 @@
+@import '../../constants.scss';
+
+.input-field {
+    display: block;
+    font-size: 1.2em;
+    margin-top: 20px;
+
+    &__input {
+        margin-top: 10px;
+        height: 30px;
+        width: 100%;
+        font-size: 1em;
+        border: 1px solid $shadow-color;
+        border-radius: 10px;
+    }
+}

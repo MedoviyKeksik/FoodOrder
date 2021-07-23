@@ -1,9 +1,6 @@
-import FoodCard from "../../components/foodCard/FoodCard";
 import Pagination from "react-js-pagination";
 import { Component } from "react";
 import { store } from '../../store';
-import { all } from "redux-saga/effects";
-import { FormattedMessage } from "react-intl";
 import FoodContainer from "../../containers/foodContainer/FoodContainer";
 import './Home.scss';
 import { requestFood } from "./actions";
@@ -88,12 +85,27 @@ class Home extends Component {
         return (
             <div className="home">
                 <div className="home__pagination-row">
-                    <select value={this.state.itemsCountPerPage} onChange={this.handleItemsPerPage.bind(this)}>
+                    <select 
+                        className="home__pagination-count" 
+                        value={this.state.itemsCountPerPage} 
+                        onChange={this.handleItemsPerPage.bind(this)}
+                    >
                         {this.options}
                     </select>
-                    <Pagination itemClass="home__pagination-item" activePage={this.state.activePage} itemsCountPerPage={this.state.itemsCountPerPage} totalItemsCount={this.state.totalItemsCount} onChange={this.handlePageChange.bind(this)} pageRangeDisplayed={5} />
+                    <Pagination 
+                        innerClass="home__pagination"
+                        itemClass="home__pagination-item" 
+                        activePage={this.state.activePage} 
+                        itemsCountPerPage={this.state.itemsCountPerPage} 
+                        totalItemsCount={this.state.totalItemsCount} 
+                        onChange={this.handlePageChange.bind(this)} 
+                        pageRangeDisplayed={5} 
+                    />
                 </div>
-                <FoodContainer food={this.state.foodCards} isAuthorized={this.state.isAuthorized} />
+                <FoodContainer 
+                    food={this.state.foodCards} 
+                    isAuthorized={this.state.isAuthorized} 
+                />
             </div>
         );
     };
