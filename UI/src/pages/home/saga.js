@@ -10,7 +10,7 @@ const Food = {
             description: "Бекон, цыпленок, ветчина, сыр блю чиз, сыры чеддер и пармезан, соус песто, кубики брынзы, томаты, красный лук, моцарелла, соус альфредо, чеснок, итальянские травы.",
             imageSource: "/images/pizza1.jpeg",
             cookingTime: "3 минуты",
-            cost: "$300"
+            cost: 300
         },
         {
             id: 124,
@@ -18,7 +18,7 @@ const Food = {
             description: "Моцарелла, сыры чеддер и пармезан, соус альфредо",
             imageSource: "/images/pizza2.jpeg",
             cookingTime: "10 минут",
-            cost: "$500"
+            cost: 500
         },
         {
             id: 125,
@@ -26,7 +26,7 @@ const Food = {
             description: "Ветчина, ананасы, моцарелла, томатный соус",
             imageSource: "/images/pizza3.jpeg",
             cookingTime: "1,5 минуты",
-            cost: "$100"
+            cost:   100
         },
         {
             title: "Pizza #4",

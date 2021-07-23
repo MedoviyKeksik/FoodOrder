@@ -1,8 +1,8 @@
-import { ADD_ORDER } from "./constants";
+import { ORDER_SENT } from "./constants";
 
 export function addOrder(payload) {
     return {
-        type: ADD_ORDER,
+        type: ORDER_SENT,
         payload
     }
 }

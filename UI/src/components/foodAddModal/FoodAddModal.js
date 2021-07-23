@@ -8,7 +8,7 @@ import NeedAuthModal from "../needAuthModal/NeedAuthModal";
 import { addFoodToCart } from "./actions";
 import { FOODORDER_FOODADDMODAL_ADDBUTTON, FOODORDER_FOODADDMODAL_CONFIRNBUTTON } from "./constants";
 import localization from './messages';
-
+import './FoodAddModal.scss';
 
 store.dispatch(loadLoclization(localization));
 
@@ -17,9 +17,12 @@ function FoodAddModal(props) {
 
     function handleConfirmation() {
         store.dispatch(addFoodToCart({
+            id: props.id,
             title: props.title,
             count: count,
-            cost: props.cost
+            cost: props.cost,
+            imageSource: props.imageSource,
+            cookingTime: props.cookingTime,
         }));
     }
 
@@ -30,13 +33,17 @@ function FoodAddModal(props) {
     if (props.isAuthorized) {
         return (
             <Modal trigger={props.trigger}>
-                <img alt="Food" src={props.imageSource} />
-                <h3 className="food-card__title">{props.title}</h3>
-                <p className="food-card__description">{props.description}</p>
-                <span className="food-card__cookingTime">{props.cookingTime}</span>
-                <span className="food-card__cost">{props.cost}</span>
-                <input value={count} type="number" onChange={handleCountChange} />
-                <button onClick={handleConfirmation}><FormattedMessage defaultMessage="Confirn" id={FOODORDER_FOODADDMODAL_CONFIRNBUTTON}/></button>
+                <div className="modal-add">
+                    <img className="modal-add__image" alt="Food" src={props.imageSource} />
+                    <div className="modal-add__info">
+                        <h3 className="modal-add__title">{props.title}</h3>
+                        <p className="modal-add__description">{props.description}</p>
+                        <span className="modal-add__cooking-time">{props.cookingTime}</span>
+                        <span className="modal-add__cost">{props.cost}</span>
+                        <input value={count} type="number" className="modal-add__count" onChange={handleCountChange} />
+                        <button className="modal-add__button" onClick={handleConfirmation}><FormattedMessage defaultMessage="Confirn" id={FOODORDER_FOODADDMODAL_CONFIRNBUTTON}/></button>
+                    </div>
+                </div>
             </Modal>
         );
     } else {

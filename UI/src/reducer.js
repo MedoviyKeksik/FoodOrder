@@ -37,6 +37,7 @@ export const reducer = (state = initialState, action) => {
         }
         case REMOVE_CART_ITEM: {
             let cart = [...state.cart];
+            console.log("LOL", cart);
             let ind = cart.findIndex((element, index, arr) => element.id = action.payload.id);
             if (ind != 'undefined') {
                 cart.splice(ind, 1);

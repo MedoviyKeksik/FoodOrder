@@ -3,7 +3,7 @@ import {useSelector} from 'react-redux';
 import CartTable from "../../components/cartTable/CartTable";
 import { store } from "../../store";
 import { addOrder } from "./actions";
-import { ADD_ORDER } from "./constants";
+import { ORDER_SENT } from "./constants";
 
 function Cart() {
     const food = useSelector((state) => state.root.cart);

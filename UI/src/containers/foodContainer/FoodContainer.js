@@ -16,6 +16,7 @@ function FoodContainer(props) {
     let cards = props.food.map((food) => 
         <FoodCard 
             key={food.id} 
+            id={food.id}
             title={food.title} 
             description={food.description} 
             cookingTime={food.cookingTime}

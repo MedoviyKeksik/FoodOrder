@@ -1,1 +1,4 @@
-export const ADD_ORDER = 'FoodOrder/Cart/ADD_ORDER';
+export const ORDER_SENT = 'FoodOrder/Cart/ORDER_SENT';
+export const ORDER_SUCCEED = 'FoodOrder/Cart/ORDER_SENT';
+export const ORDER_FAILED = 'FoodOrder/Cart/ORDER_SENT';
+

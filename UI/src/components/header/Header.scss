@@ -1,9 +1,8 @@
 @import '../../constants.scss';
-// @import '../../common.scss';
 
 .wrapper_header {
     background-color: $main-color;
-    // color: $second-color;
+    box-shadow: 0px 0px 10px lighten($shadow-color, 10);
 }
 
 .header {
@@ -22,7 +21,11 @@
         font-family: 'Uchen', serif;
         margin: 0;
         color: $second-color;
-        text-decoration: none;
+
+        &:hover {
+            color: darken($second-color, 10);
+        }
+
     }
 
     &__cart {

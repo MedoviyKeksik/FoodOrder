@@ -20,6 +20,8 @@ class Account extends React.Component {
             user: props.user
         }
 
+        this.handleStoreChange = this.handleStoreChange.bind(this);
+        store.subscribe(this.handleStoreChange);
         this.handlePageChange = this.handlePageChange.bind(this);
         this.renderInfo = this.renderInfo.bind(this);
         this.renderEdit = this.renderEdit.bind(this);
@@ -27,8 +29,8 @@ class Account extends React.Component {
         this.handleHistoryClick = this.handleHistoryClick.bind(this);
     }
 
-    componentDidUpdate() {
-        console.log("ACCOUNT COMPONENT UPDATED");
+    handleStoreChange() {
+        this.setState({user: store.getState().root.user});
     }
 
     handleHistoryClick() {
@@ -65,7 +67,6 @@ class Account extends React.Component {
     }
 
     renderHistory() {
-        console.log("RENDER HISTORY", this.state);
         if (this.state.user.history == null) {
             return (<>No data</>);
         } else {
@@ -95,7 +96,7 @@ class Account extends React.Component {
                 <h1>Account</h1>
                 <ul>
                     <li><Link to="/account">Info</Link></li>
-                    <li><Link to="/account/edit">Edit</Link></li>
+                    {/* <li><Link to="/account/edit">Edit</Link></li> */}
                     <li><Link to="/account/history" onClick={this.handleHistoryClick}>History</Link></li>
                 </ul>
                 <Switch>

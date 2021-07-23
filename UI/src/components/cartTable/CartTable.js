@@ -4,6 +4,8 @@ import CartRow from "../../containers/cartRow/CartRow";
 function CartTable(props) {
     let rows = props.food.map((food) => 
         <CartRow
+            key={food.id}
+            id={food.id}
             imageSource={food.imageSource}
             title={food.title}
             count={food.count}
