@@ -1,7 +1,12 @@
-import RegisterForm from "../../containers/registerForm/RegisterForm"
+import RegisterForm from "../../containers/registerForm/RegisterForm";
+import './Register.scss';
 
 function Register() {
-    return (<RegisterForm />);
+    return (
+        <div className="register">
+            <RegisterForm />
+        </div>
+    );
 }
 
 export default Register;

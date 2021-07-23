@@ -1,9 +1,11 @@
 import React from "react"
+import { FormattedMessage } from "react-intl";
 import InputField from "../../components/inputField/InputField";
 import { store } from "../../store";
 import { loadLoclization } from "../localeSwitcher/actions";
-import { FOODORDER_REGISTERFORM_EMAIL, FOODORDER_REGISTERFORM_NAME, FOODORDER_REGISTERFORM_PASSWORD, FOODORDER_REGISTERFORM_PHONE, FOODORDER_REGISTERFORM_SURNAME } from "./constatnts";
-import localization from './messages'
+import { FOODORDER_REGISTERFORM_BUTTON, FOODORDER_REGISTERFORM_EMAIL, FOODORDER_REGISTERFORM_NAME, FOODORDER_REGISTERFORM_PASSWORD, FOODORDER_REGISTERFORM_PHONE, FOODORDER_REGISTERFORM_SURNAME, FOODORDER_REGISTERFORM_TITLE } from "./constatnts";
+import localization from './messages';
+import './RegisterForm.scss';
 
 store.dispatch(loadLoclization(localization));
 
@@ -40,13 +42,46 @@ class RegisterForm extends React.Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <InputField titleDefault="Name:" titleId={FOODORDER_REGISTERFORM_NAME} type="text" name="name" isRequired={true} onChange={this.handleNameChange} />
-                <InputField titleDefault="Surname:" titleId={FOODORDER_REGISTERFORM_SURNAME} type="text" name="name" isRequired={true} onChange={this.handleSurnameChange} />
-                <InputField titleDefault="Email:" titleId={FOODORDER_REGISTERFORM_EMAIL} type="email" name="email" isRequired={true} onChange={this.handleEmailChange} />
-                <InputField titleDefault="Phone:" titleId={FOODORDER_REGISTERFORM_PHONE} type="phone" name="phone" isRequired={true} onChange={this.handlePhoneChange} />
-                <InputField titleDefault="Password:" titleId={FOODORDER_REGISTERFORM_PASSWORD} type="password" name="password" isRequired={true} onChange={this.handlePasswordChange} />
-                <input type="submit" />
+            <form className="register-form" onSubmit={this.handleSubmit}>
+                <h2 className="register-form__title"><FormattedMessage defaultMessage="Register" id={FOODORDER_REGISTERFORM_TITLE} /></h2>
+                <InputField 
+                    label={<FormattedMessage defaultMessage="Name:" id={FOODORDER_REGISTERFORM_NAME} />}
+                    inpitType="text" 
+                    name="name" 
+                    isRequired={true} 
+                    onChange={this.handleNameChange} 
+                />
+                <InputField 
+                    label={<FormattedMessage defaultMessage="Surname:" id={FOODORDER_REGISTERFORM_SURNAME} />}
+                    inputType="text" 
+                    name="name" 
+                    isRequired={true} 
+                    onChange={this.handleSurnameChange} 
+                />
+                <InputField 
+                    label={<FormattedMessage defaultMessage="Email:" id={FOODORDER_REGISTERFORM_EMAIL}  />}
+                    inputType="email" 
+                    name="email" 
+                    isRequired={true} 
+                    onChange={this.handleEmailChange} 
+                />
+                <InputField 
+                    label={<FormattedMessage defaultMessage="Phone:"  id={FOODORDER_REGISTERFORM_PHONE}  />}
+                    inputType="phone" 
+                    name="phone" 
+                    isRequired={true} 
+                    onChange={this.handlePhoneChange} 
+                />
+                <InputField 
+                    label={<FormattedMessage defaultMessage="Password:" id={FOODORDER_REGISTERFORM_PASSWORD} />}
+                    inputType="password" 
+                    name="password" 
+                    isRequired={true} 
+                    onChange={this.handlePasswordChange} 
+                />
+                <button type="button" className="register-form__button"> 
+                    <FormattedMessage defaultMessage="Register" id={FOODORDER_REGISTERFORM_BUTTON} />
+                </button>
             </form>
         );
     }

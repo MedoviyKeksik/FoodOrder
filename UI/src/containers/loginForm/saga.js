@@ -10,6 +10,8 @@ function* fetchLogin(action) {
                 id: 1,
                 name: 'Klim',
                 surname: 'Severin',
+                email: 'severin.klim@yandex.by',
+                phone: '+375445677227',
                 isAdmin: false
             }
         });
@@ -17,11 +19,14 @@ function* fetchLogin(action) {
         yield put({
             type: USER_LOGIN_SUCCEED,
             user: {
+                id: 0,
                 name: 'Admin',
                 isAdmin: true
             }
         });
-    else yield put({type: USER_LOGIN_FAILED});
+    else yield put({
+        type: USER_LOGIN_FAILED
+    });
 }
 
 export default fetchLogin;
