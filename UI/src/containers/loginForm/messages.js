@@ -14,4 +14,5 @@ export const ru = {
     [FOODORDER_LOGINFORM_BUTTON]: 'Войти'
 }
 
-export default {en, ru};
+const localization = {en, ru};
+export default localization;

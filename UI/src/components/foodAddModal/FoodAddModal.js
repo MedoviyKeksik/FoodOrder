@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { FormattedMessage } from "react-intl";
-import { Link } from "react-router-dom";
 import { loadLoclization } from "../../containers/localeSwitcher/actions";
 import { store } from "../../store";
 import Modal from "../modal/Modal";
 import NeedAuthModal from "../needAuthModal/NeedAuthModal";
 import { addFoodToCart } from "./actions";
-import { FOODORDER_FOODADDMODAL_ADDBUTTON, FOODORDER_FOODADDMODAL_CONFIRNBUTTON } from "./constants";
+import { FOODORDER_FOODADDMODAL_CONFIRNBUTTON } from "./constants";
 import localization from './messages';
 import './FoodAddModal.scss';
 

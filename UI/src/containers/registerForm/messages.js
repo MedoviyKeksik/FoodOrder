@@ -20,4 +20,5 @@ export const ru = {
     [FOODORDER_REGISTERFORM_BUTTON]: 'Зарегистрироваться'
 };
 
-export default {en, ru};
+const localization = {en, ru}
+export default localization;

@@ -17,7 +17,7 @@ function CartManager(props) {
         return (
             <NeedAuthModal
                 trigger={
-                <a className={props.className + " cart"}>
+                <a className={props.className + " cart"} href="/#">
                     <span className="cart__count">{props.count}</span>
                     <span className="cart__separator">&nbsp;</span>    
                     <FontAwesomeIcon className="cart__cart" icon={faShoppingCart} />

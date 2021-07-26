@@ -8,4 +8,5 @@ export const ru = {
     [FOODORDER_FOODCONTAINER_NOFOOD]: 'Нет еды!'
 }
 
-export default {en, ru};
+const localization = {en, ru};
+export default localization;

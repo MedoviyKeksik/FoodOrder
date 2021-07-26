@@ -12,4 +12,5 @@ export const ru = {
     [FOODORDER_LOGINMANAGER_REGISTER]: 'Зарегистрироваться'
 }
 
-export default {en, ru};
+const localization = {en, ru};
+export default localization;

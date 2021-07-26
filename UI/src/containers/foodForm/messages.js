@@ -18,4 +18,5 @@ export const ru = {
     [FOODORDER_FOODFORM_ADDBUTTON]: 'Добавить'
 }
 
-export default {en, ru};
+const localization = {en, ru}
+export default localization;

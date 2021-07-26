@@ -37,9 +37,8 @@ export const reducer = (state = initialState, action) => {
         }
         case REMOVE_CART_ITEM: {
             let cart = [...state.cart];
-            console.log("LOL", cart);
             let ind = cart.findIndex((element, index, arr) => element.id = action.payload.id);
-            if (ind != 'undefined') {
+            if (ind !== 'undefined') {
                 cart.splice(ind, 1);
             }
             return {
@@ -48,7 +47,6 @@ export const reducer = (state = initialState, action) => {
             }
         }
         case HISTORY_SUCCEED: {
-            console.log('STATE CHANGED', action.payload);
             return {
                 ...state,
                 user: {

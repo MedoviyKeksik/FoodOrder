@@ -1,7 +1,5 @@
 import {
-    FOOD_FETCH_REQUESTED,
-    FOOD_FETCH_SUCCEED,
-    FOOD_FETCH_FAILED
+    FOOD_FETCH_REQUESTED
 } from './constants'
 
 export function requestFood(payload) {

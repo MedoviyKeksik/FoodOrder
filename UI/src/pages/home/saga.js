@@ -1,5 +1,5 @@
-import { put, takeEvery } from 'redux-saga/effects';
-import { FOOD_FETCH_REQUESTED, FOOD_FETCH_SUCCEED } from './constants';
+import { put } from 'redux-saga/effects';
+import { FOOD_FETCH_SUCCEED } from './constants';
 
 const Food = {
     totalCount: 110,

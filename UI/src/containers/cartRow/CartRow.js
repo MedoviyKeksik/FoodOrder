@@ -24,7 +24,7 @@ function CartRow(props) {
     
     return (
         <tr>
-            <td><img src={props.imageSource} /></td>
+            <td><img src={props.imageSource} alt="Pizza" /></td>
             <td>{props.title}</td>
             <td><input type="number" value={itemCount} onChange={handleCountChange} /></td>
             <td>{itemCount * props.cost}</td>

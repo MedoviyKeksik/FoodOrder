@@ -1,7 +1,5 @@
 import React from "react";
-import { useState } from "react";
 import Pagination from "react-js-pagination";
-import { useSelector } from "react-redux";
 import { Link, Route, Switch } from "react-router-dom";
 import AccountHistory from "../../components/accountHistory/AccountHistory";
 import AccountInfo from "../../components/accountInfo/AccountInfo";

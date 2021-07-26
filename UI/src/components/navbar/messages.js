@@ -8,4 +8,5 @@ export const ru = {
     [FOODORDER_NAVBAR_ADMIN_LOCALIZATION]: "Администрирование"
 }
 
-export default {en, ru};
+const localization = {en, ru};
+export default localization;
