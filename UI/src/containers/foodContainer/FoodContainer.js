@@ -6,6 +6,7 @@ import { loadLoclization } from "../localeSwitcher/actions";
 import { FOODORDER_FOODCONTAINER_NOFOOD } from "./constants";
 import localization from './messages';
 import './FoodContainer.scss';
+import PropTypes from 'prop-types';
 
 store.dispatch(loadLoclization(localization));
 
@@ -31,5 +32,15 @@ function FoodContainer(props) {
         </div>
     );
 }
+
+FoodContainer.propTypes = {
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string,
+    cookingTime: PropTypes.number,
+    cost: PropTypes.number.isRequired,
+    imageSource: PropTypes.string,
+    isAuthorized: PropTypes.bool.isRequired
+};
 
 export default FoodContainer;

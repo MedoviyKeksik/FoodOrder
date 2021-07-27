@@ -5,6 +5,7 @@ import { loadLoclization } from '../../containers/localeSwitcher/actions';
 import { FOODORDER_NAVBAR_ADMIN_LOCALIZATION } from './constants';
 import './Navbar.scss';
 import localization from './messages';
+import PropTypes from 'prop-types';
 
 store.dispatch(loadLoclization(localization));
 
@@ -21,5 +22,9 @@ function Navbar(props) {
         </ul>
     );
 }
+
+Navbar.propTypes = {
+    isAdmin: PropTypes.bool
+};
 
 export default Navbar;

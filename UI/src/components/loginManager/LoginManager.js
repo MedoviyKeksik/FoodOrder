@@ -6,6 +6,7 @@ import { loadLoclization } from '../../containers/localeSwitcher/actions';
 import { FOODORDER_LOGINMANAGER_HI, FOODORDER_LOGINMANAGER_LOGIN, FOODORDER_LOGINMANAGER_REGISTER } from './constants';
 import './LoginManager.scss';
 import localization from './messages';
+import PropTypes from 'prop-types';
 
 store.dispatch(loadLoclization(localization));
 
@@ -35,5 +36,9 @@ function LoginManager(props) {
         </div>
     );
 }
+
+LoginManager.propTypes = {
+    user: PropTypes.object
+};
 
 export default LoginManager;

@@ -8,6 +8,7 @@ import { addFoodToCart } from "./actions";
 import { FOODORDER_FOODADDMODAL_CONFIRNBUTTON } from "./constants";
 import localization from './messages';
 import './FoodAddModal.scss';
+import PropTypes from 'prop-types';
 
 store.dispatch(loadLoclization(localization));
 
@@ -48,6 +49,17 @@ function FoodAddModal(props) {
     } else {
         return (<NeedAuthModal trigger={props.trigger} />);
     }
+}
+
+FoodAddModal.propTypes = {
+    trigger: PropTypes.element.isRequired,
+    isAuthorized: PropTypes.bool.isRequired,
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string,
+    cost: PropTypes.number.isRequired,
+    imageSource: PropTypes.string,
+    cookingTime: PropTypes.number
 }
 
 export default FoodAddModal;

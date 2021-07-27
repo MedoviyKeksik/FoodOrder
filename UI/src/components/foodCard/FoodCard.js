@@ -5,7 +5,8 @@ import { store } from "../../store";
 import FoodAddModal from "../foodAddModal/FoodAddModal";
 import { FOODORDER_FOODCARD_ADDBUTTON, FOODORDER_FOODCARD_COST, FOODORDER_FOODCARD_TIME } from "./constants";
 import './FoodCard.scss';
-import localization from './messages'
+import localization from './messages';
+import PropTypes from 'prop-types';
 
 store.dispatch(loadLoclization(localization));
 
@@ -29,6 +30,16 @@ function FoodCard(props) {
             />
         </div>
     );
+}
+
+FoodCard.propTypes = {
+    isAuthorized: PropTypes.bool.isRequired,
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string,
+    cost: PropTypes.number.isRequired,
+    imageSource: PropTypes.string,
+    cookingTime: PropTypes.number
 }
 
 export default FoodCard;

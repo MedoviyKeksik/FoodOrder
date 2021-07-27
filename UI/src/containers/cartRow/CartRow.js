@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { store } from "../../store";
 import { removeCartItem, updateCartItem } from "./actions";
-
+import PropTypes from 'prop-types';
 
 function CartRow(props) {
     const [itemCount, setItemCount] = useState(props.count);
@@ -33,5 +33,13 @@ function CartRow(props) {
         </tr>
     );
 }
+
+CartRow.propTypes = {
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    cost: PropTypes.number.isRequired,
+    imageSource: PropTypes.string,
+    cookingTime: PropTypes.number
+};
 
 export default CartRow;

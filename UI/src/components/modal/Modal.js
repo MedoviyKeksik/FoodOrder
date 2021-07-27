@@ -1,6 +1,7 @@
 import React from 'react';
 import Popup from 'reactjs-popup';
 import './Modal.scss';
+import PropTypes from 'prop-types';
 
 function Modal(props) {
     return (
@@ -11,5 +12,10 @@ function Modal(props) {
         </Popup>
     );
 }
+
+Modal.propTypes = {
+    trigger: PropTypes.element.isRequired,
+    children: PropTypes.element.isRequired
+};
 
 export default Modal;

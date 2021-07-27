@@ -5,6 +5,7 @@ import { loadLoclization } from "../../containers/localeSwitcher/actions";
 import localization from './messages';
 import { FormattedMessage } from "react-intl";
 import { FOODORDER_NEEDAUTHMODAL_LOGIN, FOODORDER_NEEDAUTHMODAL_REGISTER, FOODORDER_NEEDAUTHMODAL_TITLE } from "./constants";
+import PropTypes from 'prop-types';
 
 store.dispatch(loadLoclization(localization));
 
@@ -18,5 +19,10 @@ function NeedAuthModal(props) {
         </Modal>
     );
 }
+
+NeedAuthModal.propTypes = {
+    className: PropTypes.string,
+    trigger: PropTypes.element.isRequired,
+};
 
 export default NeedAuthModal;

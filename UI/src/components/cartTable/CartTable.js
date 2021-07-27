@@ -1,5 +1,12 @@
 import CartRow from "../../containers/cartRow/CartRow";
+import PropTypes from 'prop-types';
+import localization from './messages'
+import { store } from "../../store";
+import { loadLoclization } from "../../containers/localeSwitcher/actions";
+import { FormattedMessage } from "react-intl";
+import { FOODORDER_CARTTABLE_CANCEL, FOODORDER_CARTTABLE_COST, FOODORDER_CARTTABLE_COUNT, FOODORDER_CARTTABLE_IMAGE, FOODORDER_CARTTABLE_TIME, FOODORDER_CARTTABLE_TITLE } from "./constants";
 
+store.dispatch(loadLoclization(localization));
 
 function CartTable(props) {
     let rows = props.food.map((food) => 
@@ -15,16 +22,26 @@ function CartTable(props) {
     return (
         <table className="cart-table">
             <tr>
-                <th>Image</th>
-                <th>Title</th>
-                <th>Count</th>
-                <th>Cost</th>
-                <th>Time</th>
-                <th>CancellationButton</th>
+                <th><FormattedMessage defaultMessage="Image" id={FOODORDER_CARTTABLE_IMAGE} /></th>
+                <th><FormattedMessage defaultMessage="Title" id={FOODORDER_CARTTABLE_TITLE} /></th>
+                <th><FormattedMessage defaultMessage="Count" id={FOODORDER_CARTTABLE_COUNT} /></th>
+                <th><FormattedMessage defaultMessage="Cost" id={FOODORDER_CARTTABLE_COST} /></th>
+                <th><FormattedMessage defaultMessage="Time" id={FOODORDER_CARTTABLE_TIME} /></th>
+                <th><FormattedMessage defaultMessage="Cancel" id={FOODORDER_CARTTABLE_CANCEL} /></th>
             </tr>
             {rows}
         </table>
     );
+}
+
+CartTable.propTypes = {
+    food: PropTypes.arrayOf(PropTypes.exact({
+        id: PropTypes.number.isRequired,
+        imageSource: PropTypes.string,
+        title: PropTypes.string.isRequired,
+        count: PropTypes.number.isRequired,
+        cost: PropTypes.number.isRequired
+    }))
 }
 
 export default CartTable;
