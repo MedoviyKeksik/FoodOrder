@@ -8,9 +8,9 @@ namespace FoodOrderServer.Models
 {
     public class FoodContext : DbContext
     {
-        public FoodContext(DbContextOptions<FoodContext> options) 
-            :base(options)
-        { 
+        public FoodContext(DbContextOptions<FoodContext> options)
+            : base(options)
+        {
         }
 
         public DbSet<Food> Food { get; set; }
