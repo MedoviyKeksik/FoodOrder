@@ -18,10 +18,12 @@ namespace FoodOrderServer.Controllers
         [HttpGet]
         public IEnumerable<Food> Get()
         {
+            List<Food> food;
             using (FoodContext foodContext = new FoodContext())
             {
-                
+                food = foodContext.Food.ToList();
             }
+            return food;
         }
 
         // GET api/<ValuesController>/5

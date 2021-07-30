@@ -6,6 +6,11 @@ namespace FoodOrderServer.DataAccess
 {
     public class FoodContext : DbContext
     {
+        public FoodContext()
+            : base()
+        {
+
+        }
         public FoodContext(DbContextOptions<FoodContext> options)
             : base(options)
         {
