@@ -1,3 +1,6 @@
+using FoodOrderServer.Controllers;
+using FoodOrderServer.DataPresentation;
+using FoodOrderServer.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,6 +30,8 @@ namespace FoodOrderServer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            //services.AddScoped(typeof(DataManager<Food>));
+            services.AddTransient<DataManager<Food>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
