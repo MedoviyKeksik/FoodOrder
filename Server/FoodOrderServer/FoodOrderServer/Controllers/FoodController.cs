@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FoodOrderServer.Services;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -16,12 +17,12 @@ namespace FoodOrderServer.Controllers
     {
         // GET: api/<ValuesController>
         [HttpGet]
-        public IEnumerable<Food> Get()
+        public IEnumerable<Food> Get([FromServices] DataManager<Food> dataManager)
         {
             List<Food> food;
             using (FoodContext foodContext = new FoodContext())
             {
-                food = foodContext.Food.ToList();
+                food = dataManager.Get(foodContext.Food.ToList(), 0, 1);
             }
             return food;
         }
