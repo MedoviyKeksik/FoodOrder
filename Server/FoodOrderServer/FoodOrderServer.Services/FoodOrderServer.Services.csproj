@@ -13,4 +13,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FoodOrderServer.DataPresentation\FoodOrderServer.DataPresentation.csproj" />
+  </ItemGroup>
+
 </Project>

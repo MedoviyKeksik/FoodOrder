@@ -1,10 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using FoodOrderServer.DataPresentation;
+using FoodOrderServer.DataAccess.Contexts;
 
 namespace FoodOrderServer.DataAccess
 {
-    public class FoodContext : DbContext
+    public class FoodContext : DbContext, IGenericContext<Food>
     {
         public FoodContext()
             : base()
@@ -14,13 +15,8 @@ namespace FoodOrderServer.DataAccess
         public FoodContext(DbContextOptions<FoodContext> options)
             : base(options)
         {
-
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(@"Data Source=SLONIK-PC;Initial Catalog=FoodOrder;Integrated Security=True");
-        }
-        public DbSet<Food> Food { get; set; }
+        public DbSet<Food> Data { get; set; }
     }
 }

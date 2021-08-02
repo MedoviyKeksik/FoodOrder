@@ -15,14 +15,19 @@ namespace FoodOrderServer.Controllers
     [ApiController]
     public class FoodController : ControllerBase
     {
+        private FoodService<Food> _dataManager;
+        FoodController(FoodService<Food> dataManager)
+        {
+            _dataManager = dataManager;
+        }
         // GET: api/<ValuesController>
         [HttpGet]
-        public IEnumerable<Food> Get([FromServices] DataManager<Food> dataManager)
+        public IEnumerable<Food> Get()
         {
             List<Food> food;
             using (FoodContext foodContext = new FoodContext())
             {
-                food = dataManager.Get(foodContext.Food.ToList(), 0, 1);
+                food = _dataManager.Get(foodContext.Data.ToList(), 0, 1);
             }
             return food;
         }
