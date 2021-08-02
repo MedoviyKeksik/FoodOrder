@@ -1,10 +1,12 @@
 using FoodOrderServer.Controllers;
+using FoodOrderServer.DataAccess;
 using FoodOrderServer.DataPresentation;
 using FoodOrderServer.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -30,8 +32,9 @@ namespace FoodOrderServer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            //services.AddScoped(typeof(DataManager<Food>));
-            services.AddTransient<DataManager<Food>>();
+            services.AddTransient<FoodService<Food>>();
+            services.AddDbContext<FoodContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Scoped);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
