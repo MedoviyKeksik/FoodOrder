@@ -7,5 +7,6 @@ namespace FoodOrderServer.DataPresentation
         public int Id { get; set; }
         public TimeSpan TimeToCook { get; set; }
         public float Cost { get; set; }
+        public int DefaultLocaleId { get; set; }
     }
 }
