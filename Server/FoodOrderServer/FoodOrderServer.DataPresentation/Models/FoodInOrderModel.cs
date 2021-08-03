@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FoodOrderServer.DataPresentation.Models
 {
-    class FoodInOrderModel
+    class FoodInOrder
     {
         public int FoodId { get; set; }
         public int OrderId { get; set; }
