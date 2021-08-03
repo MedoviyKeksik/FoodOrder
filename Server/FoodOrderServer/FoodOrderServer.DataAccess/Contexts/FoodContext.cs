@@ -3,7 +3,7 @@ using System;
 using FoodOrderServer.DataPresentation;
 using FoodOrderServer.DataAccess.Contexts;
 
-namespace FoodOrderServer.DataAccess
+namespace FoodOrderServer.DataAccess.Contexts
 {
     public class FoodContext : DbContext, IGenericContext<Food>
     {
@@ -17,6 +17,11 @@ namespace FoodOrderServer.DataAccess
         {
         }
 
-        public DbSet<Food> Data { get; set; }
+        public DbSet<Food> Food { get; set; }
+
+        public DbSet<Food> GetDbSet()
+        {
+            return Food;
+        }
     }
 }

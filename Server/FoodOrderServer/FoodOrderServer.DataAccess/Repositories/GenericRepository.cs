@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace FoodOrderServer.DataAccess.Repositories
 {
-    class GenericRepository<T> : IGenericRepository<T> where T : class
+    public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         private readonly DbSet<T> _dbSet;
 
         public GenericRepository(IGenericContext<T> dbContext) {
-            _dbSet = dbContext.Data;
+            _dbSet = dbContext.GetDbSet();
         }
 
         public async Task Add(T item)

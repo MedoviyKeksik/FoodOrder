@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace FoodOrderServer.DataAccess.Contexts
 {
-    interface IGenericContext<T> where T : class
+    public interface IGenericContext<T> where T : class
     {
-        DbSet<T> Data { get; set; }
+        DbSet<T> GetDbSet();
     }
 }

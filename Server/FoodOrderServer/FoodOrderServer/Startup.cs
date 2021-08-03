@@ -1,5 +1,7 @@
 using FoodOrderServer.Controllers;
 using FoodOrderServer.DataAccess;
+using FoodOrderServer.DataAccess.Contexts;
+using FoodOrderServer.DataAccess.Repositories;
 using FoodOrderServer.DataPresentation;
 using FoodOrderServer.Services;
 using Microsoft.AspNetCore.Builder;
@@ -32,8 +34,14 @@ namespace FoodOrderServer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddTransient<FoodService<Food>>();
+            services.AddTransient<FoodService>();
+            services.AddTransient<IUnitOfWork, FoodOrderUnitOfWork>();
+            services.AddTransient<IGenericContext<Food>, FoodContext>();
+            services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddDbContext<FoodContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Scoped);
+
+            services.AddDbContext<OrderContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Scoped);
         }
 

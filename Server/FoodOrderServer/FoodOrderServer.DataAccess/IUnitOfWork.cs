@@ -1,4 +1,5 @@
-﻿using FoodOrderServer.DataPresentation;
+﻿using FoodOrderServer.DataAccess.Repositories;
+using FoodOrderServer.DataPresentation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +8,9 @@ using System.Threading.Tasks;
 
 namespace FoodOrderServer.DataAccess
 {
-    interface IUnitOfWork
+    public interface IUnitOfWork
     {
+        IGenericRepository<Food> Food { get; }
         Task Save();
     }
 }

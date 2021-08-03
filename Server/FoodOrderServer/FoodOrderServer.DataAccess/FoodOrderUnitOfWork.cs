@@ -1,13 +1,15 @@
-﻿using FoodOrderServer.DataPresentation;
+﻿using FoodOrderServer.DataAccess.Contexts;
+using FoodOrderServer.DataAccess.Repositories;
+using FoodOrderServer.DataPresentation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FoodOrderServer.DataAccess.Repositories
+namespace FoodOrderServer.DataAccess
 {
-    class FoodOrderUnitOfWork : IUnitOfWork
+    public class FoodOrderUnitOfWork : IUnitOfWork
     {
         private readonly FoodContext _food;
         private readonly IServiceProvider _serviceProvider;

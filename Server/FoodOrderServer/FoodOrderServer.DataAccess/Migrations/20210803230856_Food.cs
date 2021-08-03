@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FoodOrderServer.DataAccess.Migrations
 {
-    public partial class InitFood : Migration
+    public partial class Food : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,7 +14,8 @@ namespace FoodOrderServer.DataAccess.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TimeToCook = table.Column<TimeSpan>(type: "time", nullable: false),
-                    Cost = table.Column<float>(type: "real", nullable: false)
+                    Cost = table.Column<float>(type: "real", nullable: false),
+                    DefaultLocaleId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
