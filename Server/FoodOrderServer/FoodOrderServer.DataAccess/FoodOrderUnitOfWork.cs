@@ -27,7 +27,6 @@ namespace FoodOrderServer.DataAccess
         public IGenericRepository<FoodInOrder> FoodInOrders => GetGenericRepository<FoodInOrder>();
         public IGenericRepository<FoodLocalization> FoodLocalizations => GetGenericRepository<FoodLocalization>();
         public IGenericRepository<User> Users => GetGenericRepository<User>();
-        public IGenericRepository<UsersInRoles> UsersInRoles => GetGenericRepository<UsersInRoles>();
 
 
         public IGenericRepository<TModel> GetGenericRepository<TModel>() where TModel : class

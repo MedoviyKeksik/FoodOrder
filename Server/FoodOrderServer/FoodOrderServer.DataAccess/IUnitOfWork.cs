@@ -17,7 +17,6 @@ namespace FoodOrderServer.DataAccess
         public IGenericRepository<FoodLocalization> FoodLocalizations { get; }
         public IGenericRepository<FoodInOrder> FoodInOrders { get; }
         public IGenericRepository<User> Users { get; }
-        public IGenericRepository<UsersInRoles> UsersInRoles { get; }
 
         Task Save();
     }

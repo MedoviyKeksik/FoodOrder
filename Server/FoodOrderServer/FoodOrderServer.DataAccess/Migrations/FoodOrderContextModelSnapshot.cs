@@ -26,8 +26,8 @@ namespace FoodOrderServer.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<float>("Cost")
-                        .HasColumnType("real");
+                    b.Property<double>("Cost")
+                        .HasColumnType("float");
 
                     b.Property<int>("DefaultLocaleId")
                         .HasColumnType("int");
@@ -58,6 +58,10 @@ namespace FoodOrderServer.DataAccess.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("FoodId");
+
+                    b.HasIndex("OrderId");
+
                     b.ToTable("FoodInOrders");
                 });
 
@@ -78,9 +82,15 @@ namespace FoodOrderServer.DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FoodId");
+
+                    b.HasIndex("LocaleId");
 
                     b.ToTable("FoodLocalizations");
                 });
@@ -94,7 +104,8 @@ namespace FoodOrderServer.DataAccess.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.HasKey("Id");
 
@@ -119,6 +130,8 @@ namespace FoodOrderServer.DataAccess.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Orders");
                 });
 
@@ -130,10 +143,13 @@ namespace FoodOrderServer.DataAccess.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Permissions")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
@@ -148,7 +164,8 @@ namespace FoodOrderServer.DataAccess.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
 
                     b.Property<string>("Name")
                         .HasMaxLength(100)
@@ -158,7 +175,8 @@ namespace FoodOrderServer.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Surname")
                         .HasMaxLength(100)
@@ -169,22 +187,88 @@ namespace FoodOrderServer.DataAccess.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("FoodOrderServer.DataAccess.Entities.UsersInRoles", b =>
+            modelBuilder.Entity("RoleUser", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("RoleId")
+                    b.Property<int>("RolesId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
+                    b.Property<int>("UsersId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("RolesId", "UsersId");
 
-                    b.ToTable("UsersInRoles");
+                    b.HasIndex("UsersId");
+
+                    b.ToTable("RoleUser");
+                });
+
+            modelBuilder.Entity("FoodOrderServer.DataAccess.Entities.FoodInOrder", b =>
+                {
+                    b.HasOne("FoodOrderServer.DataAccess.Entities.Food", "Food")
+                        .WithMany()
+                        .HasForeignKey("FoodId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FoodOrderServer.DataAccess.Entities.Order", "Order")
+                        .WithMany()
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Food");
+
+                    b.Navigation("Order");
+                });
+
+            modelBuilder.Entity("FoodOrderServer.DataAccess.Entities.FoodLocalization", b =>
+                {
+                    b.HasOne("FoodOrderServer.DataAccess.Entities.Food", "Food")
+                        .WithMany("Localizations")
+                        .HasForeignKey("FoodId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FoodOrderServer.DataAccess.Entities.Locale", "Locale")
+                        .WithMany()
+                        .HasForeignKey("LocaleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Food");
+
+                    b.Navigation("Locale");
+                });
+
+            modelBuilder.Entity("FoodOrderServer.DataAccess.Entities.Order", b =>
+                {
+                    b.HasOne("FoodOrderServer.DataAccess.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("RoleUser", b =>
+                {
+                    b.HasOne("FoodOrderServer.DataAccess.Entities.Role", null)
+                        .WithMany()
+                        .HasForeignKey("RolesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FoodOrderServer.DataAccess.Entities.User", null)
+                        .WithMany()
+                        .HasForeignKey("UsersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("FoodOrderServer.DataAccess.Entities.Food", b =>
+                {
+                    b.Navigation("Localizations");
                 });
 #pragma warning restore 612, 618
         }
