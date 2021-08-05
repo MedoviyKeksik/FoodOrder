@@ -28,10 +28,10 @@ namespace FoodOrderServer.Controllers
         }
 
         // GET api/<ValuesController>/5
-        [HttpGet("{locale}/{id}")]
-        public string Get(int id, string locale)
+        [HttpGet("{id}")]
+        public Food Get(int id, string locale)
         {
-            return "value";
+            return _foodService.GetById(id, locale);
         }
 
         // POST api/<ValuesController>
@@ -50,6 +50,7 @@ namespace FoodOrderServer.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            _foodService.Delete(id);
         }
     }
 }

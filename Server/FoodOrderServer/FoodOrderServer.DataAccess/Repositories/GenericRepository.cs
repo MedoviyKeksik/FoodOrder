@@ -33,9 +33,9 @@ namespace FoodOrderServer.DataAccess.Repositories
             throw new NotImplementedException();
         }
 
-        public async Task Get(int id)
+        public async Task<T> Get(int id)
         {
-            await _dbSet.FindAsync(id);
+            return await _dbSet.FindAsync(id);
         }
 
         public IQueryable<T> GetAll()

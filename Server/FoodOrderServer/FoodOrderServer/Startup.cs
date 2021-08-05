@@ -36,7 +36,6 @@ namespace FoodOrderServer
             services.AddTransient<FoodService>();
             services.AddTransient<IUnitOfWork, FoodOrderUnitOfWork>();
             services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            //services.AddTransient<FoodOrderContext, FoodOrderContext>();
             services.AddDbContext<FoodOrderContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Scoped);
         }
