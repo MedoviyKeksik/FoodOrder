@@ -1,5 +1,4 @@
-﻿using FoodOrderServer.DataAccess.Contexts;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace FoodOrderServer.DataAccess.Repositories
 {
-    class GenericRepository<T> : IGenericRepository<T> where T : class
+    public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         private readonly DbSet<T> _dbSet;
 
-        public GenericRepository(IGenericContext<T> dbContext) {
-            _dbSet = dbContext.Data;
+        public GenericRepository(FoodOrderContext dbContext) {
+            _dbSet = dbContext.Set<T>();
         }
 
         public async Task Add(T item)

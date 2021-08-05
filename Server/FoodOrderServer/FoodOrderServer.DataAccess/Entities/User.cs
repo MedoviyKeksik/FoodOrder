@@ -1,17 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
-namespace FoodOrderServer.DataPresentation.Models
+namespace FoodOrderServer.DataAccess.Entities
 {
-    public class User
+    public class User : BaseEntity
     {
-        public int Id { get; set; }
+        [MaxLength(100)]
         public string Name { get; set; }
+        [MaxLength(100)]
         public string Surname { get; set; }
+        [EmailAddress]
         public string Email { get; set; }
+        [Phone]
         public string Phone { get; set; }
         public string Password { get; set; }
     }

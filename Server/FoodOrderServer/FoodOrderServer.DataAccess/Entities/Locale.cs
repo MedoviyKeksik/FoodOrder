@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FoodOrderServer.DataPresentation.Models
+namespace FoodOrderServer.DataAccess.Entities
 {
-    public class Locale
+    public class Locale : BaseEntity
     {
-        public int Id { get; set; }
+        [Required]
         public string Title { get; set; }
     }
 }

@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FoodOrderServer.DataPresentation.Models
+namespace FoodOrderServer.DataAccess.Entities
 {
-    class RolesModel
+    public class Role : BaseEntity
     {
-        public int Id { get; set; }
         public string Title { get; set; }
         public string Permissions { get; set; }
     }

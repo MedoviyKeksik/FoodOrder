@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FoodOrderServer.DataAccess
+namespace FoodOrderServer.DataAccess.Repositories
 {
-    interface IGenericRepository<T> : IDisposable where T : class
+    public interface IGenericRepository<T> : IDisposable where T : class
     {
         Task Add(T item);
 

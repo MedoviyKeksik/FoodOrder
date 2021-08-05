@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FoodOrderServer.DataPresentation.Models
+namespace FoodOrderServer.DataAccess.Entities
 {
-    public class FoodLocalization
+    public class FoodLocalization : BaseEntity
     {
-        public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public int FoodId { get; set; }

@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace FoodOrderServer.DataPresentation.Models
 {
-    public class FoodInOrder
+    public class Role
     {
         public int Id { get; set; }
-        public int FoodId { get; set; }
-        public int OrderId { get; set; }
-        public int Count { get; set; }
+        public string Title { get; set; }
+        public string Permissions { get; set; }
     }
 }

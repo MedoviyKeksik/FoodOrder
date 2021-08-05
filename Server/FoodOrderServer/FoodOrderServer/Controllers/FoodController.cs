@@ -1,4 +1,4 @@
-﻿using FoodOrderServer.DataPresentation;
+﻿using FoodOrderServer.DataPresentation.Models;
 using FoodOrderServer.DataAccess;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -15,26 +15,21 @@ namespace FoodOrderServer.Controllers
     [ApiController]
     public class FoodController : ControllerBase
     {
-        private FoodService<Food> _dataManager;
-        FoodController(FoodService<Food> dataManager)
+        private FoodService _foodService;
+        public FoodController(FoodService foodService)
         {
-            _dataManager = dataManager;
+            _foodService = foodService;
         }
         // GET: api/<ValuesController>
         [HttpGet]
-        public IEnumerable<Food> Get()
+        public IEnumerable<Food> Get(string locale, int offset, int count)
         {
-            List<Food> food;
-            using (FoodContext foodContext = new FoodContext())
-            {
-                food = _dataManager.Get(foodContext.Data.ToList(), 0, 1);
-            }
-            return food;
+            return _foodService.Get(locale, offset, count);
         }
 
         // GET api/<ValuesController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{locale}/{id}")]
+        public string Get(int id, string locale)
         {
             return "value";
         }
