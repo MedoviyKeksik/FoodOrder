@@ -1,6 +1,6 @@
-﻿using FoodOrderServer.DataAccess.Contexts;
+﻿using FoodOrderServer.DataAccess;
 using FoodOrderServer.DataAccess.Repositories;
-using FoodOrderServer.DataPresentation;
+using FoodOrderServer.DataAccess.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,16 +11,24 @@ namespace FoodOrderServer.DataAccess
 {
     public class FoodOrderUnitOfWork : IUnitOfWork
     {
-        private readonly FoodContext _food;
+        private readonly FoodOrderContext _db;
         private readonly IServiceProvider _serviceProvider;
 
-        public FoodOrderUnitOfWork(FoodContext food, IServiceProvider serviceProvider)
+        public FoodOrderUnitOfWork(FoodOrderContext db, IServiceProvider serviceProvider)
         {
-            _food = food;
+            _db = db;
             _serviceProvider = serviceProvider;
         }
 
         public IGenericRepository<Food> Food => GetGenericRepository<Food>();
+        public IGenericRepository<Order> Orders => GetGenericRepository<Order>();
+        public IGenericRepository<Locale> Locales => GetGenericRepository<Locale>();
+        public IGenericRepository<Role> Roles => GetGenericRepository<Role>();
+        public IGenericRepository<FoodInOrder> FoodInOrders => GetGenericRepository<FoodInOrder>();
+        public IGenericRepository<FoodLocalization> FoodLocalizations => GetGenericRepository<FoodLocalization>();
+        public IGenericRepository<User> Users => GetGenericRepository<User>();
+        public IGenericRepository<UsersInRoles> UsersInRoles => GetGenericRepository<UsersInRoles>();
+
 
         public IGenericRepository<TModel> GetGenericRepository<TModel>() where TModel : class
         {
@@ -29,7 +37,7 @@ namespace FoodOrderServer.DataAccess
 
         public async Task Save()
         {
-            await _food.SaveChangesAsync();
+            await _db.SaveChangesAsync();
         }
     }
 }

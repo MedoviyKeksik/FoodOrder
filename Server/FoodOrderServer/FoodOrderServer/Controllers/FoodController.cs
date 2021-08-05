@@ -1,4 +1,4 @@
-﻿using FoodOrderServer.DataPresentation;
+﻿using FoodOrderServer.DataPresentation.Models;
 using FoodOrderServer.DataAccess;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -22,7 +22,6 @@ namespace FoodOrderServer.Controllers
         }
         // GET: api/<ValuesController>
         [HttpGet]
-        [HttpGet("{locale}/{offset=0}/{count=2000000000}")]
         public IEnumerable<Food> Get(string locale, int offset, int count)
         {
             return _foodService.Get(locale, offset, count);

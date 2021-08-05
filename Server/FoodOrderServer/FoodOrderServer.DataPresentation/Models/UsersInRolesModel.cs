@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FoodOrderServer.DataPresentation.Models
 {
-    class UsersInRoles
+    public class UsersInRoles
     {
         public int Id { get; set; }
         public int UserId { get; set; }
