@@ -34,6 +34,8 @@ namespace FoodOrderServer
         {
             services.AddControllers();
             services.AddTransient<FoodService>();
+            services.AddTransient<OrdersService>();
+            services.AddTransient<UserService>();
             services.AddTransient<IUnitOfWork, FoodOrderUnitOfWork>();
             services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddDbContext<FoodOrderContext>(options =>

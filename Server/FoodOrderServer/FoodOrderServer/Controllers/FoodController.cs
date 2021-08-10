@@ -1,19 +1,14 @@
 ﻿using FoodOrderServer.DataPresentation.Models;
-using FoodOrderServer.DataAccess;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using FoodOrderServer.Services;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace FoodOrderServer.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
-    public class FoodController : ControllerBase
+    public class FoodController : Controller
     {
         private FoodService _foodService;
         public FoodController(FoodService foodService)
@@ -22,35 +17,43 @@ namespace FoodOrderServer.Controllers
         }
         // GET: api/<ValuesController>
         [HttpGet]
-        public IEnumerable<Food> Get(string locale, int offset, int count)
+        public async Task<IActionResult> Get(string locale, int offset, int count)
         {
-            return _foodService.Get(locale, offset, count);
+            var food = await _foodService.Get(locale, offset, count);
+            return Ok(food);
         }
 
         // GET api/<ValuesController>/5
-        [HttpGet("{id}")]
-        public Food Get(int id, string locale)
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> Get(int id)
         {
-            return _foodService.GetById(id, locale);
+            var food = await _foodService.GetById(id);
+            if (food == null) return NotFound();
+            return Ok(food);
         }
 
         // POST api/<ValuesController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task Post([FromBody] FullFood food)
         {
+            await _foodService.Add(food);
         }
 
         // PUT api/<ValuesController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("{id:int}")]
+        public async Task Put(int id, [FromBody] FullFood food)
         {
+            if (food.Id == id)
+            {
+                await _foodService.Update(food);
+            }
         }
 
         // DELETE api/<ValuesController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("{id:int}")]
+        public async Task Delete(int id)
         {
-            _foodService.Delete(id);
+            await _foodService.Delete(id);
         }
     }
 }

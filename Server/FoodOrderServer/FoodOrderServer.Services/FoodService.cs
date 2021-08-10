@@ -4,6 +4,7 @@ using System.Linq;
 using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace FoodOrderServer.Services
 {
@@ -14,22 +15,17 @@ namespace FoodOrderServer.Services
         {
         }
 
-        private static List<T> SubList<T>(List<T> list, int offset, int count)
+        private int? GetLocaleIdByName(string locale)
         {
-            List<T> result = new List<T>();
-            for (int i = offset; i < Math.Min(offset + count, list.Count); i++)
-            {
-                result.Add(list[i]);
-            }
-            return result;
+            return _db.Locales.GetAll().FirstOrDefault(lang => lang.Title.Equals(locale))?.Id;
         }
 
-        public List<Food> Get(string locale, int offset, int count)
+        public async Task<List<Food>> Get(string locale, int offset, int count)
         {
             if (count <= 0) count = int.MaxValue;
             if (string.IsNullOrEmpty(locale))
             {
-                var query = _db.Food.GetAll().Select(food =>
+                var food = _db.Food.GetAll().Select(food =>
                     new Food
                     {
                         Id = food.Id,
@@ -37,12 +33,12 @@ namespace FoodOrderServer.Services
                         TimeToCook = food.TimeToCook,
                         Title = food.Localizations.First(lang => food.DefaultLocaleId == lang.LocaleId).Title,
                         Description = food.Localizations.First(lang => food.DefaultLocaleId == lang.LocaleId).Description
-                    }).ToListAsync();
-                return SubList<Food>(query.Result, offset, count);
+                    }).Skip(offset).Take(count);
+                return await food.ToListAsync();
             } 
             else
             {
-                var query = _db.Food.GetAll().Select(food =>
+                var food = _db.Food.GetAll().Select(food =>
                     new Food
                     {
                         Id = food.Id,
@@ -50,47 +46,91 @@ namespace FoodOrderServer.Services
                         TimeToCook = food.TimeToCook,
                         Title = food.Localizations.First(lang => locale == lang.Locale.Title).Title,
                         Description = food.Localizations.First(lang => locale == lang.Locale.Title).Description
-                    }).ToListAsync();
-                return SubList<Food>(query.Result, offset, count);
+                    }).Skip(offset).Take(count); ;
+                return await food.ToListAsync();
             }
         }
 
-        public Food GetById(int id, string locale)
+        public async Task<FullFood> GetById(int id)
         {
-
-            var food = _db.Food.Get(id).Result;
-            DataAccess.Entities.FoodLocalization localization;
-            if (string.IsNullOrEmpty(locale)) 
-            {
-                localization = food.Localizations.First(lang => food.DefaultLocaleId == lang.LocaleId);
-            }
-            else
-            {
-                localization = food.Localizations.First(lang => locale == lang.Locale.Title);
-            }
-            return new Food
+            var food = await _db.Food.Get(id);
+            if (food == null) return null;
+            var localizations = _db.FoodLocalizations.GetAll()
+                .Where(locale => locale.FoodId == id)
+                .Select(locale =>
+                    new FoodLocalization 
+                    {
+                        Title = locale.Title,
+                        Description = locale.Description,
+                        Locale = locale.Locale.Title
+                    }).ToListAsync();
+            return new FullFood
             {
                 Id = food.Id,
                 TimeToCook = food.TimeToCook,
                 Cost = food.Cost,
-                Title = localization.Title,
-                Description = localization.Description
+                Locales = await localizations,
+                DefaultLocale = (await _db.Locales.Get(food.DefaultLocaleId)).Title
             };
         }
 
-        public void Add() 
+        public async Task Add(FullFood food) 
         {
-            throw new NotImplementedException();
+            var localizations = food.Locales.Select(locale => new DataAccess.Entities.FoodLocalization
+            {
+                FoodId = food.Id,
+                LocaleId = GetLocaleIdByName(locale.Locale).Value,
+                Title = locale.Title,
+                Description = locale.Description
+            });
+            await _db.Food.Add(new DataAccess.Entities.Food
+            {
+                Cost = food.Cost,
+                TimeToCook = food.TimeToCook,
+                DefaultLocaleId = GetLocaleIdByName(food.DefaultLocale).Value,
+                Localizations = localizations.ToList()
+            });
+            await _db.Save();
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
             _db.Food.Delete(id);
+            await _db.Save();
         }
 
-        public void Update(int id, Food food)
+        public async Task Update(FullFood food)
         {
-            throw new NotImplementedException();
+            var editFood = _db.Food.Get(food.Id).Result;
+            if (editFood == null) return;
+
+            editFood.Cost = food.Cost;
+            editFood.DefaultLocaleId = GetLocaleIdByName(food.DefaultLocale) ?? editFood.DefaultLocaleId;
+            editFood.TimeToCook = food.TimeToCook;
+            if (food.Locales != null)
+            {
+                food.Locales.ForEach(locale =>
+                {
+                    var tmp = editFood.Localizations.FirstOrDefault(lz => lz.Locale.Title == locale.Locale);
+                    if (tmp == null)
+                    {
+                        editFood.Localizations.Add(new DataAccess.Entities.FoodLocalization
+                        {
+                            FoodId = food.Id,
+                            LocaleId = GetLocaleIdByName(locale.Locale).Value,
+                            Title = locale.Title,
+                            Description = locale.Description
+                        });
+                    }
+                    else
+                    {
+                        tmp.Title = locale.Title ?? tmp.Title;
+                        tmp.Description = locale.Description ?? tmp.Description;
+                    }
+                });
+            }
+            _db.Food.Update(editFood);
+            await _db.Save();
         }
     }
 }

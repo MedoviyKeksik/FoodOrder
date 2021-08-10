@@ -12,7 +12,6 @@ namespace FoodOrderServer.Services
         public OrdersService(IUnitOfWork unitOfWork) 
             : base(unitOfWork)
         {
-
         }
     }
 }

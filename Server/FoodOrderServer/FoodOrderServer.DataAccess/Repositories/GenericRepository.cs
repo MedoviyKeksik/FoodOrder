@@ -30,7 +30,7 @@ namespace FoodOrderServer.DataAccess.Repositories
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            // throw new NotImplementedException();
         }
 
         public async Task<T> Get(int id)
