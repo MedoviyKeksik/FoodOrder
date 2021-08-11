@@ -26,6 +26,7 @@ namespace FoodOrderServer.Controllers
         }
 
         // GET api/<ValuesController>/5
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet("{id:int}")]
         public async Task<IActionResult> Get(int id)
         {

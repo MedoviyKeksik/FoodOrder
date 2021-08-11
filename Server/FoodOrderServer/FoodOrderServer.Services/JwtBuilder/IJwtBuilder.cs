@@ -8,5 +8,8 @@ namespace FoodOrderServer.Services.JwtBuilder
 {
     public interface IJwtBuilder
     {
+        string GetAccessToken(DataPresentation.Models.User user);
+        int? ValidateToken(string token);
+        string GetRefreshToken();
     }
 }

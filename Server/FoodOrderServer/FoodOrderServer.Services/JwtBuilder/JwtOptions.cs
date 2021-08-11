@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FoodOrderServer
+namespace FoodOrderServer.Services.JwtBuilder
 {
     public class JwtOptions
     {

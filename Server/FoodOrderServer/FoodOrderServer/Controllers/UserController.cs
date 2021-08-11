@@ -22,15 +22,19 @@ namespace FoodOrderServer.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> RegisterUser([FromBody] User user)
+        public async Task<IActionResult> RegisterUser([FromBody] RegistrationInfo registrationInfo)
         {
-            return Ok();
+            var user = await _userService.Register(registrationInfo);
+            if (user == null) return Conflict();
+            return Ok(user);
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] User user)
+        public async Task<IActionResult> Login([FromBody] LoginInfo loginInfo)
         {
-            return Ok();
+            var user = await _userService.Authenticate(loginInfo);
+            if (user == null) return BadRequest();
+            return Ok(user);
         }
 
         [HttpPost("refresh")]
