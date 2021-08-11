@@ -23,7 +23,6 @@ namespace FoodOrderServer.DataAccess
         public DbSet<Role> Roles { get; set; }
         public DbSet<Locale> Locales { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<UsersInRoles> UsersInRoles { get; set; }
         public DbSet<FoodLocalization> FoodLocalizations { get; set; }
     }
 }

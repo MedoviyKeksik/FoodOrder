@@ -10,7 +10,7 @@ namespace FoodOrderServer.DataAccess.Repositories
     {
         Task Add(T item);
 
-        Task Get(int id);
+        Task<T> Get(int id);
         IQueryable<T> GetAll();
         void Update(T item);
         void Delete(int id);

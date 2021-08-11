@@ -8,10 +8,9 @@ namespace FoodOrderServer.DataPresentation.Models
 {
     public class FoodLocalization
     {
-        public int Id { get; set; }
+        public int LocaleId { get; set; }
+        public string Locale { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public int FoodId { get; set; }
-        public int LocaleId { get; set; }
-    }
+     }
 }

@@ -9,6 +9,7 @@ namespace FoodOrderServer.DataAccess.Entities
 {
     public class Locale : BaseEntity
     {
+        [MaxLength(20)]
         [Required]
         public string Title { get; set; }
     }
