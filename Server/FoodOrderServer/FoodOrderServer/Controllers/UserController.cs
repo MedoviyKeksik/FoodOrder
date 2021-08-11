@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FoodOrderServer.DataPresentation.Models;
+using FoodOrderServer.Services;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,36 +14,29 @@ namespace FoodOrderServer.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        // GET: api/<UserController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly UserService _userService;
+
+        public UserController(UserService userService)
         {
-            return new string[] { "value1", "value2" };
+            _userService = userService;
         }
 
-        // GET api/<UserController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<UserController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> RegisterUser([FromBody] User user)
         {
+            return Ok();
         }
 
-        // PUT api/<UserController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] User user)
         {
+            return Ok();
         }
 
-        // DELETE api/<UserController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpPost("refresh")]
+        public async Task<IActionResult> RefreshToken()
         {
+            return Ok();
         }
     }
 }
