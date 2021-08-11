@@ -38,9 +38,12 @@ namespace FoodOrderServer
             services.AddSingleton<IJwtBuilder, JwtBuilder>();
             services.AddDbContext<FoodOrderContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Scoped);
-            
-            var jwtOptions = Configuration.GetSection("Jwt").Get<JwtOptions>();
-            var sectretKey = Encoding.UTF8.GetBytes(jwtOptions.Secret);
+
+            var options = new JwtOptions();
+            var section = Configuration.GetSection("Jwt");
+            section.Bind(options);
+            services.Configure<JwtOptions>(section);
+            services.AddSingleton<IJwtBuilder, JwtBuilder>();
 
             services.AddAuthentication(x =>
             {
@@ -53,7 +56,7 @@ namespace FoodOrderServer
                 x.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(sectretKey),
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(options.Secret)),
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };

@@ -32,6 +32,8 @@ namespace FoodOrderServer.DataAccess.Entities
         public string Phone { get; set; }
 
         public string Password { get; set; }
+        public string RefreshToken { get; set; }
+        public DateTime ExpireDate { get; set; }
 
         private ICollection<Role> _roles;
         public ICollection<Role> Roles { 
