@@ -1,13 +1,12 @@
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { loadLoclization } from '../../containers/localeSwitcher/actions';
-import { store } from '../../store';
 import { FOODORDER_ACCOUNTINFO_EMAIL, FOODORDER_ACCOUNTINFO_NAME, FOODORDER_ACCOUNTINFO_PHONE, FOODORDER_ACCOUNTINFO_SURNAME } from './constants';
 import localization from './messages';
-
-store.dispatch(loadLoclization(localization));
+import { connect } from 'react-redux';
 
 function AccountInfo(props) {
+    props.loadLoclization(localization);
     return (
         <table>
             <tr>
@@ -37,4 +36,8 @@ AccountInfo.propTypes = {
     phone: PropTypes.string
 }
 
-export default AccountInfo;
+const mapDispatchToProps = {
+    loadLoclization
+}
+
+export default connect(null, mapDispatchToProps)(AccountInfo);

@@ -1,16 +1,16 @@
 import React from "react";
 import { FormattedMessage } from "react-intl";
 import FoodCard from "../../components/foodCard/FoodCard";
-import { store } from "../../store";
 import { loadLoclization } from "../localeSwitcher/actions";
 import { FOODORDER_FOODCONTAINER_NOFOOD } from "./constants";
 import localization from './messages';
 import './FoodContainer.scss';
 import PropTypes from 'prop-types';
-
-store.dispatch(loadLoclization(localization));
+import { connect } from 'react-redux';
 
 function FoodContainer(props) {
+    props.loadLoclization(localization);
+
     if (props.food == null) 
         return (<h2><FormattedMessage defaultMessage="No Foood!" id={FOODORDER_FOODCONTAINER_NOFOOD} /></h2>);
 
@@ -43,4 +43,8 @@ FoodContainer.propTypes = {
     isAuthorized: PropTypes.bool.isRequired
 };
 
-export default FoodContainer;
+const mapDispatchToProps = {
+    loadLoclization
+};
+
+export default connect(null, mapDispatchToProps)(FoodContainer);

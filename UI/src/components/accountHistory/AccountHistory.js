@@ -1,14 +1,14 @@
 import PropTypes from 'prop-types';
 import localization from './messages';
 import { loadLoclization } from '../../containers/localeSwitcher/actions';
-import { store } from '../../store';
 import './AccountHistory.scss';
 import { FormattedMessage } from 'react-intl';
 import { FOODORDER_ACCOUNTHISTORY_COST, FOODORDER_ACCOUNTHISTORY_COUNT, FOODORDER_ACCOUNTHISTORY_IMAGE, FOODORDER_ACCOUNTHISTORY_TITLE } from './constants';
-
-store.dispatch(loadLoclization(localization));
+import { connect } from 'react-redux';
 
 function AccountHistory(props) {
+    props.loadLoclization(localization);
+
     let content = props.items.map((item) => { 
         let rows = item.food.items.map((item) => 
             <tr key={item.id}>
@@ -50,4 +50,8 @@ AccountHistory.propTypes = {
     }))
 }
 
-export default AccountHistory
+const mapDispatchToProps = {
+    loadLoclization
+};
+
+export default connect(null, mapDispatchToProps)(AccountHistory);

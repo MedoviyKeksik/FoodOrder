@@ -1,16 +1,15 @@
 import React from "react";
 import { FormattedMessage } from "react-intl";
 import { loadLoclization } from "../../containers/localeSwitcher/actions";
-import { store } from "../../store";
 import FoodAddModal from "../foodAddModal/FoodAddModal";
 import { FOODORDER_FOODCARD_ADDBUTTON, FOODORDER_FOODCARD_COST, FOODORDER_FOODCARD_TIME } from "./constants";
 import './FoodCard.scss';
 import localization from './messages';
 import PropTypes from 'prop-types';
-
-store.dispatch(loadLoclization(localization));
+import { connect } from 'react-redux';
 
 function FoodCard(props) {
+    props.loadLoclization(localization);
     return (
         <div className="food-card">
             <img className="food-card__image" alt="Food" src={props.imageSource} />
@@ -42,4 +41,8 @@ FoodCard.propTypes = {
     cookingTime: PropTypes.number
 }
 
-export default FoodCard;
+const mapDispatchToProps = {
+    loadLoclization
+}
+
+export default connect(null, mapDispatchToProps)(FoodCard);

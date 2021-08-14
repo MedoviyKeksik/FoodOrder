@@ -7,8 +7,7 @@ import { FOODORDER_LOGINFORM_LOGIN, FOODORDER_LOGINFORM_PASSWORD, FOODORDER_LOGI
 import localization from './messages';
 import './LoginForm.scss';
 import { FormattedMessage } from "react-intl";
-
-store.dispatch(loadLoclization(localization));
+import { connect } from "react-redux";
 
 class LoginForm extends React.Component {
     constructor(props) {
@@ -18,7 +17,8 @@ class LoginForm extends React.Component {
             login: '',
             password: ''
         }
-
+        
+        props.loadLoclization(localization);
         this.handleLoginChange = this.handleChange.bind(this, 'login');
         this.handlePasswordChange = this.handleChange.bind(this, 'password');
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -31,10 +31,10 @@ class LoginForm extends React.Component {
     }
 
     handleSubmit(event) {
-        store.dispatch(userLogin({
+        this.props.userLogin({
             login: this.state.login,
             password: this.state.password
-        }));
+        });
         event.preventDefault();
     }
 
@@ -63,4 +63,9 @@ class LoginForm extends React.Component {
     }
 }
 
-export default LoginForm;
+const mapDispatchToProps = {
+    loadLoclization,
+    userLogin
+};
+
+export default connect(null, mapDispatchToProps)(LoginForm);

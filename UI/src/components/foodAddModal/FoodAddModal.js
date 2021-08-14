@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { FormattedMessage } from "react-intl";
 import { loadLoclization } from "../../containers/localeSwitcher/actions";
-import { store } from "../../store";
 import Modal from "../modal/Modal";
 import NeedAuthModal from "../needAuthModal/NeedAuthModal";
 import { addFoodToCart } from "./actions";
@@ -9,21 +8,21 @@ import { FOODORDER_FOODADDMODAL_CONFIRNBUTTON } from "./constants";
 import localization from './messages';
 import './FoodAddModal.scss';
 import PropTypes from 'prop-types';
-
-store.dispatch(loadLoclization(localization));
+import { connect } from 'react-redux';
 
 function FoodAddModal(props) {
+    props.loadLoclization(localization);
     let [count, setCount] = useState(1);
 
     function handleConfirmation() {
-        store.dispatch(addFoodToCart({
+        props.addFoodToCart({
             id: props.id,
             title: props.title,
             count: count,
             cost: props.cost,
             imageSource: props.imageSource,
             cookingTime: props.cookingTime,
-        }));
+        });
     }
 
     function handleCountChange(e) {
@@ -62,4 +61,9 @@ FoodAddModal.propTypes = {
     cookingTime: PropTypes.number
 }
 
-export default FoodAddModal;
+const mapDispatchToProps = {
+    loadLoclization,
+    addFoodToCart
+}
+
+export default connect(null, mapDispatchToProps)(FoodAddModal);

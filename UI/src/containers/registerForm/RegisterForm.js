@@ -1,13 +1,12 @@
 import React from "react"
 import { FormattedMessage } from "react-intl";
+import { connect } from "react-redux";
 import InputField from "../../components/inputField/InputField";
 import { store } from "../../store";
 import { loadLoclization } from "../localeSwitcher/actions";
 import { FOODORDER_REGISTERFORM_BUTTON, FOODORDER_REGISTERFORM_EMAIL, FOODORDER_REGISTERFORM_NAME, FOODORDER_REGISTERFORM_PASSWORD, FOODORDER_REGISTERFORM_PHONE, FOODORDER_REGISTERFORM_SURNAME, FOODORDER_REGISTERFORM_TITLE } from "./constatnts";
 import localization from './messages';
 import './RegisterForm.scss';
-
-store.dispatch(loadLoclization(localization));
 
 class RegisterForm extends React.Component {
     constructor(props) {
@@ -20,6 +19,8 @@ class RegisterForm extends React.Component {
             phone: '',
             password: ''
         }
+
+        this.props.loadLoclization(localization);
 
         this.handleNameChange = this.handleChange.bind(this, 'name');
         this.handleSurnameChange = this.handleChange.bind(this, 'surname');
@@ -87,4 +88,8 @@ class RegisterForm extends React.Component {
     }
 }
 
-export default RegisterForm;
+const mapDispatchToProps = {
+    loadLoclization
+}
+
+export default connect(null, loadLoclization)(RegisterForm);
