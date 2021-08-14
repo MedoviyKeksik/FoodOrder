@@ -94,6 +94,34 @@ namespace FoodOrderServer.Services
             return Convert.ToBase64String(dst);
         }
 
+        public async Task<User> RefreshToken(string accesToken, string refreshToken) 
+        {
+            var principal = _jwtBuilder.GetPrincipalFromExpiredToken(accesToken);
+            var login = principal.Claims.FirstOrDefault(c => c.Type == "Login")?.Value;
+            var user = _db.Users.GetAll().FirstOrDefault(user => user.Email == login || user.Phone == login);
+            if (user == null || user.RefreshToken != refreshToken || user.ExpireDate <= DateTime.Now)
+            {
+                return null;
+            }
+            var userModel = new User
+            {
+                Id = user.Id,
+                Email = user.Email,
+                Phone = user.Phone,
+                Roles = user.Roles.Select(role => new Role { Id = role.Id, Title = role.Title, Permissions = role.Permissions }).ToList()
+            };
+            var newAccessToken = _jwtBuilder.GetAccessToken(userModel);
+            var newRefreshToken = _jwtBuilder.GetRefreshToken();
+
+            user.RefreshToken = newRefreshToken;
+            user.ExpireDate = DateTime.Now.AddDays(7); // ????????
+            await _db.Save();
+
+            userModel.AccessToken = newAccessToken;
+            userModel.RefreshToken = newRefreshToken;
+            return userModel;
+        }
+
         private bool IsValidPassword(string hashedPassword, string password)
         {
             if (string.IsNullOrWhiteSpace(hashedPassword) || string.IsNullOrWhiteSpace(password)) {

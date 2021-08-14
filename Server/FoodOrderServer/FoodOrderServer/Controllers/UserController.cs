@@ -40,6 +40,7 @@ namespace FoodOrderServer.Controllers
         [HttpPost("refresh")]
         public async Task<IActionResult> RefreshToken()
         {
+
             return Ok();
         }
     }

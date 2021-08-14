@@ -45,5 +45,7 @@ namespace FoodOrderServer.DataAccess.Entities
 
         [Required]
         public OrderStatus Status { get; set; }
+
+        public ICollection<FoodInOrder> FoodInOrder { get; set; }
     }
 }
