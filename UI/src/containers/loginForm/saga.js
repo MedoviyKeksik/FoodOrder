@@ -1,32 +1,20 @@
 import { put } from "@redux-saga/core/effects";
-import { USER_LOGIN_FAILED, USER_LOGIN_SUCCEED } from "./constants";
+import { loginFailed, loginSucced } from "./actions";
 
 function* fetchLogin(action) {
     console.log(action);
-    if (action.user.login === 'slonik' && action.user.password === '12345') 
-        yield put({
-            type: USER_LOGIN_SUCCEED, 
-            user: {
-                id: 1,
-                name: 'Klim',
-                surname: 'Severin',
-                email: 'severin.klim@yandex.by',
-                phone: '+375445677227',
-                isAdmin: false
-            }
-        });
-    else if (action.user.login === 'admin' && action.user.password === '12345')
-        yield put({
-            type: USER_LOGIN_SUCCEED,
-            user: {
-                id: 0,
-                name: 'Admin',
-                isAdmin: true
-            }
-        });
-    else yield put({
-        type: USER_LOGIN_FAILED
-    });
+    try {
+        const data = yield call(() => fetch('https://localhost:44368/api/User/login', {
+            method: "POST",
+            headers: {
+                'Content-type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(action.user)
+        }).then(res => res.json()));
+        yield put(loginSucced(data));
+    } catch (e) {
+        yield put(loginFailed(e));
+    }
 }
 
 export default fetchLogin;
