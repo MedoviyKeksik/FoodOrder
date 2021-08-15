@@ -5,6 +5,7 @@ import './Header.scss';
 import { Link } from 'react-router-dom';
 import LoginManager from '../../components/loginManager/LoginManager';
 import CartManager from '../cartManager/CartManager';
+import PropTypes from 'prop-types';
 
 function Header(props) {
     return (
@@ -21,6 +22,11 @@ function Header(props) {
         </div>
     );
 }
+
+Header.propTypes = {
+    cartCount: PropTypes.number.isRequired,
+    user: PropTypes.object
+};  
 
 export default Header;
 

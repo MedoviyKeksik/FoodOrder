@@ -1,14 +1,14 @@
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
-import { store } from '../../store';
 import { loadLoclization } from '../../containers/localeSwitcher/actions';
 import { FOODORDER_NAVBAR_ADMIN_LOCALIZATION } from './constants';
 import './Navbar.scss';
 import localization from './messages';
-
-store.dispatch(loadLoclization(localization));
+import PropTypes from 'prop-types';
+import { connect} from 'react-redux';
 
 function Navbar(props) {    
+    props.loadLoclization(localization);
     return (
         <ul className="navbar">
             { props.isAdmin && 
@@ -22,4 +22,12 @@ function Navbar(props) {
     );
 }
 
-export default Navbar;
+Navbar.propTypes = {
+    isAdmin: PropTypes.bool
+};
+
+const mapDispatchToProps = {
+    loadLoclization
+}
+
+export default connect(null, mapDispatchToProps)(Navbar);

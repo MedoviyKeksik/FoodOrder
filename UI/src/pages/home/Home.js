@@ -34,15 +34,13 @@ class Home extends Component {
             foodCards: [],
             isAuthorized: false
         }
-
-        this.getGlobalId = this.getGlobalId.bind(this);
         
         this.options = itemsPerPage.map((data) => <option value={data.value}>{data.title}</option>);   
         this.handleStoreChange = this.handleStoreChange.bind(this);
     }
 
     componentDidMount() {
-        store.subscribe(this.handleStoreChange);
+        this.unsubscribe = store.subscribe(this.handleStoreChange);
         store.dispatch(requestFood({
             count: this.state.itemsCountPerPage, 
             offset: (this.state.activePage - 1) * this.state.itemsCountPerPage
@@ -77,8 +75,8 @@ class Home extends Component {
         }));
     }
 
-    getGlobalId(index) {
-        return (this.state.activePage - 1) * this.state.itemsCountPerPage + index;
+    componentWillUnmount() {
+        this.unsubscribe();
     }
 
     render() {

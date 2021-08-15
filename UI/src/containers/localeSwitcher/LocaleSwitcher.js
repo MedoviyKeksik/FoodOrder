@@ -3,6 +3,7 @@ import { store } from '../../store';
 import { changeLocale } from './actions';
 import { saveLocale } from './localStorage';
 import './LocaleSwitcher.scss';
+import PropTyeps from 'prop-types';
 
 class LocalizationButton extends React.Component {
     constructor(props) {
@@ -30,5 +31,9 @@ class LocalizationButton extends React.Component {
         );
     }
 }
+
+LocalizationButton.propTypes = {
+    locale: PropTyeps.oneOf(['en', 'ru'])
+};
 
 export default LocalizationButton;

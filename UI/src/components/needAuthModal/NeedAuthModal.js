@@ -1,14 +1,14 @@
 import Modal from "../modal/Modal";
 import { Link } from "react-router-dom";
-import { store } from "../../store";
 import { loadLoclization } from "../../containers/localeSwitcher/actions";
 import localization from './messages';
 import { FormattedMessage } from "react-intl";
 import { FOODORDER_NEEDAUTHMODAL_LOGIN, FOODORDER_NEEDAUTHMODAL_REGISTER, FOODORDER_NEEDAUTHMODAL_TITLE } from "./constants";
-
-store.dispatch(loadLoclization(localization));
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
 function NeedAuthModal(props) {
+    // props.loadLoclization(localization);
     return (
         <Modal className={props.className} trigger={props.trigger} >
             <h3><FormattedMessage defaultMessage="Please authorize" id={FOODORDER_NEEDAUTHMODAL_TITLE} /></h3>
@@ -19,4 +19,13 @@ function NeedAuthModal(props) {
     );
 }
 
-export default NeedAuthModal;
+NeedAuthModal.propTypes = {
+    className: PropTypes.string,
+    trigger: PropTypes.element.isRequired,
+};
+
+const mapDispatchToProps = {
+    loadLoclization
+}
+
+export default connect(null, mapDispatchToProps)(NeedAuthModal);

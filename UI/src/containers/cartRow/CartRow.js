@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { store } from "../../store";
 import { removeCartItem, updateCartItem } from "./actions";
-
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 function CartRow(props) {
     const [itemCount, setItemCount] = useState(props.count);
@@ -9,17 +9,17 @@ function CartRow(props) {
     function handleCountChange(e) {
         if (e.target.value > 0) {
             setItemCount(e.target.value);        
-            store.dispatch(updateCartItem({
+            props.updateCartItem({
                 id: props.id,
                 count: e.target.value
-            }));
+            });
         }
     }
 
     function handleRemove() {
-        store.dispatch(removeCartItem({
+        props.removeCartItem({
             id: props.id
-        }));
+        });
     }
     
     return (
@@ -34,4 +34,17 @@ function CartRow(props) {
     );
 }
 
-export default CartRow;
+CartRow.propTypes = {
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    cost: PropTypes.number.isRequired,
+    imageSource: PropTypes.string,
+    cookingTime: PropTypes.number
+};
+
+const mapDispatchToProps = {
+    updateCartItem,
+    removeCartItem
+}
+
+export default connect(null, mapDispatchToProps)(CartRow);

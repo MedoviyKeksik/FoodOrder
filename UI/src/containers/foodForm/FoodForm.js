@@ -1,12 +1,12 @@
 import React from "react";
 import InputField from "../../components/inputField/InputField";
-import { store } from "../../store";
 import { loadLoclization } from "../localeSwitcher/actions";
 import { addFoodToCatalog } from "./actions";
 import { FOODORDER_FOODFORM_ADDBUTTON, FOODORDER_FOODFORM_COOKINGTIME, FOODORDER_FOODFORM_COST, FOODORDER_FOODFORM_DESCRIPTION, FOODORDER_FOODFORM_PICTURE, FOODORDER_FOODFORM_TITLE } from "./constants";
 import localization from './messages';
 import './FoodForm.scss';
 import { FormattedMessage } from "react-intl";
+import { connect } from "react-redux";
 
 class FoodForm extends React.Component {
     constructor(props) {
@@ -29,7 +29,7 @@ class FoodForm extends React.Component {
     }
 
     componentDidMount() {
-        store.dispatch(loadLoclization(localization));
+        this.props.loadLoclization(localization);
     }
 
     handleChange(field, event) {
@@ -41,12 +41,12 @@ class FoodForm extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        store.dispatch(addFoodToCatalog({
+        this.props.addFoodToCatalog({
             title: this.state.title,
             description: this.state.description,
             cost: this.state.cookingTime,
             cookingTime: this.state.cookingTime
-        }));
+        });
     }
 
     render() {
@@ -93,4 +93,9 @@ class FoodForm extends React.Component {
     }
 }
 
-export default FoodForm;
+const mapDispatchToProps = {
+    loadLoclization,
+    addFoodToCatalog
+}
+
+export default connect(null, mapDispatchToProps)(FoodForm);

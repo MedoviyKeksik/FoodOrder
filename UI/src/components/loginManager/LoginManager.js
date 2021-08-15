@@ -1,15 +1,15 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
-import { store } from '../../store';
 import { loadLoclization } from '../../containers/localeSwitcher/actions';
 import { FOODORDER_LOGINMANAGER_HI, FOODORDER_LOGINMANAGER_LOGIN, FOODORDER_LOGINMANAGER_REGISTER } from './constants';
 import './LoginManager.scss';
 import localization from './messages';
-
-store.dispatch(loadLoclization(localization));
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
 function LoginManager(props) {  
+    props.loadLoclization(localization);
     let content;
     if (props.user == null) {
         content = (
@@ -36,4 +36,12 @@ function LoginManager(props) {
     );
 }
 
-export default LoginManager;
+LoginManager.propTypes = {
+    user: PropTypes.object
+};
+
+const mapDispatchToProps = {
+    loadLoclization
+}
+
+export default connect(null, mapDispatchToProps)(LoginManager);

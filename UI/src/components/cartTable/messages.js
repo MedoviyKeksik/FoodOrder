@@ -1,0 +1,22 @@
+import { FOODORDER_CARTTABLE_CANCEL, FOODORDER_CARTTABLE_COST, FOODORDER_CARTTABLE_COUNT, FOODORDER_CARTTABLE_IMAGE, FOODORDER_CARTTABLE_TIME, FOODORDER_CARTTABLE_TITLE } from "./constants";
+
+export const en = {
+    [FOODORDER_CARTTABLE_TITLE]: 'Title',
+    [FOODORDER_CARTTABLE_COUNT]: 'Count',
+    [FOODORDER_CARTTABLE_COST]: 'Cost',
+    [FOODORDER_CARTTABLE_CANCEL]: 'Cancel',
+    [FOODORDER_CARTTABLE_TIME]: 'Time',
+    [FOODORDER_CARTTABLE_IMAGE]: 'Image'
+}
+
+export const ru = {
+    [FOODORDER_CARTTABLE_TITLE]: 'Название',
+    [FOODORDER_CARTTABLE_COUNT]: 'Количество',
+    [FOODORDER_CARTTABLE_COST]: 'Стоимость',
+    [FOODORDER_CARTTABLE_CANCEL]: 'Отмена',
+    [FOODORDER_CARTTABLE_TIME]: 'Время',
+    [FOODORDER_CARTTABLE_IMAGE]: 'Картинка'
+}
+
+const localization = {en, ru};
+export default localization;
