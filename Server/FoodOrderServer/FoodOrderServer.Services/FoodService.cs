@@ -46,7 +46,7 @@ namespace FoodOrderServer.Services
                         TimeToCook = food.TimeToCook,
                         Title = food.Localizations.First(lang => locale == lang.Locale.Title).Title,
                         Description = food.Localizations.First(lang => locale == lang.Locale.Title).Description
-                    }).Skip(offset).Take(count); ;
+                    }).Skip(offset).Take(count);
                 return await food.ToListAsync();
             }
         }
@@ -78,7 +78,7 @@ namespace FoodOrderServer.Services
         {
             var localizations = food.Locales.Select(locale => new DataAccess.Entities.FoodLocalization
             {
-                FoodId = food.Id,
+                //FoodId = food.Id,
                 LocaleId = GetLocaleIdByName(locale.Locale).Value,
                 Title = locale.Title,
                 Description = locale.Description

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FoodOrderServer.DataAccess.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,7 @@ namespace FoodOrderServer.DataPresentation.Models
         public int Id { get; set; }
         public int UserId { get; set; }
         public DateTime Time { get; set; }
-        public int Status { get; set; }
+        public OrderStatus Status { get; set; }
+        public ICollection<FoodInOrder> Food { get; set; }
     }
 }
