@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
-import { loadLoclization } from '../../containers/localeSwitcher/actions';
+import { loadLocalization } from '../../containers/localeSwitcher/actions';
 import { FOODORDER_NAVBAR_ADMIN_LOCALIZATION } from './constants';
 import './Navbar.scss';
 import localization from './messages';
@@ -27,7 +27,7 @@ Navbar.propTypes = {
 };
 
 const mapDispatchToProps = {
-    loadLoclization
+    loadLoclization: loadLocalization
 }
 
 export default connect(null, mapDispatchToProps)(Navbar);

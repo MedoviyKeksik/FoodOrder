@@ -1,7 +1,7 @@
 import React from "react";
 import { FormattedMessage } from "react-intl";
 import FoodCard from "../../components/foodCard/FoodCard";
-import { loadLoclization } from "../localeSwitcher/actions";
+import { loadLocalization } from "../localeSwitcher/actions";
 import { FOODORDER_FOODCONTAINER_NOFOOD } from "./constants";
 import localization from './messages';
 import './FoodContainer.scss';
@@ -20,7 +20,7 @@ function FoodContainer(props) {
             id={food.id}
             title={food.title} 
             description={food.description} 
-            cookingTime={food.cookingTime}
+            cookingTime={food.timeToCook.totalMinutes}
             cost={food.cost}
             imageSource={food.imageSource}
             isAuthorized={props.isAuthorized}
@@ -44,7 +44,7 @@ FoodContainer.propTypes = {
 };
 
 const mapDispatchToProps = {
-    loadLoclization
+    loadLoclization: loadLocalization
 };
 
 export default connect(null, mapDispatchToProps)(FoodContainer);

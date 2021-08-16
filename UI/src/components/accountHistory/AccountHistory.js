@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import localization from './messages';
-import { loadLoclization } from '../../containers/localeSwitcher/actions';
+import { loadLocalization } from '../../containers/localeSwitcher/actions';
 import './AccountHistory.scss';
 import { FormattedMessage } from 'react-intl';
 import { FOODORDER_ACCOUNTHISTORY_COST, FOODORDER_ACCOUNTHISTORY_COUNT, FOODORDER_ACCOUNTHISTORY_IMAGE, FOODORDER_ACCOUNTHISTORY_TITLE } from './constants';
@@ -51,7 +51,7 @@ AccountHistory.propTypes = {
 }
 
 const mapDispatchToProps = {
-    loadLoclization
+    loadLoclization: loadLocalization
 };
 
 export default connect(null, mapDispatchToProps)(AccountHistory);

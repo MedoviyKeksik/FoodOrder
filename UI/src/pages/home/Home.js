@@ -1,9 +1,11 @@
 import Pagination from "react-js-pagination";
 import { Component } from "react";
-import { store } from '../../store';
 import FoodContainer from "../../containers/foodContainer/FoodContainer";
 import './Home.scss';
 import { requestFood } from "./actions";
+import { connect } from "react-redux";
+import { faCaretLeft, faCaretRight, faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const itemsPerPage = [
     {
@@ -30,53 +32,49 @@ class Home extends Component {
         this.state = {
             totalItemsCount: 0,
             activePage: 1,
-            itemsCountPerPage: itemsPerPage[0].value,
-            foodCards: [],
-            isAuthorized: false
+            itemsCountPerPage: itemsPerPage[0].value
         }
         
-        this.options = itemsPerPage.map((data) => <option value={data.value}>{data.title}</option>);   
-        this.handleStoreChange = this.handleStoreChange.bind(this);
+        this.options = itemsPerPage.map((data) => <option value={data.value}>{data.title}</option>);
     }
 
     componentDidMount() {
-        this.unsubscribe = store.subscribe(this.handleStoreChange);
-        store.dispatch(requestFood({
+        this.props.requestFood({
             count: this.state.itemsCountPerPage, 
-            offset: (this.state.activePage - 1) * this.state.itemsCountPerPage
-        }));
-    }
-
-    handleStoreChange() {
-        this.setState({
-            foodCards: store.getState().food.items, 
-            totalItemsCount: store.getState().food.totalCount,
-            isAuthorized: store.getState().root.user
+            offset: (this.state.activePage - 1) * this.state.itemsCountPerPage,
+            locale: this.props.locale
         });
+    }
+    
+    componentDidUpdate(prevProps) {
+        if (prevProps.locale !== this.props.locale) {
+            this.props.requestFood({
+                count: this.state.itemsCountPerPage, 
+                offset: (this.state.activePage - 1) * this.state.itemsCountPerPage,
+                locale: this.props.locale
+            });
+        }
     }
 
     handlePageChange(pageNumber) {
         this.setState({activePage: pageNumber});
-        store.dispatch(requestFood({
+        this.props.requestFood({
             count: this.state.itemsCountPerPage, 
-            offset: (pageNumber - 1) * this.state.itemsCountPerPage
-        }));
+            offset: (pageNumber - 1) * this.state.itemsCountPerPage,
+            locale: this.props.locale
+        });
     }
-
 
     handleItemsPerPage(e) {
         this.setState({
             activePage: 1,
             itemsCountPerPage: Number(e.target.value)
         });
-        store.dispatch(requestFood({
+        this.props.requestFood({
             count: Number(e.target.value), 
-            offset: 0
-        }));
-    }
-
-    componentWillUnmount() {
-        this.unsubscribe();
+            offset: 0,
+            locale: this.props.locale
+        });
     }
 
     render() {
@@ -93,20 +91,39 @@ class Home extends Component {
                     <Pagination 
                         innerClass="home__pagination"
                         itemClass="home__pagination-item" 
+                        linkClass="home__pagination-link"
+                        activeClass="home__pagination-active"
                         activePage={this.state.activePage} 
                         itemsCountPerPage={this.state.itemsCountPerPage} 
-                        totalItemsCount={this.state.totalItemsCount} 
+                        totalItemsCount={this.props.totalItemsCount} 
                         onChange={this.handlePageChange.bind(this)} 
+                        firstPageText={<FontAwesomeIcon icon={faCaretLeft} />}
+                        prevPageText={<FontAwesomeIcon icon={faChevronLeft} />}
+                        nextPageText={<FontAwesomeIcon icon={faChevronRight} />}
+                        lastPageText={<FontAwesomeIcon icon={faCaretRight} />}
                         pageRangeDisplayed={5} 
                     />
                 </div>
                 <FoodContainer 
-                    food={this.state.foodCards} 
-                    isAuthorized={this.state.isAuthorized} 
+                    food={this.props.foodCards} 
+                    isAuthorized={this.props.isAuthorized} 
                 />
             </div>
         );
     };
 }
 
-export default Home;
+const mapStateToProps = (state) => {
+    return {
+        locale: state.localizer.locale,
+        isAuthorized: !!state.root.user,
+        totalItemsCount: state.food.totalCount,
+        foodCards: state.food.items
+    };
+};
+
+const mapDispatchToProps = {
+    requestFood
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

@@ -1,9 +1,8 @@
 import React from "react"
 import InputField from "../../components/inputField/InputField";
-import { store } from "../../store";
-import { loadLoclization } from "../localeSwitcher/actions";
+import { loadLocalization } from "../localeSwitcher/actions";
 import { userLogin } from "./actions";
-import { FOODORDER_LOGINFORM_LOGIN, FOODORDER_LOGINFORM_PASSWORD, FOODORDER_LOGINFORM_BUTTON, FOODORDER_LOGINFORM_TITLE} from "./constants";
+import { FOODORDER_LOGINFORM_LOGIN, FOODORDER_LOGINFORM_PASSWORD, FOODORDER_LOGINFORM_BUTTON, FOODORDER_LOGINFORM_TITLE, FOODORDER_LOGINFORM_LOGINFAILED} from "./constants";
 import localization from './messages';
 import './LoginForm.scss';
 import { FormattedMessage } from "react-intl";
@@ -42,6 +41,7 @@ class LoginForm extends React.Component {
         return (
             <form className="login-form" onSubmit={this.handleSubmit}>
                 <h2 className="login-form__title"><FormattedMessage defaultMessage="Login" id={FOODORDER_LOGINFORM_TITLE} /></h2>
+                {this.props?.isLoginFailed && <h4><FormattedMessage defaultMessage="Login failed." id={FOODORDER_LOGINFORM_LOGINFAILED} /></h4>}
                 <InputField 
                     label={<FormattedMessage defaultMessage="Phone/Email:" id={FOODORDER_LOGINFORM_LOGIN} />}
                     inputType="text" 
@@ -63,9 +63,15 @@ class LoginForm extends React.Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        isLoginFailed: state.root.isLoginFailed
+    };
+}
+
 const mapDispatchToProps = {
-    loadLoclization,
+    loadLoclization: loadLocalization,
     userLogin
 };
 
-export default connect(null, mapDispatchToProps)(LoginForm);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

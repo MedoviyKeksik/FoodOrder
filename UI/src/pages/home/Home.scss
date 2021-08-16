@@ -9,10 +9,6 @@
         justify-content: flex-end;
     }
 
-    // &__pagination-count {
-        // height: 30px;
-    // }
-
     &__pagination {
         margin: 0;
         margin-left: 20px;
@@ -21,7 +17,23 @@
     }
 
     &__pagination-item {
+        width: 25px;
+        height: 25px;
         display: block;
+        box-sizing: border-box;
         list-style: none;
+        border: 1px solid $shadow-color;
+        text-align: center;
+        color: darken($shadow-color, 20);
+    }
+
+    &__pagination-link {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    &__pagination-active {
+        background-color: $main-color;
+        color: $second-color;
     }
 }

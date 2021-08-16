@@ -1,6 +1,6 @@
 import Modal from "../modal/Modal";
 import { Link } from "react-router-dom";
-import { loadLoclization } from "../../containers/localeSwitcher/actions";
+import { loadLocalization } from "../../containers/localeSwitcher/actions";
 import localization from './messages';
 import { FormattedMessage } from "react-intl";
 import { FOODORDER_NEEDAUTHMODAL_LOGIN, FOODORDER_NEEDAUTHMODAL_REGISTER, FOODORDER_NEEDAUTHMODAL_TITLE } from "./constants";
@@ -25,7 +25,7 @@ NeedAuthModal.propTypes = {
 };
 
 const mapDispatchToProps = {
-    loadLoclization
+    loadLoclization: loadLocalization
 }
 
 export default connect(null, mapDispatchToProps)(NeedAuthModal);

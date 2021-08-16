@@ -2,8 +2,8 @@ import React from "react"
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import InputField from "../../components/inputField/InputField";
-import { store } from "../../store";
-import { loadLoclization } from "../localeSwitcher/actions";
+import { loadLocalization } from "../localeSwitcher/actions";
+import { userRegister } from "./actions";
 import { FOODORDER_REGISTERFORM_BUTTON, FOODORDER_REGISTERFORM_EMAIL, FOODORDER_REGISTERFORM_NAME, FOODORDER_REGISTERFORM_PASSWORD, FOODORDER_REGISTERFORM_PHONE, FOODORDER_REGISTERFORM_SURNAME, FOODORDER_REGISTERFORM_TITLE } from "./constatnts";
 import localization from './messages';
 import './RegisterForm.scss';
@@ -20,13 +20,13 @@ class RegisterForm extends React.Component {
             password: ''
         }
 
-        this.props.loadLoclization(localization);
+        this.props.loadLocalization(localization);
 
         this.handleNameChange = this.handleChange.bind(this, 'name');
         this.handleSurnameChange = this.handleChange.bind(this, 'surname');
         this.handleEmailChange = this.handleChange.bind(this, 'email');
         this.handlePhoneChange = this.handleChange.bind(this, 'phone');
-        this.handlePassswordChange = this.handleChange.bind(this, 'password');
+        this.handlePasswordChange = this.handleChange.bind(this, 'password');
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -37,8 +37,14 @@ class RegisterForm extends React.Component {
     }
 
     handleSubmit(event) {
+        this.props.userRegister({
+            name: this.state.name,
+            surname: this.state.surname,
+            email: this.state.email,
+            phone: this.state.phone,
+            password: this.state.password
+        });
         event.preventDefault();
-        // TODO: Submit Registration data
     }
 
     render() {
@@ -80,7 +86,7 @@ class RegisterForm extends React.Component {
                     isRequired={true} 
                     onChange={this.handlePasswordChange} 
                 />
-                <button type="button" className="register-form__button"> 
+                <button type="submit" className="register-form__button"> 
                     <FormattedMessage defaultMessage="Register" id={FOODORDER_REGISTERFORM_BUTTON} />
                 </button>
             </form>
@@ -89,7 +95,8 @@ class RegisterForm extends React.Component {
 }
 
 const mapDispatchToProps = {
-    loadLoclization
+    loadLocalization,
+    userRegister
 }
 
-export default connect(null, loadLoclization)(RegisterForm);
+export default connect(null, mapDispatchToProps)(RegisterForm);

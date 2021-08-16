@@ -1,6 +1,6 @@
 import React from "react";
 import { FormattedMessage } from "react-intl";
-import { loadLoclization } from "../../containers/localeSwitcher/actions";
+import { loadLocalization } from "../../containers/localeSwitcher/actions";
 import FoodAddModal from "../foodAddModal/FoodAddModal";
 import { FOODORDER_FOODCARD_ADDBUTTON, FOODORDER_FOODCARD_COST, FOODORDER_FOODCARD_TIME } from "./constants";
 import './FoodCard.scss';
@@ -42,7 +42,7 @@ FoodCard.propTypes = {
 }
 
 const mapDispatchToProps = {
-    loadLoclization
+    loadLoclization: loadLocalization
 }
 
 export default connect(null, mapDispatchToProps)(FoodCard);

@@ -1,7 +1,7 @@
 import CartRow from "../../containers/cartRow/CartRow";
 import PropTypes from 'prop-types';
 import localization from './messages'
-import { loadLoclization } from "../../containers/localeSwitcher/actions";
+import { loadLocalization } from "../../containers/localeSwitcher/actions";
 import { FormattedMessage } from "react-intl";
 import { FOODORDER_CARTTABLE_CANCEL, FOODORDER_CARTTABLE_COST, FOODORDER_CARTTABLE_COUNT, FOODORDER_CARTTABLE_IMAGE, FOODORDER_CARTTABLE_TIME, FOODORDER_CARTTABLE_TITLE } from "./constants";
 import {connect} from 'react-redux';
@@ -44,7 +44,7 @@ CartTable.propTypes = {
 }
 
 const mapDispatchToProps = {
-    loadLoclization
+    loadLoclization: loadLocalization
 }
 
 export default connect(null, mapDispatchToProps)(CartTable);

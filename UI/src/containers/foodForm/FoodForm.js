@@ -1,6 +1,6 @@
 import React from "react";
 import InputField from "../../components/inputField/InputField";
-import { loadLoclization } from "../localeSwitcher/actions";
+import { loadLocalization } from "../localeSwitcher/actions";
 import { addFoodToCatalog } from "./actions";
 import { FOODORDER_FOODFORM_ADDBUTTON, FOODORDER_FOODFORM_COOKINGTIME, FOODORDER_FOODFORM_COST, FOODORDER_FOODFORM_DESCRIPTION, FOODORDER_FOODFORM_PICTURE, FOODORDER_FOODFORM_TITLE } from "./constants";
 import localization from './messages';
@@ -94,7 +94,7 @@ class FoodForm extends React.Component {
 }
 
 const mapDispatchToProps = {
-    loadLoclization,
+    loadLoclization: loadLocalization,
     addFoodToCatalog
 }
 

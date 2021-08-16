@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FormattedMessage } from "react-intl";
-import { loadLoclization } from "../../containers/localeSwitcher/actions";
+import { loadLocalization } from "../../containers/localeSwitcher/actions";
 import Modal from "../modal/Modal";
 import NeedAuthModal from "../needAuthModal/NeedAuthModal";
 import { addFoodToCart } from "./actions";
@@ -62,7 +62,7 @@ FoodAddModal.propTypes = {
 }
 
 const mapDispatchToProps = {
-    loadLoclization,
+    loadLoclization: loadLocalization,
     addFoodToCart
 }
 

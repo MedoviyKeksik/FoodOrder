@@ -1,0 +1,9 @@
+@import "../../constants.scss";
+
+.footer {
+    height: 40px;
+    padding: 10px;
+    background-color: darken($shadow-color, 10);
+    margin-top: auto;
+    color: $second-color;
+}

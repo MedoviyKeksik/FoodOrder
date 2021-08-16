@@ -13,11 +13,10 @@ function Cart() {
     }
 
     return (
-        <>
-            <h1>Cart</h1>      
+        <div className="cart">
             <CartTable food={food} />
             <button onClick={handleConfirn}>Confirn</button>
-        </> 
+        </div> 
     );
 }
 

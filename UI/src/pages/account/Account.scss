@@ -1,6 +1,39 @@
+@import '../../constants.scss';
 
 .account {
+    width: $page-width;
+    margin: 20px auto;
+
+    &__navbar {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+    }
+
+    &__navbar-item {
+        margin-right: 5px;
+        padding: 4px;
+        box-sizing: border-box;
+        border: 1px solid $shadow-color;
+        border-radius: 5px;
+    }
+
+    &__navbar-link {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    &__navbar-item_active {
+        background-color: $main-color;
+        color: $second-color;
+    }
+
     &__history-item {
         list-style: none;
+    }
+
+    &__nodata {
+        margin-top: 10px;
     }
 }

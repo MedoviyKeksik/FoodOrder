@@ -10,6 +10,7 @@ import Cart from './pages/cart/Cart';
 import Admin from './pages/admin/Admin';
 import { useSelector } from 'react-redux';
 import Header from './components/header/Header';
+import Footer from './components/footer/Footer';
 
 function App() {
     const locale = useSelector((state) => state.localizer);
@@ -43,6 +44,7 @@ function App() {
                 <Route path="/cart" component={Cart}/>
                 <Route path="/admin" component={Admin}/>
             </Switch>
+            <Footer />
             </IntlProvider>
         </div>
         </>

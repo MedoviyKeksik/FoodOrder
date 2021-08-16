@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
-import { loadLoclization } from '../../containers/localeSwitcher/actions';
+import { loadLocalization } from '../../containers/localeSwitcher/actions';
 import { FOODORDER_LOGINMANAGER_HI, FOODORDER_LOGINMANAGER_LOGIN, FOODORDER_LOGINMANAGER_REGISTER } from './constants';
 import './LoginManager.scss';
 import localization from './messages';
@@ -41,7 +41,7 @@ LoginManager.propTypes = {
 };
 
 const mapDispatchToProps = {
-    loadLoclization
+    loadLoclization: loadLocalization
 }
 
 export default connect(null, mapDispatchToProps)(LoginManager);

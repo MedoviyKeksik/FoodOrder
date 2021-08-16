@@ -7,7 +7,7 @@ export function changeLocale(locale) {
     }
 }
 
-export function loadLoclization(payload) {
+export function loadLocalization(payload) {
     return {
         type: LOCALIZATION_LOADED,
         payload

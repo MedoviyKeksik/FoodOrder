@@ -1,4 +1,4 @@
-import { FOOD_FETCH_SUCCEED } from "./constants";
+import { FOOD_FETCH_FAILED, FOOD_FETCH_SUCCEED } from "./constants";
 
 const initialState = {
     food: []
@@ -7,7 +7,12 @@ const initialState = {
 export const reducer = (state = initialState, action) => {
     switch (action.type) {
         case FOOD_FETCH_SUCCEED:
-            return action.info;
+            return action.data;
+        case FOOD_FETCH_FAILED:
+            return {
+                ...state,
+                error: action.error
+            }
         default:
             return state;
     }
