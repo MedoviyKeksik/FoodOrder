@@ -1,8 +1,6 @@
 ﻿using FoodOrderServer.DataAccess;
 using FoodOrderServer.DataPresentation.Models;
 using System.Linq;
-using System;
-using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
@@ -20,9 +18,10 @@ namespace FoodOrderServer.Services
             return _db.Locales.GetAll().FirstOrDefault(lang => lang.Title.Equals(locale))?.Id;
         }
 
-        public async Task<List<Food>> Get(string locale, int offset, int count)
+        public async Task<PartialFood> Get(string locale, int offset, int count)
         {
             if (count <= 0) count = int.MaxValue;
+            var result = new PartialFood { TotalCount = _db.Food.GetAll().Count() };
             if (string.IsNullOrEmpty(locale))
             {
                 var food = _db.Food.GetAll().Select(food =>
@@ -31,10 +30,11 @@ namespace FoodOrderServer.Services
                         Id = food.Id,
                         Cost = food.Cost,
                         TimeToCook = food.TimeToCook,
+                        ImageSource = food.ImageSource,
                         Title = food.Localizations.First(lang => food.DefaultLocaleId == lang.LocaleId).Title,
                         Description = food.Localizations.First(lang => food.DefaultLocaleId == lang.LocaleId).Description
                     }).Skip(offset).Take(count);
-                return await food.ToListAsync();
+                result.Items = await food.ToListAsync();
             } 
             else
             {
@@ -44,11 +44,13 @@ namespace FoodOrderServer.Services
                         Id = food.Id,
                         Cost = food.Cost,
                         TimeToCook = food.TimeToCook,
+                        ImageSource = food.ImageSource,
                         Title = food.Localizations.First(lang => locale == lang.Locale.Title).Title,
                         Description = food.Localizations.First(lang => locale == lang.Locale.Title).Description
                     }).Skip(offset).Take(count);
-                return await food.ToListAsync();
+                result.Items = await food.ToListAsync();
             }
+            return result;
         }
 
         public async Task<FullFood> GetById(int id)
@@ -67,6 +69,7 @@ namespace FoodOrderServer.Services
             return new FullFood
             {
                 Id = food.Id,   
+                ImageSource = food.ImageSource,
                 TimeToCook = food.TimeToCook,
                 Cost = food.Cost,
                 Locales = await localizations,

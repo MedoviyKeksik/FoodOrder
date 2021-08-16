@@ -11,6 +11,7 @@ namespace FoodOrderServer.DataPresentation.Models
         public TimeSpan TimeToCook { get; set; }
         public double Cost { get; set; }
         public string DefaultLocale { get; set; }
+        public string ImageSource { get; set; }
         public List<FoodLocalization> Locales { get; set; }
     }
 }

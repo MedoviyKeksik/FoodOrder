@@ -24,6 +24,7 @@ namespace FoodOrderServer.DataAccess.Entities
         public double Cost { get; set; }
 
         public int DefaultLocaleId { get; set; }
+        public string ImageSource { get; set; }
         
         private ICollection<FoodLocalization> _localizations;
         public ICollection<FoodLocalization> Localizations

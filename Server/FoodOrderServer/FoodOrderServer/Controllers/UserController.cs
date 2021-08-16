@@ -33,7 +33,7 @@ namespace FoodOrderServer.Controllers
         public async Task<IActionResult> Login([FromBody] LoginInfo loginInfo)
         {
             var user = await _userService.Authenticate(loginInfo);
-            if (user == null) return BadRequest();
+            if (user == null) return Unauthorized();
             return Ok(user);
         }
 

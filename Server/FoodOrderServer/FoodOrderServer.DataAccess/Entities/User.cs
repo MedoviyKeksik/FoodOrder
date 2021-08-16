@@ -40,5 +40,6 @@ namespace FoodOrderServer.DataAccess.Entities
             get => LazyLoader.Load(this, ref _roles); 
             set => _roles = value; 
         } 
+
     }
 }

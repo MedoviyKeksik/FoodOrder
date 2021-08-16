@@ -8,6 +8,7 @@ namespace FoodOrderServer.DataPresentation.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public TimeSpan TimeToCook { get; set; }
+        public string ImageSource { get; set; }
         public double Cost { get; set; }
     }
 }

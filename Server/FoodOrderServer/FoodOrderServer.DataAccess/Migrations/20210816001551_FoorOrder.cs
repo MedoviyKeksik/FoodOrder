@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FoodOrderServer.DataAccess.Migrations
 {
-    public partial class FoodOrder : Migration
+    public partial class FoorOrder : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,7 +15,8 @@ namespace FoodOrderServer.DataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TimeToCook = table.Column<TimeSpan>(type: "time", nullable: false),
                     Cost = table.Column<double>(type: "float", nullable: false),
-                    DefaultLocaleId = table.Column<int>(type: "int", nullable: false)
+                    DefaultLocaleId = table.Column<int>(type: "int", nullable: false),
+                    ImageSource = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -167,6 +168,35 @@ namespace FoodOrderServer.DataAccess.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Food",
+                columns: new[] { "Id", "Cost", "DefaultLocaleId", "ImageSource", "TimeToCook" },
+                values: new object[] { 1, 10.4, 1, "images/pizza1.jpeg", new TimeSpan(0, 0, 14, 0, 0) });
+
+            migrationBuilder.InsertData(
+                table: "Locales",
+                columns: new[] { "Id", "Title" },
+                values: new object[,]
+                {
+                    { 1, "en" },
+                    { 2, "ru" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Roles",
+                columns: new[] { "Id", "Permissions", "Title" },
+                values: new object[] { 1, "All", "Admin" });
+
+            migrationBuilder.InsertData(
+                table: "FoodLocalizations",
+                columns: new[] { "Id", "Description", "FoodId", "LocaleId", "Title" },
+                values: new object[] { 1, "So tasty pizza", 1, 1, "Pizza" });
+
+            migrationBuilder.InsertData(
+                table: "FoodLocalizations",
+                columns: new[] { "Id", "Description", "FoodId", "LocaleId", "Title" },
+                values: new object[] { 2, "Очень вкусная пицца", 1, 2, "Пицца" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_FoodInOrders_FoodId",

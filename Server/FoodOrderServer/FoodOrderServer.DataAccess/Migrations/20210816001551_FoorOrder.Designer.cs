@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodOrderServer.DataAccess.Migrations
 {
     [DbContext(typeof(FoodOrderContext))]
-    [Migration("20210811222803_FoodOrder")]
-    partial class FoodOrder
+    [Migration("20210816001551_FoorOrder")]
+    partial class FoorOrder
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,12 +34,25 @@ namespace FoodOrderServer.DataAccess.Migrations
                     b.Property<int>("DefaultLocaleId")
                         .HasColumnType("int");
 
+                    b.Property<string>("ImageSource")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<TimeSpan>("TimeToCook")
                         .HasColumnType("time");
 
                     b.HasKey("Id");
 
                     b.ToTable("Food");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Cost = 10.4,
+                            DefaultLocaleId = 1,
+                            ImageSource = "images/pizza1.jpeg",
+                            TimeToCook = new TimeSpan(0, 0, 14, 0, 0)
+                        });
                 });
 
             modelBuilder.Entity("FoodOrderServer.DataAccess.Entities.FoodInOrder", b =>
@@ -95,6 +108,24 @@ namespace FoodOrderServer.DataAccess.Migrations
                     b.HasIndex("LocaleId");
 
                     b.ToTable("FoodLocalizations");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "So tasty pizza",
+                            FoodId = 1,
+                            LocaleId = 1,
+                            Title = "Pizza"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "Очень вкусная пицца",
+                            FoodId = 1,
+                            LocaleId = 2,
+                            Title = "Пицца"
+                        });
                 });
 
             modelBuilder.Entity("FoodOrderServer.DataAccess.Entities.Locale", b =>
@@ -112,6 +143,18 @@ namespace FoodOrderServer.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Locales");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Title = "en"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Title = "ru"
+                        });
                 });
 
             modelBuilder.Entity("FoodOrderServer.DataAccess.Entities.Order", b =>
@@ -156,6 +199,14 @@ namespace FoodOrderServer.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Permissions = "All",
+                            Title = "Admin"
+                        });
                 });
 
             modelBuilder.Entity("FoodOrderServer.DataAccess.Entities.User", b =>
@@ -219,7 +270,7 @@ namespace FoodOrderServer.DataAccess.Migrations
                         .IsRequired();
 
                     b.HasOne("FoodOrderServer.DataAccess.Entities.Order", "Order")
-                        .WithMany()
+                        .WithMany("FoodInOrder")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -277,6 +328,11 @@ namespace FoodOrderServer.DataAccess.Migrations
             modelBuilder.Entity("FoodOrderServer.DataAccess.Entities.Food", b =>
                 {
                     b.Navigation("Localizations");
+                });
+
+            modelBuilder.Entity("FoodOrderServer.DataAccess.Entities.Order", b =>
+                {
+                    b.Navigation("FoodInOrder");
                 });
 #pragma warning restore 612, 618
         }

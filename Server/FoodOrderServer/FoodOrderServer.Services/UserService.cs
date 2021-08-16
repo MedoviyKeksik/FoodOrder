@@ -63,6 +63,8 @@ namespace FoodOrderServer.Services
             var userModel = new User
             {
                 Id = user.Id,
+                Name = user.Name,
+                Surname = user.Surname,
                 Email = user.Email,
                 Phone = user.Phone,
                 Roles = user.Roles.Select(role => new Role { Id = role.Id, Title = role.Title, Permissions = role.Permissions }).ToList()
