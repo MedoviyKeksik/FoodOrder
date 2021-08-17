@@ -9,7 +9,7 @@ namespace FoodOrderServer.Services.Interfaces
 {
     public interface IOrdersService
     {
-        Task<List<Order>> GetByUser(int userId);
+        Task<PartialOrderModel> GetByUser(int userId);
         Task<Order> GetById(int orderId);
         Task Add(Order order);
         Task Update(Order order);

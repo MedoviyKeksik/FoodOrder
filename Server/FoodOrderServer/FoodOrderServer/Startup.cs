@@ -15,6 +15,7 @@ using Microsoft.Extensions.Hosting;
 using System.Text;
 using FoodOrderServer.Services.JwtBuilder;
 using FoodOrderServer.Services.Interfaces;
+using Azure.Storage.Blobs;
 
 namespace FoodOrderServer
 {
@@ -31,11 +32,17 @@ namespace FoodOrderServer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
             services.AddTransient<IFoodService, FoodService>();
             services.AddTransient<IOrdersService, OrdersService>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IImageService, ImageService>();
+
+            services.AddSingleton(x => new BlobServiceClient(Configuration.GetConnectionString("AzureBlobStorage")));
+
             services.AddTransient<IUnitOfWork, FoodOrderUnitOfWork>();
             services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
             services.AddSingleton<IJwtBuilder, JwtBuilder>();
             services.AddDbContext<FoodOrderContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Scoped);

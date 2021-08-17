@@ -11,7 +11,7 @@ namespace FoodOrderServer.Services.Interfaces
     {
         Task<PartialFood> GetItems(string locale, int offset, int count);
         Task<FullFood> GetById(int id);
-        Task Add(FullFood food);
+        Task Add(FoodInfoModel food);
         Task Delete(int id);
         Task Update(FullFood food);
     }

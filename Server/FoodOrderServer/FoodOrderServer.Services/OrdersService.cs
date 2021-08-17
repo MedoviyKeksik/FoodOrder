@@ -17,9 +17,11 @@ namespace FoodOrderServer.Services
         {
         }
 
-        public async Task<List<Order>> GetByUser(int userId)
+        public async Task<PartialOrderModel> GetByUser(int userId)
         {
-            return await _db.Orders.GetAll()
+            return new PartialOrderModel
+            {
+                Items = await _db.Orders.GetAll()
                 .Where(order => order.UserId == userId)
                 .Select(order => new Order
                 {
@@ -27,7 +29,10 @@ namespace FoodOrderServer.Services
                     Status = order.Status,
                     UserId = order.UserId,
                     Time = order.Time
-                }).ToListAsync();
+                }).ToListAsync(),
+                TotalCount = _db.Orders.GetAll()
+                .Where(order => order.UserId == userId).Count()
+            };
         }
 
         public async Task<Order> GetById(int orderId)
@@ -79,6 +84,5 @@ namespace FoodOrderServer.Services
             _db.Orders.Delete(orderId);
             await _db.Save();
         }
-
     }
 }

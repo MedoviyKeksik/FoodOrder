@@ -9,9 +9,11 @@ namespace FoodOrderServer.Services
 {
     public class FoodService : BaseService, IFoodService
     {
-        public FoodService(IUnitOfWork unitOfWork)
+        private readonly IImageService _imageService;
+        public FoodService(IUnitOfWork unitOfWork, IImageService imageService)
             : base(unitOfWork)
         {
+            _imageService = imageService;
         }
 
         private int? GetLocaleIdByName(string locale)
@@ -78,11 +80,13 @@ namespace FoodOrderServer.Services
             };
         }
 
-        public async Task Add(FullFood food) 
+        public async Task Add(FoodInfoModel food) 
         {
+            var binaryData = System.Convert.FromBase64String(food.Image);
+            var newfilename = System.Guid.NewGuid() + System.IO.Path.GetExtension(food.Filename);
+            await _imageService.UploadImage(newfilename, binaryData);
             var localizations = food.Locales.Select(locale => new DataAccess.Entities.FoodLocalization
             {
-                //FoodId = food.Id,
                 LocaleId = GetLocaleIdByName(locale.Locale).Value,
                 Title = locale.Title,
                 Description = locale.Description
@@ -92,7 +96,8 @@ namespace FoodOrderServer.Services
                 Cost = food.Cost,
                 TimeToCook = food.TimeToCook,
                 DefaultLocaleId = GetLocaleIdByName(food.DefaultLocale).Value,
-                Localizations = localizations.ToList()
+                Localizations = localizations.ToList(),
+                ImageSource = "https://localhost:44368/api/images/" + newfilename
             });
             await _db.Save();
         }

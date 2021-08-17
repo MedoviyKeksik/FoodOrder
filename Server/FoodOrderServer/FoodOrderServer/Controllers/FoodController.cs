@@ -36,7 +36,7 @@ namespace FoodOrderServer.Controllers
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
         [HttpPost]
-        public async Task AddFood([FromBody] FullFood food)
+        public async Task AddFood([FromBody] FoodInfoModel food)
         {
             await _foodService.Add(food);
         }
