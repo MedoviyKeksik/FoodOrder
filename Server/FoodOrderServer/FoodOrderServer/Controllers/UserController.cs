@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FoodOrderServer.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/user")]
     [ApiController]
     public class UserController : ControllerBase
     {

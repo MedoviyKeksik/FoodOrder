@@ -9,17 +9,16 @@ using System.Threading.Tasks;
 
 namespace FoodOrderServer.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/orders")]
     [ApiController]
     public class OrdersController : ControllerBase
     {
-        private IOrdersService _ordersService;
+        private readonly IOrdersService _ordersService;
         public OrdersController(IOrdersService ordersService)
         {
             _ordersService = ordersService;
         }
 
-        // GET: api/<OrdersController>
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetOrderById(int id)
@@ -28,7 +27,6 @@ namespace FoodOrderServer.Controllers
             return Ok(order);
         }
 
-        // GET api/<OrdersController>/5
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet("/user/{id}")]
         public async Task<IActionResult> GetOrdersByUserId(int id)
@@ -37,7 +35,6 @@ namespace FoodOrderServer.Controllers
             return Ok(orders);
         }
 
-        // POST api/<OrdersController>
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost]
         public async Task AddOrder([FromBody] Order order)
@@ -45,7 +42,6 @@ namespace FoodOrderServer.Controllers
             await _ordersService.Add(order);
         }
 
-        // PUT api/<OrdersController>/5
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPut("{id}")]
         public async Task UpdateOrder(int id, [FromBody] Order order)
@@ -55,7 +51,6 @@ namespace FoodOrderServer.Controllers
             }
         }
 
-        // DELETE api/<OrdersController>/5
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpDelete("{id}")]
         public void DeleteOrder(int id)
