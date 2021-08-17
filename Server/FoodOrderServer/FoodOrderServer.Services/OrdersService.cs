@@ -1,5 +1,6 @@
 ﻿using FoodOrderServer.DataAccess;
 using FoodOrderServer.DataPresentation.Models;
+using FoodOrderServer.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace FoodOrderServer.Services
 {
-    public class OrdersService : BaseService
+    public class OrdersService : BaseService, IOrdersService
     {
         public OrdersService(IUnitOfWork unitOfWork) 
             : base(unitOfWork)
@@ -73,7 +74,7 @@ namespace FoodOrderServer.Services
             await _db.Save();
         }
 
-        public async void Delete(int orderId)
+        public async Task Delete(int orderId)
         {
             _db.Orders.Delete(orderId);
             await _db.Save();

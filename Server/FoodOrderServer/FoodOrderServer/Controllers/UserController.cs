@@ -1,9 +1,6 @@
 ﻿using FoodOrderServer.DataPresentation.Models;
-using FoodOrderServer.Services;
+using FoodOrderServer.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -14,9 +11,9 @@ namespace FoodOrderServer.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly UserService _userService;
+        private readonly IUserService _userService;
 
-        public UserController(UserService userService)
+        public UserController(IUserService userService)
         {
             _userService = userService;
         }
@@ -38,10 +35,11 @@ namespace FoodOrderServer.Controllers
         }
 
         [HttpPost("refresh")]
-        public async Task<IActionResult> RefreshToken()
+        public async Task<IActionResult> RefreshToken(Tokens tokens)
         {
-
-            return Ok();
+            var user = await _userService.RefreshToken(tokens.AccessToken, tokens.RefreshToken);
+            if (user == null) return Unauthorized();
+            return Ok(user);
         }
     }
 }

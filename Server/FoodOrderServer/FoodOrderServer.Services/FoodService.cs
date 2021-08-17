@@ -3,10 +3,11 @@ using FoodOrderServer.DataPresentation.Models;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using FoodOrderServer.Services.Interfaces;
 
 namespace FoodOrderServer.Services
 {
-    public class FoodService : BaseService
+    public class FoodService : BaseService, IFoodService
     {
         public FoodService(IUnitOfWork unitOfWork)
             : base(unitOfWork)
@@ -18,7 +19,7 @@ namespace FoodOrderServer.Services
             return _db.Locales.GetAll().FirstOrDefault(lang => lang.Title.Equals(locale))?.Id;
         }
 
-        public async Task<PartialFood> Get(string locale, int offset, int count)
+        public async Task<PartialFood> GetItems(string locale, int offset, int count)
         {
             if (count <= 0) count = int.MaxValue;
             var result = new PartialFood { TotalCount = _db.Food.GetAll().Count() };

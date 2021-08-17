@@ -1,12 +1,8 @@
 ﻿using FoodOrderServer.DataPresentation.Models;
-using FoodOrderServer.Services;
+using FoodOrderServer.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -17,8 +13,8 @@ namespace FoodOrderServer.Controllers
     [ApiController]
     public class OrdersController : ControllerBase
     {
-        private OrdersService _ordersService;
-        public OrdersController(OrdersService ordersService)
+        private IOrdersService _ordersService;
+        public OrdersController(IOrdersService ordersService)
         {
             _ordersService = ordersService;
         }
@@ -26,7 +22,7 @@ namespace FoodOrderServer.Controllers
         // GET: api/<OrdersController>
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetOrderById(int id)
         {
             var order = await _ordersService.GetById(id);
             return Ok(order);
@@ -35,7 +31,7 @@ namespace FoodOrderServer.Controllers
         // GET api/<OrdersController>/5
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet("/user/{id}")]
-        public async Task<IActionResult> GetByUserId(int id)
+        public async Task<IActionResult> GetOrdersByUserId(int id)
         {
             var orders = await _ordersService.GetByUser(id);
             return Ok(orders);
@@ -44,7 +40,7 @@ namespace FoodOrderServer.Controllers
         // POST api/<OrdersController>
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost]
-        public async Task Post([FromBody] Order order)
+        public async Task AddOrder([FromBody] Order order)
         {
             await _ordersService.Add(order);
         }
@@ -52,7 +48,7 @@ namespace FoodOrderServer.Controllers
         // PUT api/<OrdersController>/5
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPut("{id}")]
-        public async Task Put(int id, [FromBody] Order order)
+        public async Task UpdateOrder(int id, [FromBody] Order order)
         {
             if (id == order.Id) {
                 await _ordersService.Update(order);
@@ -62,7 +58,7 @@ namespace FoodOrderServer.Controllers
         // DELETE api/<OrdersController>/5
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void DeleteOrder(int id)
         {
             _ordersService.Delete(id);
         }

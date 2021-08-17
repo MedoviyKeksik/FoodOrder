@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Text;
 using FoodOrderServer.Services.JwtBuilder;
+using FoodOrderServer.Services.Interfaces;
 
 namespace FoodOrderServer
 {
@@ -30,9 +31,9 @@ namespace FoodOrderServer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddTransient<FoodService>();
-            services.AddTransient<OrdersService>();
-            services.AddTransient<UserService>();
+            services.AddTransient<IFoodService, FoodService>();
+            services.AddTransient<IOrdersService, OrdersService>();
+            services.AddTransient<IUserService, UserService>();
             services.AddTransient<IUnitOfWork, FoodOrderUnitOfWork>();
             services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddSingleton<IJwtBuilder, JwtBuilder>();

@@ -1,16 +1,15 @@
 ﻿using FoodOrderServer.DataAccess;
 using FoodOrderServer.DataPresentation.Models;
+using FoodOrderServer.Services.Interfaces;
 using FoodOrderServer.Services.JwtBuilder;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace FoodOrderServer.Services
 {
-    public class UserService : BaseService
+    public class UserService : BaseService, IUserService
     {
         private readonly int _iterationsCount = 10000;
         private readonly int _saltSize = 16;
