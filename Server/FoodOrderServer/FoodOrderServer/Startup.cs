@@ -1,12 +1,6 @@
-using FoodOrderServer.Controllers;
-using FoodOrderServer.DataAccess;
-using FoodOrderServer.DataAccess.Repositories;
-using FoodOrderServer.DataPresentation.Models;
-using FoodOrderServer.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -15,6 +9,10 @@ using Microsoft.Extensions.Hosting;
 using System.Text;
 using FoodOrderServer.Services.JwtBuilder;
 using FoodOrderServer.Services.Interfaces;
+using FoodOrderServer.DataAccess;
+using FoodOrderServer.DataAccess.Repositories;
+using FoodOrderServer.Services;
+using FoodOrderServer.ExceptionHandling;
 using Azure.Storage.Blobs;
 
 namespace FoodOrderServer
@@ -82,9 +80,13 @@ namespace FoodOrderServer
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
             app.UseCors(
                 options => options.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader().AllowCredentials()
             );
+
+            app.UseMiddleware<ExceptionMiddleware>();
+
             app.UseAuthorization();
             app.UseAuthentication();
 

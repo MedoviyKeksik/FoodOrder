@@ -32,7 +32,7 @@ namespace FoodOrderServer.DataAccess
             modelBuilder.Entity<Role>().HasData(
                 new Role[]
                 {
-                    new Role {Id = 1, Title = "Admin", Permissions = "All"}
+                    new Role {Id = 1, Title = "Admin", Permissions = ""}
                 }
                 );
 

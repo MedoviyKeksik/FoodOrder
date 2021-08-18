@@ -15,14 +15,15 @@ class FoodForm extends React.Component {
         this.state = {
             title: "",
             description: "",
-            pictures: "",
+            picture: "",
             cost: 0,
-            cookingTime: 0
+            cookingTime: 0,
+            file: null
         }
 
+        this.handlePictureChange = this.handlePictureChange.bind(this);
         this.handleTitleChange = this.handleChange.bind(this, "title");
         this.handleDescriptionChange = this.handleChange.bind(this, "description");
-        this.handlePictureChange = this.handleChange.bind(this, "picture");
         this.handleCostChange = this.handleChange.bind(this, "cost");
         this.handleCookingTimeChange = this.handleChange.bind(this, "cookingTime");
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -32,20 +33,42 @@ class FoodForm extends React.Component {
         this.props.loadLoclization(localization);
     }
 
+    handlePictureChange(event) {
+        this.setState({
+            file: event.target.files[0]
+        });
+    }
+
+    toBase64 = file => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsBinaryString(file);
+        reader.onload = () => resolve(btoa(reader.result));
+        reader.onerror = error => reject(error);
+    });
+
     handleChange(field, event) {
         const tmp = {};
-        console.log(event);
         tmp[field] = event.target.value;
         this.setState(tmp);
     }
 
     handleSubmit(event) {
         event.preventDefault();
-        this.props.addFoodToCatalog({
-            title: this.state.title,
-            description: this.state.description,
-            cost: this.state.cookingTime,
-            cookingTime: this.state.cookingTime
+        this.toBase64(this.state.file).then(imageBase64 => {
+            this.props.addFoodToCatalog({
+                locales: [
+                    { 
+                        locale: "en",
+                        title: this.state.title,
+                        description: this.state.description 
+                    }
+                ],
+                defaultLocale: "en",
+                cost: this.state.cost,
+                timeToCook: this.state.cookingTime,
+                filename: this.state.file.name,
+                image: imageBase64
+            });
         });
     }
 

@@ -25,7 +25,6 @@ namespace FoodOrderServer.Controllers
             return Ok(food);
         }
 
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetFoodById(int id)
         {
@@ -34,15 +33,14 @@ namespace FoodOrderServer.Controllers
             return Ok(food);
         }
 
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost]
         public async Task AddFood([FromBody] FoodInfoModel food)
         {
             await _foodService.Add(food);
         }
 
-        // PUT api/<ValuesController>/5
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPut("{id:int}")]
         public async Task UpdateFood(int id, [FromBody] FullFood food)
         {
@@ -52,7 +50,7 @@ namespace FoodOrderServer.Controllers
             }
         }
 
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpDelete("{id:int}")]
         public async Task DeleteFood(int id)
         {

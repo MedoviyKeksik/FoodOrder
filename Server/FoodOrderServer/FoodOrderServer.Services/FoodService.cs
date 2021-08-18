@@ -94,7 +94,7 @@ namespace FoodOrderServer.Services
             await _db.Food.Add(new DataAccess.Entities.Food
             {
                 Cost = food.Cost,
-                TimeToCook = food.TimeToCook,
+                TimeToCook = System.TimeSpan.FromMinutes(food.TimeToCook),
                 DefaultLocaleId = GetLocaleIdByName(food.DefaultLocale).Value,
                 Localizations = localizations.ToList(),
                 ImageSource = "https://localhost:44368/api/images/" + newfilename

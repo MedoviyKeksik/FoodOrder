@@ -9,7 +9,7 @@ namespace FoodOrderServer.DataPresentation.Models
     public class FoodInfoModel
     {
         public int Id { get; set; }
-        public TimeSpan TimeToCook { get; set; }
+        public int TimeToCook { get; set; }
         public double Cost { get; set; }
         public string DefaultLocale { get; set; }
         public string Image { get; set; }
