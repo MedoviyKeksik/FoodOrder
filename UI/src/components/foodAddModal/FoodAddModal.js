@@ -16,7 +16,7 @@ function FoodAddModal(props) {
 
     function handleConfirmation() {
         props.addFoodToCart({
-            id: props.id,
+            foodId: props.id,
             title: props.title,
             count: count,
             cost: props.cost,

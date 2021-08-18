@@ -58,7 +58,8 @@ namespace FoodOrderServer.Services
             {
                 Status = order.Status,
                 Time = order.Time,
-                UserId = order.UserId
+                UserId = order.UserId,
+                FoodInOrder = food.ToList()
             });
             await _db.Save();
         }

@@ -18,7 +18,6 @@ class Account extends React.Component {
         this.state = {
             activePage: 1,
             countPerPage: 20,
-            user: props.user
         }
         this.handlePageChange = this.handlePageChange.bind(this);
         this.renderInfo = this.renderInfo.bind(this);
@@ -28,9 +27,9 @@ class Account extends React.Component {
     }
 
     handleHistoryClick() {
-        if (this.state.user != null) {
+        if (this.props.user != null) {
             this.props.getHistory({
-                userId: this.state.user.id,
+                userId: this.props.user.id,
                 count: this.state.countPerPage,
                 offset: (this.state.activePage -  1) * this.state.countPerPage
             });
@@ -38,8 +37,9 @@ class Account extends React.Component {
     }
 
     handlePageChange(page) {
-        this.props.dispatch({
-            userId: this.state.user.id,
+        this.props.getHistory({
+            userId: this.props.user.id,
+            locale: this.props.locale,
             count: this.state.countPerPage,
             offset: (page -  1) * this.state.countPerPage
         });
@@ -48,16 +48,17 @@ class Account extends React.Component {
     renderInfo() {
         return (
             <AccountInfo 
-                name={this.state.user.name} 
-                surname={this.state.user.surname}  
-                email={this.state.user.email}
-                phone={this.state.user.phone}
+                name={this.props.user.name} 
+                surname={this.props.user.surname}  
+                email={this.props.user.email}
+                phone={this.props.user.phone}
             />
         );
     }
 
     renderHistory() {
-        if (this.state.user.history == null) {
+        console.log("RENDER_HISTORY", this.props.user.history, this.props.user);
+        if (this.props.user.history == null) {
             return (<div className="account__nodata"><FormattedMessage defaultMessage="No data" id={FOODORDER_ACCOUNT_NODATA} /></div>);
         } else {
             return (
@@ -65,12 +66,12 @@ class Account extends React.Component {
                     <Pagination 
                         itemClass="account__history-item"
                         activePage={this.state.activePage} 
-                        totalItemsCount={this.state.user.history.totalCount} 
+                        totalItemsCount={this.props.user.history.totalCount} 
                         onChange={this.handlePageChange} 
                         itemsCountPerPage={this.state.countPerPage}
                     />
                     <AccountHistory 
-                        items={this.state.user.history.items}
+                        items={this.props.user.history.items}
                     />
                 </>
             );
@@ -78,7 +79,7 @@ class Account extends React.Component {
     }
 
     render() {
-        if (this.state.user == null) {
+        if (this.props.user == null) {
             return (
                 <div className="account">
                     <h2><FormattedMessage defaultMessage="Please login first" id={FOODORDER_ACCOUNT_PLSLOGIN} /></h2>
@@ -104,7 +105,8 @@ class Account extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        user: state.root.user
+        user: state.root.user,
+        locale: state.localizer.locale
     };
 }
 

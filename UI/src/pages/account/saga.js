@@ -1,34 +1,36 @@
-import { put, call } from "redux-saga/effects";
+import { put, call, select } from "redux-saga/effects";
+import { API_URL, ORDERSBYUSER } from "../../constants";
 import { historyFailed, historySucceed } from "./actions";
 
+
+function AddParams(url, params) {
+    let result = url;
+    let isFirst = true;
+    for (let i in params) {
+        if (params[i] != null) {
+            result += (isFirst ? '?' : '&') + i + '=' + params[i];
+            isFirst = false;
+        } 
+    }
+    return result;
+}
+
 function* fetchHistory(action) {
-    console.log("HISTORY SUCCEED");
     try {
+        let accessToken = yield select(state => state.root.user.accessToken);
         const data = yield call(() => {
-            return fetch('').then(res => res.json());
+            return fetch(
+                AddParams(API_URL + ORDERSBYUSER + action.payload.userId, {locale: action.payload.locale, count: action.payload.count, offset: action.payload.offset}),
+                {
+                    headers: {
+                        'Authorization': 'Bearer ' + accessToken, 
+                    }
+                }).then(res => res.json());
         });
         yield put(historySucceed(data));
     } catch (e) {
         yield put(historyFailed(e));
     }
-    // yield put({
-    //     type: HISTORY_SUCCEED,
-    //     payload: {
-    //         items: [
-    //             {
-    //                 orderId: 1,
-    //                 food: {    
-    //                     totalCount: 2,
-    //                     items: [
-    //                         { title: 'Item1', count: 5, cost: 10 },
-    //                         { title: 'Item2' }
-    //                     ]
-    //                 }
-    //             }
-    //         ]
-    //     }
-    // });
-    
 }
 
 export default fetchHistory;

@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using FoodOrderServer.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -32,7 +31,7 @@ namespace FoodOrderServer.DataAccess
             modelBuilder.Entity<Role>().HasData(
                 new Role[]
                 {
-                    new Role {Id = 1, Title = "Admin", Permissions = ""}
+                    new Role {Id = 1, Title = "Administrator", Permissions = "{AddFood: True, AdminPage: True}"}
                 }
                 );
 

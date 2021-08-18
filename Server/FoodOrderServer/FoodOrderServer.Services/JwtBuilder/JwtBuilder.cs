@@ -3,11 +3,9 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace FoodOrderServer.Services.JwtBuilder
 {
@@ -63,7 +61,7 @@ namespace FoodOrderServer.Services.JwtBuilder
                 new Claim("Id", user.Id.ToString()),
                 new Claim("Email", user.Email),
                 new Claim("Phone", user.Phone),
-                new Claim("Roles", roles.ToString())
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, roles.ToString())
             };
         }
 

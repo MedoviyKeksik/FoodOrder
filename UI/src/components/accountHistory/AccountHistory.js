@@ -10,25 +10,26 @@ function AccountHistory(props) {
     props.loadLoclization(localization);
 
     let content = props.items.map((item) => { 
-        let rows = item.food.items.map((item) => 
-            <tr key={item.id}>
-                <td>{item.imageSource}</td>
-                <td>{item.title}</td>
-                <td>{item.count}</td>
-                <td>{item.cost}</td>
-            </tr>
-        );
+        // let rows = item.food.map((food) => 
+            // <tr key={food.id}>
+            //     <td>{item.imageSource}</td>
+            //     <td>{item.title}</td>
+            //     <td>{item.count}</td>
+            //     <td>{item.cost}</td>
+            // </tr>
+        // );
         return (
-            <table key={item.orderId}>
-                <caption>{item.orderId}</caption>
-                <tr>
-                    <td><FormattedMessage defaultMessage="Image" id={FOODORDER_ACCOUNTHISTORY_IMAGE} /></td>
-                    <td><FormattedMessage defaultMessage="Title" id={FOODORDER_ACCOUNTHISTORY_TITLE} /></td>
-                    <td><FormattedMessage defaultMessage="Count" id={FOODORDER_ACCOUNTHISTORY_COUNT} /></td>
-                    <td><FormattedMessage defaultMessage="Cost" id={FOODORDER_ACCOUNTHISTORY_COST} /></td>
-                </tr>
-                {rows}
-            </table>
+            <p>{"OrderId:" + item.id + " OrderTime:"+ item.time}</p>
+            // <table key={item.Id}>
+            //     <caption>{item.Id}</caption>
+            //     <tr>
+            //         <td><FormattedMessage defaultMessage="Image" id={FOODORDER_ACCOUNTHISTORY_IMAGE} /></td>
+            //         <td><FormattedMessage defaultMessage="Title" id={FOODORDER_ACCOUNTHISTORY_TITLE} /></td>
+            //         <td><FormattedMessage defaultMessage="Count" id={FOODORDER_ACCOUNTHISTORY_COUNT} /></td>
+            //         <td><FormattedMessage defaultMessage="Cost" id={FOODORDER_ACCOUNTHISTORY_COST} /></td>
+            //     </tr>
+            //     {rows}
+            // </table>
         );
     });
     return <>{content}</>;

@@ -1,12 +1,12 @@
 import { put, call, select } from "redux-saga/effects";
 import { addFoodToCatalogFailed, addFoodToCatalogSucceed } from "./actions";
-import { API_URL } from "../../constants";
+import { API_URL, FOOD } from "../../constants";
 
 function *sendFood(action) {
     try {
         let accessToken = yield select(state => state.root.user.accessToken);
         const data = yield call(() => {
-            return fetch(API_URL + 'food/', {
+            return fetch(API_URL + FOOD, {
                 method: "POST",
                 headers: {
                     'Authorization': 'Bearer ' + accessToken, 

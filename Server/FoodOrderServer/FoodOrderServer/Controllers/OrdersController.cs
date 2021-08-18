@@ -28,7 +28,7 @@ namespace FoodOrderServer.Controllers
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [HttpGet("/user/{id}")]
+        [HttpGet("user/{id}")]
         public async Task<IActionResult> GetOrdersByUserId(int id)
         {
             var orders = await _ordersService.GetByUser(id);
@@ -37,25 +37,29 @@ namespace FoodOrderServer.Controllers
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost]
-        public async Task AddOrder([FromBody] Order order)
+        public async Task<IActionResult> AddOrder([FromBody] Order order)
         {
             await _ordersService.Add(order);
+            return Ok();
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPut("{id}")]
-        public async Task UpdateOrder(int id, [FromBody] Order order)
+        public async Task<IActionResult> UpdateOrder(int id, [FromBody] Order order)
         {
             if (id == order.Id) {
                 await _ordersService.Update(order);
+                return Ok();
             }
+            return BadRequest();
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpDelete("{id}")]
-        public void DeleteOrder(int id)
+        public async Task<IActionResult> DeleteOrder(int id)
         {
-            _ordersService.Delete(id);
+            await _ordersService.Delete(id);
+            return Ok();
         }
     }
 }

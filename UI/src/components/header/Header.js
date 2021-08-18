@@ -11,7 +11,7 @@ function Header(props) {
     function isAdmin(user) {
         for (let i in user.roles)
         {
-            if (user.roles[i].title === "Admin") return true;
+            if (user.roles[i].title === "Administrator") return true;
         }
         return false;
     }

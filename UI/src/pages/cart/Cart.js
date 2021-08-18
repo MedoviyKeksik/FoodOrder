@@ -6,10 +6,13 @@ import { addOrder } from "./actions";
 
 function Cart() {
     const food = useSelector((state) => state.root.cart);
-    console.log("CART");
-    console.log(food);
+    const user = useSelector((state) => state.root.user);
     function handleConfirn() {
-        store.dispatch(addOrder({food}));
+        store.dispatch(addOrder({
+            food,
+            userId: user.id,
+            time: new Date
+        }));
     }
 
     return (
