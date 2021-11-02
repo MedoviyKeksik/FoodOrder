@@ -1,0 +1,66 @@
+@import '../../constants.scss';
+
+.modal-add {
+    display: flex;
+
+    &__image {
+        display: block;
+        margin-right: 20px;
+    }
+
+    &__info {
+        width: 400px;
+    }
+
+    &__title {
+        font-size: 1.5em;
+        margin-top: 0.5em;
+        margin-bottom: 0em;
+    }
+
+    &__description {
+        width: 70%;
+        word-wrap: break-word;
+        text-align: justify;
+        font-size: 0.9em;
+        color: darken($shadow-color, 20);
+    }
+
+    &__cooking-time {
+        margin-top: auto;
+        display: block;
+        font-weight: bold;
+        color: $main-color;
+    }
+
+    &__cost {
+        display: block;
+        font-weight: bold;
+        color: $main-color;
+    }
+
+    &__count {
+        margin-top: 10px;
+        height: 30px;
+        width: 100%;
+        font-size: 1em;
+        border: 1px solid $shadow-color;
+        border-radius: 10px;
+    }
+
+    &__button {
+        font-size: 1em;
+        display: block;
+        background-color: $main-color;
+        color: $second-color;
+        border: none;
+        padding: 0.5em 1em;
+        border-radius: 10px;
+        margin-left: auto;
+        margin-top: 1em;
+
+        &:hover {
+            background-color: lighten($color: ($main-color), $amount: 10);
+        }
+    }
+}

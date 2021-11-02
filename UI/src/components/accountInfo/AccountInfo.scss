@@ -1,0 +1,13 @@
+@import "../../constants.scss";
+
+.account-info {
+    margin-top: 20px;
+    border: 1px solid $shadow-color;
+    border-spacing: 0px;
+    border-radius: 5px;
+
+    &__cell {
+        padding: 3px;
+        box-sizing: border-box;
+    }
+}

@@ -1,0 +1,45 @@
+@import '../../constants.scss';
+
+.wrapper_header {
+    background-color: $main-color;
+    box-shadow: 0px 0px 10px lighten($shadow-color, 10);
+}
+
+.header {
+    width: $page-width;
+    margin: 0 auto;
+    height: 55px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    &__title-link {
+        text-decoration: none;
+    }
+
+    &__title {
+        font-family: 'Uchen', serif;
+        margin: 0;
+        color: $second-color;
+
+        &:hover {
+            color: darken($second-color, 10);
+        }
+
+    }
+
+    &__cart {
+        margin-left: auto;
+        margin-right: 15px;
+        color: $second-color;
+        font-size: 1.5em;
+    
+        &:hover {
+            color: $text-color;
+        }
+    }
+
+    &__locale-switcher {
+        margin-right: 15px;
+    }
+}

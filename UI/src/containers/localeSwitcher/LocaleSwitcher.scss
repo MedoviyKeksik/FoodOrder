@@ -1,0 +1,11 @@
+@import '../../constants.scss';
+
+.locale-switcher {
+    display: block;
+    font-size: 1em;
+    height: 30px;
+    color: $text-color;
+    background-color: $second-color;
+    border-radius: 5px;
+    border: 1px solid $shadow-color;
+}

@@ -1,0 +1,60 @@
+@import '../../constants.scss';
+
+.food-card {
+    width: 300px;
+    margin: 10px;
+    padding: 20px;
+    border: 1px solid #d3d3d3;
+    box-shadow: 0px 0px 5px $shadow-color;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+
+    &__image {
+        width: 100%;
+        display: block;
+        margin: 0 auto;
+    }
+
+    &__title {
+        font-size: 1.5em;
+        margin-top: 0.5em;
+        margin-bottom: 0em;
+    }
+
+    &__description {
+        word-wrap: break-word;
+        text-align: justify;
+        font-size: 0.9em;
+        color: darken($shadow-color, 20);
+    }
+
+    &__cooking-time {
+        margin-top: auto;
+        display: block;
+        font-weight: bold;
+        color: $main-color;
+    }
+
+    &__cost {
+        display: block;
+        font-weight: bold;
+        color: $main-color;
+    }
+
+    &__button {
+        font-size: 1em;
+        display: block;
+        background-color: $main-color;
+        color: $second-color;
+        border: none;
+        padding: 0.5em 1em;
+        border-radius: 10px;
+        margin-left: auto;
+        margin-top: 1em;
+
+        &:hover {
+            background-color: lighten($color: ($main-color), $amount: 10);
+        }
+    }
+}

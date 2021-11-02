@@ -1,0 +1,18 @@
+import { FOODORDER_ACCOUNTINFO_EMAIL, FOODORDER_ACCOUNTINFO_NAME, FOODORDER_ACCOUNTINFO_PHONE, FOODORDER_ACCOUNTINFO_SURNAME } from "./constants";
+
+export const en = {
+    [FOODORDER_ACCOUNTINFO_NAME]: 'Name',
+    [FOODORDER_ACCOUNTINFO_SURNAME]: 'Surname',
+    [FOODORDER_ACCOUNTINFO_PHONE]: 'Phone',
+    [FOODORDER_ACCOUNTINFO_EMAIL]: 'Email'
+}
+
+export const ru = {
+    [FOODORDER_ACCOUNTINFO_NAME]: 'Имя',
+    [FOODORDER_ACCOUNTINFO_SURNAME]: 'Фамилия',
+    [FOODORDER_ACCOUNTINFO_PHONE]: 'Телефон',
+    [FOODORDER_ACCOUNTINFO_EMAIL]: 'Email'
+}
+
+const localization = {en, ru};
+export default localization;
